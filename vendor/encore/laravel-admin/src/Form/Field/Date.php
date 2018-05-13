@@ -35,8 +35,14 @@ class Date extends Text
     {
         $this->options['format'] = $this->format;
         $this->options['locale'] = config('app.locale');
-        $this->options['sideBySide'] = true;
-        $this->options['keepOpen'] = true;
+        $this->options['sideBySide'] = false;
+        $this->options['keepOpen'] = false;
+        $this->options['useCurrent'] = false;
+        $this->options['showTodayButton'] = true;
+        $this->options['showClear'] = true;
+        $this->options['showClose'] = true;
+        $this->options['allowInputToggle'] = true;
+        $this->options['focusOnShow'] = false;
 
         $this->script = "$('{$this->getElementClassSelector()}').datetimepicker(".json_encode($this->options).');';
 

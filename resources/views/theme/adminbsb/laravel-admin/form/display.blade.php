@@ -1,14 +1,11 @@
-<div class="{{$viewClass['form-group']}}">
-    <label class="{{$viewClass['label']}} control-label">{{$label}}</label>
-    <div class="{{$viewClass['field']}}">
-        <div class="box box-solid box-default no-margin">
-            <!-- /.box-header -->
-            <div class="box-body">
-                {!! $value !!}&nbsp;
-            </div><!-- /.box-body -->
+<div class="{{$viewClass['field']}}">
+    <div class="form-float {{$viewClass['form-group']}}">
+        <div class="form-line focused">
+
+            <input type="text" id="" name="" value="{!! $value !!}" class="form-control" disabled>
+            @include('admin::form.help-block')
+
+            <label for="{{$id}}" class="form-label">{{$label}}</label>
         </div>
-
-        @include('admin::form.help-block')
-
     </div>
 </div>

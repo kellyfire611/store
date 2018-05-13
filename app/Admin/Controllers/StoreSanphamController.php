@@ -15,6 +15,8 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class StoreSanphamController extends Controller
 {
@@ -239,5 +241,23 @@ $.ajax({
             $form->display('created_at', __('models.common.created_at'));
             $form->display('updated_at', __('models.common.updated_at'));
         });
+    }
+
+    public function storeInModal(Request $request)
+    {
+        // $validator = Validator::make(Input::all(), $this->rules);
+        // if ($validator->fails()) {
+        //     return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
+        // } else {
+            $sp = new StoreSanpham();
+            $sp->ma_sanpham = $request->ma_sanpham;
+            $sp->ten_sanpham = $request->ten_sanpham;
+            $sp->donvitinh_id = $request->donvitinh_id;
+            $sp->ten_hoatchat = $request->ten_hoatchat;
+            $sp->nongdo_hamluong = $request->nongdo_hamluong;
+            $sp->quycachdonggoi = $request->quycachdonggoi;
+            $sp->save();
+            return response()->json($sp);
+        // }
     }
 }

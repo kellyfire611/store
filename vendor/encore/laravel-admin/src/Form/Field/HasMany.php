@@ -425,7 +425,7 @@ $('#has-many-{$this->column}').on('click', '.add', function () {
     {$templateScript}
 
    
-
+    $.AdminBSB.input.activate();
 });
 
 $('#has-many-{$this->column}').on('click', '.remove', function () {

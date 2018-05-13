@@ -58,6 +58,8 @@ Route::group([
     /* ./. --- Excel --- */
 
     /* --- Ajax Controller --- */
+    $router->post('store/sanphamInModal', 'StoreSanphamController@storeInModal')->name('store.sanpham.storeInModal');
+
     $router->post('store/ajax/generateMaSanPham', 'AjaxController@generateMaSanPham')->name('store.ajax.generateMaSanPham');
     $router->post('store/ajax/generateSoPhieuNhap', 'AjaxController@generateSoPhieuNhap')->name('store.ajax.generateSoPhieuNhap');
     $router->post('store/ajax/generateSoPhieuXuat', 'AjaxController@generateSoPhieuXuat')->name('store.ajax.generateSoPhieuXuat');

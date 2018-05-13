@@ -13,7 +13,7 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">{{ trans('admin.filter') }}</h4>
             </div>
-            <form action="{!! $action !!}" method="get" pjax-container>
+            <form action="{!! $action !!}" method="get">
                 <div class="modal-body">
                     <div class="form">
                         @foreach($filters as $filter)

@@ -79,6 +79,7 @@ class Form implements Renderable
         }
 
         $this->initFormAttributes();
+        $this->disablePjax();
     }
 
     /**

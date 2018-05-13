@@ -93,7 +93,6 @@
 
 
 
-<script src="{{ admin_asset ("/vendor/laravel-admin/jquery-pjax/jquery.pjax.js") }}"></script>
 <script src="{{ admin_asset ("/vendor/laravel-admin/nprogress/nprogress.js") }}"></script>
 <script src="{{ admin_asset ("/vendor/keypress/keypress-2.1.5.min.js") }}"></script>
 <script src="{{ admin_asset ("/vendor/angularjs/angular.min.js") }}"></script>
@@ -148,7 +147,7 @@
 
  @include('admin::partials.sidebar')
 
-    <section class="content" id="pjax-container">
+    <section class="content" id="">
 
     
 
