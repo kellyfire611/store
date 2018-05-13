@@ -1,0 +1,110 @@
+body {
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Helvetica Neue',sans-serif;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.display-none {
+    display: none;
+}
+
+.box-body {
+    font-size: 0.9em;
+}
+
+.box-body .form-group {
+    margin-bottom: 2px;
+}
+
+.box-body .input-group {
+    width: 100%;
+}
+
+.box-body .form-control:focus {
+    background: #faffbd;
+}
+
+.dongia {
+    color: blue;
+}
+
+.soluong {
+    color: green;
+}
+
+.thanhtien {
+    color: red;
+}
+
+/* --- Hiệu chỉnh form chi tiết --- */
+/* Dạng Table */
+.has-many-table {
+    background: #007735a3;
+}
+
+.has-many-table-forms {
+    margin: 0;
+    padding: 0;
+}
+
+.has-many-table-forms > th, .has-many-table-forms > td {
+    margin: 0;
+    padding: 0;
+}
+/* ./. Dạng Table */
+
+/* Dạng Table div */
+/* .has-many-tablediv {
+    background: #007735a3;
+} */
+
+.has-many-tablediv-forms {
+    margin: 0;
+    padding: 0;
+}
+
+.has-many-tablediv-forms > th, .has-many-tablediv-forms > td {
+    margin: 0;
+    padding: 0;
+}
+
+/* .has-many-tablediv > .has-many-tablediv-forms > .fields-group:nth-child(even) {
+    background: #e08181;
+} */
+/* ./. Dạng Table div */
+
+/* --- ./. Hiệu chỉnh form chi tiết --- */
+
+.form-group-viewmode-table {
+    padding: 0;
+
+}
+
+.form-group-viewmode-table > div {
+    padding: 0;
+    margin: 0;
+}
+
+.page_break { page-break-before: always; }
+.page_break_inside_avoid { page-break-inside: avoid; }
+.word_wrap {
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+}
+
+.clickable {
+    color: red;
+    font-weight: bold;
+}
+
+.select2-container *:focus {
+    border-color: #3c8dbc;
+    background: #faffbd;
+}
