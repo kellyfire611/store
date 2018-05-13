@@ -20,7 +20,7 @@
                 @include('admin::form.tab', compact('tabObj'))
             @else
                 <div class="fields-group">
-
+                    <div class="row clearfix">
                     @if($form->hasRows())
                         @foreach($form->getRows() as $row)
                             {!! $row->render() !!}
@@ -30,7 +30,7 @@
                             {!! $field->render() !!}
                         @endforeach
                     @endif
-
+                    </div>
 
                 </div>
             @endif
@@ -38,21 +38,18 @@
         </div>
         <!-- /.box-body -->
         <div class="footer">
+            <div class="row clearfix">
+                <div class="col-md-12">
+                    @if( ! $form->isMode(\Encore\Admin\Form\Builder::MODE_VIEW)  || ! $form->option('enableSubmit'))
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    @endif
 
-            @if( ! $form->isMode(\Encore\Admin\Form\Builder::MODE_VIEW)  || ! $form->option('enableSubmit'))
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            @endif
-            <div class="col-md-{{$width['label']}}">
+                    {!! $form->submitButton() !!}
 
+                    {!! $form->resetButton() !!}
+
+                </div>
             </div>
-            <div class="col-md-{{$width['field']}}">
-
-                {!! $form->submitButton() !!}
-
-                {!! $form->resetButton() !!}
-
-            </div>
-
         </div>
 
         @foreach($form->getHiddenFields() as $hiddenField)

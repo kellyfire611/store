@@ -31,6 +31,7 @@
 
 <!-- Custom Css -->
 <link href="{{ admin_asset("theme/adminbsb/css/style.css") }}" rel="stylesheet">
+<link href="{{ admin_asset("theme/adminbsb/css/custom-style.css") }}" rel="stylesheet">
 
 <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
 <link href="{{ admin_asset("theme/adminbsb/css/themes/all-themes.css") }}" rel="stylesheet" />

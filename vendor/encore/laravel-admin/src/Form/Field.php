@@ -196,7 +196,7 @@ class Field implements Renderable
      */
     protected $width = [
         'label' => 2,
-        'field' => 10,
+        'field' => 12,
         'view' => 12,
     ];
 

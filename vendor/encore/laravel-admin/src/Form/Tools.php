@@ -60,7 +60,7 @@ EOT;
         $text = trans('admin.back');
 
         return <<<EOT
-<div class="btn-group pull-right" style="margin-right: 10px">
+<div class="btn-group " style="margin-right: 10px">
     <a class="btn btn-sm btn-default form-history-back"><i class="fa fa-arrow-left"></i>&nbsp;$text</a>
 </div>
 EOT;
@@ -74,7 +74,7 @@ EOT;
         $text = trans('admin.list');
 
         return <<<EOT
-<div class="btn-group pull-right" style="margin-right: 10px">
+<div class="btn-group " style="margin-right: 10px">
     <a href="$resource" class="btn btn-sm btn-default"><i class="fa fa-list"></i>&nbsp;$text</a>
 </div>
 EOT;
