@@ -298,6 +298,14 @@ function(data) {
     var hansudung = '<span class="" style="color: green"><b>' + arr[8] + '</b></span> ';
 
     template = ma_sanpham + ten_sanpham + ten_hoatchat + nongdo_hamluong + sokiemsoat + hansudung + dongianhap + soluong_conlai + ten_donvitinh;
+    template = '<div class="row"><div class="col-sm-1">'+ ma_sanpham +'</div><div class="col-sm-3">'+ ten_sanpham +'</div><div class="col-sm-2">'+ ten_hoatchat +'</div>' 
+        + '<div class="col-sm-1">'+ nongdo_hamluong +'</div>' 
+        + '<div class="col-sm-1">'+ sokiemsoat +'</div>' 
+        + '<div class="col-sm-1">'+ hansudung +'</div>' 
+        + '<div class="col-sm-1">'+ dongianhap +'</div>' 
+        + '<div class="col-sm-1">'+ soluong_conlai +'</div>' 
+        + '<div class="col-sm-1">'+ ten_donvitinh +'</div>' 
+        + '</div>';
     return template;
   }
 EOT;
