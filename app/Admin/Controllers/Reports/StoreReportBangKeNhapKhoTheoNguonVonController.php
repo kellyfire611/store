@@ -4,6 +4,9 @@ namespace App\Admin\Controllers\Reports;
 
 use App\Models\StoreSoketoan;
 use App\Models\StoreNguoncungcap;
+use App\Models\StoreSanphamNhom;
+use App\Models\StoreSanphamLoai;
+use App\Models\StoreNhaCungCap;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -39,8 +42,15 @@ class StoreReportBangKeNhapKhoTheoNguonVonController extends Controller
             // dd($bag);
 
             $nguonCungCap = StoreNguoncungcap::selectboxData();
+            $nhomSanPham = StoreSanphamNhom::selectboxData(); 
+            $loaiSanPham = StoreSanphamLoai::selectboxData(); 
+            $nhaCungCap = StoreNhaCungCap::selectboxData(); 
             $content->body(view('admin.reports.bangkenhapkho_theonguonvon.index')
-                ->with('nguonCungCap', $nguonCungCap));
+                ->with(Array('nguonCungCap'=> $nguonCungCap
+                            ,'nhomSanPham' => $nhomSanPham
+                            ,'loaiSanPham' => $loaiSanPham
+                            ,'nhaCungCap' => $nhaCungCap
+            )));
         });
     }
 }

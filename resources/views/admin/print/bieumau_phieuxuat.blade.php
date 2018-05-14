@@ -47,14 +47,23 @@ Biểu mẫu Phiếu xuất kho
                 <td class="tg-031e"></td>
             </tr>
             <tr>
-                <td class="tg-031e align-left" colspan="3">Số : {{ $bag['data']->result[0]->so_phieuxuat }}</td>
-
+                <td class="tg-031e align-left" ></td>
+                <td class="tg-031e align-left" ></td>
+                <td class="tg-031e align-center" >Số: {{ $bag['data']->result[0]->so_phieuxuat }}</td>
+            </tr>
+            <tr>
+                <td class="tg-031e align-left" colspan="3">Xuất qua kho :</td>
+            </tr>
+            <tr>
+                <td class="tg-031e align-left" colspan="3">Lý do xuất kho : {{ $bag['data']->result[0]->lydo_xuat }}</td>
             </tr>
             <tr>
                 <td class="tg-031e align-left" colspan="3">Họ tên người nhận hàng : {{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
             </tr>
             <tr>
-                <td class="tg-031e align-left" colspan="3">Lý do xuất kho : {{ $bag['data']->result[0]->lydo_xuat }}</td>
+                <td class="tg-031e align-left" >Nguồn :</td>
+                <td class="tg-031e align-left" >Số chứng từ : {{ $bag['data']->result[0]->so_chungtu }}</td>
+                <td class="tg-031e align-left" >Ngày :</td>
             </tr>
         </table>
         <table class="main">
@@ -120,14 +129,14 @@ Biểu mẫu Phiếu xuất kho
             <tr>
                 <td class="main-yw4l no-border"></td>
 
-                <td class="main-yw4l no-border">Tổng số tiền (bằng chữ): </td>
-                <td class="main-yw4l align-left no-border bold" colspan="9"><?php echo decimalToTextVietnamese($sum); ?></td>
+                <td class="main-yw4l no-border align-right">Tổng số tiền (bằng chữ): </td>
+                <td class="main-yw4l align-left no-border bold " colspan="9"><?php echo decimalToTextVietnamese($sum); ?></td>
 
             </tr>
             <tr>
                 <td class="main-yw4l no-border"></td>
 
-                <td class="main-yw4l no-border">Chứng từ kèm theo: </td>
+                <td class="main-yw4l no-border align-right">Chứng từ kèm theo: </td>
                 <td class="main-yw4l align-left no-border" colspan="9"></td>
 
             </tr>
