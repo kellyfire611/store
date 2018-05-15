@@ -824,6 +824,7 @@ class Field implements Renderable
                 return [
                     'label'      => "col-sm-{$this->width['label']}",
                     'field'      => "col-sm-{$this->width['field']}",
+                    'view'       => "col-sm-{$this->width['view']}",
                     'form-group' => 'form-group ',
                 ];
             }

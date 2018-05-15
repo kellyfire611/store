@@ -8,6 +8,8 @@ $(function () {
         setSkinListHeightAndScroll(false);
         setSettingListHeightAndScroll(false);
     });
+
+    autosize($('textarea.auto-growth'));
 });
 
 //Skin changer
