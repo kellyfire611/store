@@ -74,6 +74,12 @@ $(this)
 })
 
 $('.modal-footer').on('click', '.save', function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    });
+
     $.ajax({
         type: 'POST',
         url: '{{ route('store.sanpham.storeInModal') }}',
@@ -81,7 +87,7 @@ $('.modal-footer').on('click', '.save', function() {
         success: function(data) {
 
             // create the option and append to Select2
-            var option = new Option(data.ten_sanpham, data.id, true, true);
+            var option = new Option(data.ten_sanpham, data.id, false, false);
             $(".sanpham_id").append(option);//.trigger('change');
 
 
