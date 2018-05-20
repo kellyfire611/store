@@ -71,6 +71,8 @@
  <!-- Jquery CountTo Plugin Js -->
  <script src="{{ admin_asset("theme/adminbsb/plugins/jquery-countto/jquery.countTo.js") }}"></script>
 
+ <script src="{{ admin_asset("theme/adminbsb/plugins/autosize/autosize.js") }}"></script>
+
 <!-- Morris Plugin Js -->
 <script src="{{ admin_asset("theme/adminbsb/plugins/raphael/raphael.min.js") }}"></script>
 <script src="{{ admin_asset("theme/adminbsb/plugins/morrisjs/morris.js") }}"></script>

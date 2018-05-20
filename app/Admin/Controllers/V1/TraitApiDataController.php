@@ -49,7 +49,7 @@ trait ApiDataController {
                             from store_phieuxuat px
                                 join store_phieuxuat_chitiet pxct on pxct.phieuxuat_id = px.id
                                 join store_kho kxt on px.xuat_tu_kho_id = kxt.id
-                                join store_kho kxd on px.xuat_den_kho_id = kxd.id
+                                left join store_kho kxd on px.xuat_den_kho_id = kxd.id
                             where px.id = $id");
         $chitiet = DB::select("select *
                             from store_phieuxuat_chitiet pxct

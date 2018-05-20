@@ -11,6 +11,7 @@ use App\Models\StoreSanpham;
 use App\Models\StoreDonvitinh;
 use App\Models\StoreSystemConfig;
 use App\Models\StoreNguoncungcap;
+use App\Models\HrmQuocgia;
 use App\Models\CommonModel;
 use Encore\Admin\Auth\Database\Administrator;
 
@@ -76,6 +77,7 @@ class StoreBienbanKiemNhapController extends Controller
             $content->description('Thêm mới');
 
             $content->body($this->form());
+            $content->body(view('admin.store.phieunhap.modal')->with('donvitinh', StoreDonvitinh::selectboxData()));
         });
     }
 
@@ -138,14 +140,14 @@ class StoreBienbanKiemNhapController extends Controller
                 ->attribute('tabindex', 1)
                 //->useTableDiv()
                 //->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->readOnly();
-                //->setWidth(12, 12, 3);
+                ->readOnly()
+                ->setWidth(12, 12, 6);
             
             $ngayLapBienBan = $form->datetime('bienban_kiemnhap_ngay_lapbienban', __('models.store_phieunhap.bienban_kiemnhap_ngay_lapbienban'))
-                ->attribute('tabindex', 3);
+                ->attribute('tabindex', 3)
                 //->useTableDiv()
                 //->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                //->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 6);
 
                 $ajaxGenerateSoPhieuNhapUrl = route('store.ajax.generateSoPhieuBienBanKiemNhap');
                 $script = <<<EOT
@@ -191,45 +193,45 @@ EOT;
 
 
 
-            $form->jsonforms('bienban_kiemnhap_tokiemnhap', __('models.store_phieunhap.bienban_kiemnhap_tokiemnhap'));
+            $form->textarea('bienban_kiemnhap_tokiemnhap', __('models.store_phieunhap.bienban_kiemnhap_tokiemnhap'));
                 //->useTableDiv()
                 //->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 //->setWidth(12, 12, 3);
 
-            $form->text('bienban_kiemnhap_lydo', __('models.store_phieunhap.bienban_kiemnhap_lydo'));
+            $form->textarea('bienban_kiemnhap_lydo', __('models.store_phieunhap.bienban_kiemnhap_lydo'));
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->setWidth(12, 12, 3);
-            $form->text('bienban_kiemnhap_diadiem', __('models.store_phieunhap.bienban_kiemnhap_diadiem'));
+            $form->textarea('bienban_kiemnhap_diadiem', __('models.store_phieunhap.bienban_kiemnhap_diadiem'));
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->setWidth(12, 12, 3);
-            $form->text('bienban_kiemnhap_ykiendexuat', __('models.store_phieunhap.bienban_kiemnhap_ykiendexuat'));
+            $form->textarea('bienban_kiemnhap_ykiendexuat', __('models.store_phieunhap.bienban_kiemnhap_ykiendexuat'));
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->setWidth(12, 12, 3);
 
             $form->select('soketoan_id', __('models.store_phieunhap.soketoan_id'))
                 ->options(StoreSoketoan::selectBoxData())
-                ->rules('required');
+                ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
             $form->select('nhap_vao_kho_id', __('models.store_phieunhap.nhap_vao_kho_id'))
                 ->options(StoreKho::selectboxData())
-                ->rules('required');
+                ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
 
             
             $form->select('nguoi_lapphieu_id', __('models.store_phieunhap.nguoi_lapphieu_id'))
                 ->options(CommonModel::administratorSelectboxData())
                 ->rules('required')
                 //->useTableDiv()
-                ->default(Admin::user()->id);
+                ->default(Admin::user()->id)
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 6);
+                ->setWidth(12, 12, 6);
 
             $form->hasMany('chitiet', 'Chi tiết', function (Form\NestedForm $form) {
                 // $form->hidden('nhapxuat_id', __('models.store_phieunhap_chitiet.nhapxuat_id'))
@@ -261,8 +263,8 @@ EOT;
                     ->options(StoreSanpham::selectboxData())
                     ->rules('required')
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
-                    ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                    ->useTableDiv()
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
                     ->setWidth(12, 12, 3);
                     //->config('templateResult', $templateResult);
                 // $form->select('donvitinh_id', __('models.store_phieunhap_chitiet.donvitinh_id'))
@@ -289,35 +291,53 @@ EOT;
                     ->options(StoreNguoncungcap::selectboxData())
                     ->rules('required')
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
-                    ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                    ->useTableDiv()
-                    ->setWidth(12, 12, 3);
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 2);
+                $form->select('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
+                    HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
+                    )->rules('required')->attribute('tabindex', 6)
+                    ->setWidth(12, 12, 2);
+                $form->text('so_lo', __('models.store_phieunhap_chitiet.so_lo'))
+                    //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 1);
+                    // onlyControl, onlyLabel, LabelAndControl
+                    // bootstrap_div_group_only_control
+                    // bootstrap_div_group_only_label
+                    // bootstrap_div_group_only_label_and_control
+                $form->text('so_chungtu', __('models.store_phieunhap_chitiet.so_chungtu'))
+                    // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 2);
                 $form->datetime('hansudung', __('models.store_phieunhap_chitiet.hansudung'))
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
-                    ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                    ->useTableDiv()
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
                     ->setWidth(12, 12, 2);
                 $form->currency('dongianhap', __('models.store_phieunhap_chitiet.dongianhap'))
                     ->addElementClass(['dongia'])
                     ->rules('required')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
-                    ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                    ->useTableDiv()
-                    ->setWidth(12, 12, 1);
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 12);
                 $form->currency('soluong_theohopdong', 'SL theo HĐ')
                     //->addElementClass(['soluong'])
                     ->rules('required')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
-                    ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                    ->useTableDiv()
-                    ->setWidth(12, 12, 1);
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 6);
                 $form->currency('soluongnhap', 'Số lượng thực tế')
                     ->addElementClass(['soluong'])
                     ->rules('required')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
-                    ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                    ->useTableDiv()
-                    ->setWidth(12, 12, 1);
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 6);
                 // $form->currency('soluong_conlai', __('models.store_phieunhap_chitiet.soluong_conlai'))
                 //     ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                 //     ->useTableDiv()
@@ -328,7 +348,7 @@ EOT;
                 //     ->useTableDiv()
                 //     ->setWidth(12, 12, 1);
                 //$form->datetime('ngay_sudungdautien', __('models.store_phieunhap_chitiet.ngay_sudungdautien'));
-            })->useTableDiv();
+            });//->useTableDiv();
 
             $form->display('created_at', __('models.common.created_at'));
             $form->display('updated_at', __('models.common.updated_at'));

@@ -140,14 +140,14 @@ class StorePhieuxuatController extends Controller
             $sophieuxuat = $form->text('so_phieuxuat', __('models.store_phieuxuat.so_phieuxuat'))
                 ->rules('required')
                 // ->useTableDiv()
-                ->readOnly();
+                ->readOnly()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
             $ngayXuatKho = $form->datetime('ngay_xuatkho', __('models.store_phieuxuat.ngay_xuatkho'))
-                ->rules('required');
+                ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
 
             $ajaxGenerateSoPhieuXuatUrl = route('store.ajax.generateSoPhieuXuat');
             $script = <<<EOT
@@ -206,24 +206,24 @@ EOT;
          
             $form->script($script);
 
-            $form->datetime('ngay_xacnhan', __('models.store_phieuxuat.ngay_xacnhan'));
+            $form->datetime('ngay_xacnhan', __('models.store_phieuxuat.ngay_xacnhan'))
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
             $form->text('lydo_xuat', __('models.store_phieuxuat.lydo_xuat'))
-                ->rules('required');
+                ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
 
-            $form->text('nguoi_nhanhang', __('models.store_phieuxuat.nguoi_nhanhang'));
+            $form->text('nguoi_nhanhang', __('models.store_phieuxuat.nguoi_nhanhang'))
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
-            $form->text('so_chungtu', __('models.store_phieuxuat.so_chungtu'));
+                ->setWidth(12, 12, 6);
+            $form->text('so_chungtu', __('models.store_phieuxuat.so_chungtu'))
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 6);
             // $form->select('nhacungcap_id', __('models.store_phieuxuat.nhacungcap_id'))
             //     ->options(StoreNhacungcap::selectboxData())
             //     ->rules('required')
@@ -233,33 +233,34 @@ EOT;
             $form->select('soketoan_id', __('models.store_phieuxuat.soketoan_id'))
                 ->rules('required')
                 ->options(StoreSoketoan::selectBoxData())
-                ->rules('required');
+                ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
 
             $form->select('xuat_tu_kho_id', __('models.store_phieuxuat.xuat_tu_kho_id'))
                 ->rules('required')
                 ->options(StoreKho::selectboxData())
-                ->rules('required');
+                ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
             $form->select('xuat_den_kho_id', __('models.store_phieuxuat.xuat_den_kho_id'))
                 ->rules('required')
                 ->options(StoreKho::selectboxData())
-                ->rules('required');
+                ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                // ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 3);
                 //dd(Admin::user());
             $form->select('nguoi_lapphieu_id', __('models.store_phieuxuat.nguoi_lapphieu_id'))
                 ->options(CommonModel::administratorSelectboxData())
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->default(Admin::user()->id);
-                // ->setWidth(12, 12, 6);
+                ->default(Admin::user()->id)
+                ->readonly()
+                ->setWidth(12, 12, 3);
 
             $form->hasMany('chitiet', 'Chi tiết', function (Form\NestedForm $form) {
                 // Hidden field
@@ -340,8 +341,8 @@ EOT;
                     // ->useTableDiv()
                     ->escapeMarkup($escapeMarkup)
                     ->templateResult($templateResult)
-                    ->templateSelection($templateSelection);
-                    // ->setWidth(12, 12, 9);
+                    ->templateSelection($templateSelection)
+                    ->setWidth(12, 12, 9);
 
                     //dd($sanpham->getElementClassSelector());
 
@@ -442,11 +443,11 @@ EOT;
                 //     ->setWidth(12, 12, 1);
                 $form->currency('soluongxuat', __('models.store_phieuxuat_chitiet.soluongxuat'))
                     ->rules('required')
-                    ->addElementClass(['soluong']);
+                    ->addElementClass(['soluong'])
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    // ->setWidth(12, 12, 2);
+                    ->setWidth(12, 12, 2);
                 // $form->currency('thue', __('models.store_phieuxuat_chitiet.thue'))
                 //     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                 //     ->labelPosition(CommonModel::LABEL_POSITION_TOP)

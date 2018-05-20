@@ -24,7 +24,7 @@ class PrintController extends Controller
         //dd($q);
 
         $bag = $this->getData($view, $q);
-        //dd($bag);
+        // dd($bag);
         return view('admin.print.' . $view)->with('bag', $bag);
     }
 
@@ -56,6 +56,7 @@ class PrintController extends Controller
     {
         $result = $this->phieuxuatById($query['phieuxuat_id']);
 
+        // dd($result);
         $bag = [
             'meta' => [
                 'title' => 'Phiếu xuất',
