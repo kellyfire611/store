@@ -1,23 +1,23 @@
 
 
-<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_bangkenhapkho_theonguonvon']) }}">
+<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_bangkenhapkho_tonghop']) }}">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="p_ngay_batdau">Từ ngày</label>
-                <input type="text" class="form-control" id="p_ngay_batdau" name="p_ngay_batdau">
+                <input type="text" class="form-control" id="p_ngay_batdau" name="p_ngay_batdau" required>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="p_ngay_ketthuc">Đến ngày</label>
-                <input type="text" class="form-control" id="p_ngay_ketthuc" name="p_ngay_ketthuc">
+                <input type="text" class="form-control" id="p_ngay_ketthuc" name="p_ngay_ketthuc" required>
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="p_nguoncungcap_id">Nguồn cung cấp</label>
+                <label for="p_nguoncungcap_id">Nguồn vốn cung cấp</label>
                 <select class="form-control" style="width: 100%;" name="p_nguoncungcap_id" id="p_nguoncungcap_id">
                     <option value=""></option>
                     @foreach($nguonCungCap as $select => $option)
@@ -27,8 +27,20 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <div class="form-group">Nhóm sản phẩm</label>
-                <select class="form-control" style="width: 100%;" name="p_nguoncungcap_id" id="p_nguoncungcap_id">
+                <div class="form-group">
+                    <label for="p_sanpham_id">Sản phẩm</label>
+                    <select class="form-control" style="width: 100%;" name="p_sanpham_id" id="p_sanpham_id">
+                        <option value=""></option>
+                        @foreach($sanPham as $select => $option)
+                        <option value="{{$select}}">{{$option}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="p_nhomsanpham_id">Nhóm sản phẩm</label>
+                <select class="form-control" style="width: 100%;" name="p_nhomsanpham_id" id="p_nhomsanpham_id">
                     <option value=""></option>
                     @foreach($nhomSanPham as $select => $option)
                     <option value="{{$select}}">{{$option}}</option>
@@ -37,20 +49,11 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <div class="form-group">Loại sản phẩm</label>
-                <select class="form-control" style="width: 100%;" name="p_nguoncungcap_id" id="p_nguoncungcap_id">
+            <div class="form-group">
+                <label for="p_loaisanpham_id">Loại sản phẩm</label>
+                <select class="form-control" style="width: 100%;" name="p_loaisanpham_id" id="p_loaisanpham_id">
                     <option value=""></option>
                     @foreach($loaiSanPham as $select => $option)
-                    <option value="{{$select}}">{{$option}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group">Nhà cung cấp</label>
-                <select class="form-control" style="width: 100%;" name="p_nguoncungcap_id" id="p_nguoncungcap_id">
-                    <option value=""></option>
-                    @foreach($nhaCungCap as $select => $option)
                     <option value="{{$select}}">{{$option}}</option>
                     @endforeach
                 </select>
@@ -258,7 +261,7 @@
 // // this is the id of the form
 // $("#conditionForm").submit(function(e) {
 
-//     // var url = "{{ route('store.ajax.reportBangKeNhapKhoTheoNguonVon') }}"; // the script where you handle the form input.
+//     // var url = "{{ route('store.ajax.reportBangKeNhapKhoTonghop') }}"; // the script where you handle the form input.
 //     // $.ajaxSetup({
 //     //     headers: {
 //     //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -304,4 +307,7 @@
   $('#p_ngay_batdau').datetimepicker(option);
   $('#p_ngay_ketthuc').datetimepicker(option);
   $('#p_nguoncungcap_id').select2({'allowClear': 'true'});
+  $('#p_sanpham_id').select2({'allowClear': 'true'});
+  $('#p_nhomsanpham_id').select2({'allowClear': 'true'});
+  $('#p_loaisanpham_id').select2({'allowClear': 'true'});
 </script>

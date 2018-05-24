@@ -1,7 +1,7 @@
 @extends('print.layout.paper')
 
 @section('title')
-Biểu mẫu Phiếu xuất kho
+Biểu mẫu Bảng kê Nhập kho tổng hợp
 @endsection
 
 @section('paper-size') A4 landscape @endsection

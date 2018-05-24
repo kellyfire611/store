@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Reports;
 
 use App\Models\StoreSoketoan;
 use App\Models\StoreNguoncungcap;
+use App\Models\StoreSanpham;
 use App\Models\StoreSanphamNhom;
 use App\Models\StoreSanphamLoai;
 use App\Models\StoreNhaCungCap;
@@ -17,7 +18,7 @@ use Encore\Admin\Controllers\ModelForm;
 use Illuminate\Http\Request;
 use DB;
 
-class StoreReportBangKeNhapKhoTheoNguonVonController extends Controller
+class StoreReportBangKeNhapKhoTongHopController extends Controller
 {
     use ModelForm;
 
@@ -30,7 +31,7 @@ class StoreReportBangKeNhapKhoTheoNguonVonController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('Báo cáo Bảng kê Nhập kho theo nguồn vốn');
+            $content->header('Báo cáo Bảng kê Nhập kho Tổng hợp');
             $content->description('description');
 
             // $parameter = [
@@ -42,11 +43,13 @@ class StoreReportBangKeNhapKhoTheoNguonVonController extends Controller
             // dd($bag);
 
             $nguonCungCap = StoreNguoncungcap::selectboxData();
+            $sanPham = StoreSanpham::selectboxData();
             $nhomSanPham = StoreSanphamNhom::selectboxData(); 
             $loaiSanPham = StoreSanphamLoai::selectboxData(); 
-            $nhaCungCap = StoreNhaCungCap::selectboxData(); 
-            $content->body(view('admin.reports.bangkenhapkho_theonguonvon.index')
+            $nhaCungCap = StoreNhaCungCap::selectboxData();
+            $content->body(view('admin.reports.bangkenhapkho_tonghop.index')
                 ->with(Array('nguonCungCap'=> $nguonCungCap
+                            ,'sanPham' => $sanPham
                             ,'nhomSanPham' => $nhomSanPham
                             ,'loaiSanPham' => $loaiSanPham
                             ,'nhaCungCap' => $nhaCungCap

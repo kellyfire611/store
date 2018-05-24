@@ -67,7 +67,7 @@ class PrintController extends Controller
         return $bag;
     }
 
-    protected function getDataBieumau_report_bangkenhapkho_theonguonvon($query)
+    protected function getDataBieumau_report_bangkenhapkho_tonghop($query)
     {
         $totalResult = 1;
         $totalPages = 1;
@@ -76,14 +76,17 @@ class PrintController extends Controller
         // dd($query);
         $p_ngay_batdau = $query['p_ngay_batdau'];
         $p_ngay_ketthuc = $query['p_ngay_ketthuc'];
-        $p_nguoncungcap_id = $query['p_nguoncungcap_id'];
+        $p_nguoncungcap_id = $query['p_nguoncungcap_id'] ?? 0;
+        $p_sanpham_id = $query['p_sanpham_id'] ?? 0;
 
         $parameter = [
             $p_ngay_batdau,
             $p_ngay_ketthuc,
-            $p_nguoncungcap_id
+            $p_nguoncungcap_id,
+            $p_sanpham_id
         ];
-        $data = DB::select('call usp_store_baocao_bangkenhapkho_theonguonvon(?,?,?)', $parameter);
+        // dd($parameter);
+        $data = DB::select('call usp_store_baocao_bangkenhapkho_tonghop(?,?,?,?)', $parameter);
         $chitiet = $data;
 
         $result = json_encode(
@@ -95,10 +98,11 @@ class PrintController extends Controller
 
         $bag = [
             'meta' => [
-                'title' => 'Bảng kê nhập kho theo nguồn vốn',
+                'title' => 'Bảng kê nhập kho tổng hợp',
                 'p_ngay_batdau' => $p_ngay_batdau,
                 'p_ngay_ketthuc' => $p_ngay_ketthuc,
-                'p_nguoncungcap_id' => $p_nguoncungcap_id
+                'p_nguoncungcap_id' => $p_nguoncungcap_id,
+                'p_sanpham_id' => $p_sanpham_id,
             ],
             'data' => json_decode($result)
         ];
