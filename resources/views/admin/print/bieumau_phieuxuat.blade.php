@@ -104,7 +104,7 @@ Biểu mẫu Phiếu xuất kho
                 <td></td>
                 <td>{{ $detail->ten_donvitinh }}</td>
                 <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
-                <td></td>
+                <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
                 <td class="align-right">{{ number_format($detail->dongiaxuat, 0) }}</td>
                 <td class="align-right"><?php $tt = $detail->soluongxuat * $detail->dongiaxuat; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
                 <td></td>
