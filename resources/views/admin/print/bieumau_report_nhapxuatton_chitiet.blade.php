@@ -1,7 +1,7 @@
 @extends('print.layout.paper')
 
 @section('title')
-Biểu mẫu Phiếu xuất kho
+Biểu mẫu Báo cáo Nhập xuất tồn chi tiết
 @endsection
 
 @section('paper-size') A4 landscape @endsection
@@ -28,21 +28,22 @@ Biểu mẫu Phiếu xuất kho
     </article>
 </section>
 @else
+
 <section class="sheet padding-10mm">
     <article>
       <table class="main">
-        <caption>{{ $bag['meta']['title'] }}</caption>
+        <caption><h1>{{ $bag['meta']['title'] }}</h1></caption>
         <thead>
             <tr class="bold" >
-                <td>STT</td>
-                <td>Tên thuốc</td>
+                <td style="width:25px;">STT</td>
+                <td style="width:180px;">Tên thuốc</td>
                 <td>Mã <br>Nguồn</td>
                 <td>ĐVT</td>
                 <td>Đơn giá</td>
                 <td>HSD</td>
                 <td>Tồn<br>đầu kỳ</td>
                 <td>Thành tiền<br></td>
-                <td>Nhập</td>
+                <td>Tổng nhập</td>
                 <td>Thành tiền</td>
                 <td>Tổng xuất</td>
                 <td>Thành tiền</td>
@@ -62,52 +63,40 @@ Biểu mẫu Phiếu xuất kho
             @foreach($bag['data']->detail as $key => $value)
             <?php
             $stt++;
-            $ttTonDauKy = $value->dongianhap * $value->tong_soluongnhap;
-            $ttTongNhap = 0;
-            $ttTongXuat = 0;
-            $ttTonCuoiKy = 0;
+            $ttTonDauKy = $value->dongianhap * $value->tong_soluong_tondauky;
+            $ttTongNhap = $value->dongianhap * $value->tong_soluongnhap;
+            $ttTongXuat = $value->dongianhap * $value->tong_soluongxuat;
+            $slTonCuoiKy = ($value->tong_soluong_tondauky + $value->tong_soluongnhap) - $value->tong_soluongxuat;
+            $ttTonCuoiKy = ($ttTonDauKy + $ttTongNhap) - $ttTongXuat;
+            if(!empty($value->hansudung))
+            {
+                $hanSuDung = \Carbon\Carbon::parse($value->hansudung);
+            }
             ?>
-            <tr>
+            <tr class="{{ ($ttTonCuoiKy < 0) ? 'error' : '' }}">
                 <td>{{ $stt }}</td>
-                <td class="bold" >{{ $value->ten_sanpham }}</td>
+                <td class="align-left">{{ $value->ten_sanpham }}</td>
                 <td></td>
-                <td></td>
-                <td class="dongia align-right">{{ number_format($value->dongianhap, 4) }}</td>
-                <td></td>
+                <td>{{ $value->ten_donvitinh }}</td>
+                <td class="dongia align-right">{{ number_format($value->dongianhap, 0) }}</td>
+                <td>{{ !empty($hansudung) ? $hanSuDung->toDateString() : '' }}</td>
                 <td class="soluong align-right">{{ number_format($value->tong_soluongnhap, 0) }}</td>
                 <td class="thanhtien align-right">{{ number_format($ttTonDauKy, 0) }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{ $value->tong_soluongxuat }}</td>
-                <td></td>
+                <td class="soluong align-right">{{ number_format($value->tong_soluongnhap, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTongNhap, 0) }}</td>
+                <td class="soluong align-right">{{ number_format($value->tong_soluongxuat, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTongXuat, 0) }}</td>
+                <td class="soluong align-right">{{ number_format($slTonCuoiKy, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTonCuoiKy, 0) }}</td>
                 <td></td>
             </tr>
             <?php
             $sumTonDauKy += $ttTonDauKy;
-            $sumTongNhap += 0;
-            $sumTongXuat += 0;
-            $sumTonCuoiKy = $sumTonDauKy + $sumTongNhap - $sumTongXuat;
+            $sumTongNhap += $ttTongNhap;
+            $sumTongXuat += $ttTongXuat;
+            $sumTonCuoiKy = ($sumTonDauKy + $sumTongNhap) - $sumTongXuat;
             ?>
             @endforeach
-            <tr>
-                <td></td>
-                <td>CỘNG</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>0</td>
-                <td class="thanhtien align-right">{{ number_format($sumTonDauKy, 0) }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="thanhtien align-right">{{ number_format($sumTongXuat, 0) }}</td>
-                <td>0</td>
-                <td class="thanhtien align-right">{{ number_format($sumTonCuoiKy, 0) }}</td>
-                <td></td>
-            </tr>
         </tbody>
         <tfoot>
             <tr>
@@ -117,13 +106,13 @@ Biểu mẫu Phiếu xuất kho
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>0</td>
+                <td>X</td>
                 <td class="thanhtien align-right">{{ number_format($sumTonDauKy, 0) }}</td>
-                <td></td>
-                <td></td>
+                <td>X</td>
+                <td class="thanhtien align-right">{{ number_format($sumTongNhap, 0) }}</td>
                 <td></td>
                 <td class="thanhtien align-right">{{ number_format($sumTongXuat, 0) }}</td>
-                <td>0</td>
+                <td>X</td>
                 <td class="thanhtien align-right">{{ number_format($sumTonCuoiKy, 0) }}</td>
                 <td></td>
             </tr>
