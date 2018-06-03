@@ -68,7 +68,7 @@ class PrintController extends Controller
     }
 
     protected function getDataBieumau_report_bangkenhapkho_tonghop($query)
-    {
+    {   
         $totalResult = 1;
         $totalPages = 1;
         $currentPage = 1;
@@ -78,15 +78,39 @@ class PrintController extends Controller
         $p_ngay_ketthuc = $query['p_ngay_ketthuc'];
         $p_nguoncungcap_id = $query['p_nguoncungcap_id'] ?? 0;
         $p_sanpham_id = $query['p_sanpham_id'] ?? 0;
+        $p_sanpham_nhom_id = $query['p_sanpham_nhom_id'] ?? 0;
+        $p_sanpham_loai_id = $query['p_sanpham_loai_id'] ?? 0;
 
         $parameter = [
             $p_ngay_batdau,
             $p_ngay_ketthuc,
             $p_nguoncungcap_id,
-            $p_sanpham_id
+            $p_sanpham_id,
+            $p_sanpham_nhom_id,
+            $p_sanpham_loai_id
         ];
         // dd($parameter);
-        $data = DB::select('call usp_store_baocao_bangkenhapkho_tonghop(?,?,?,?)', $parameter);
+        $data = DB::select('call usp_store_baocao_bangkenhapkho_tonghop(?,?,?,?,?,?)', $parameter);
+        //$data = DB::select();
+        $quey =  DB::select('SELECT ncc.ma_nguoncungcap, ncc.ten_nguoncungcap
+        , sp.ma_sanpham, sp.ten_sanpham, sp.ten_hoatchat, sp.nongdo_hamluong
+        , dvt.ten_donvitinh
+        , pn.ngay_laphoadon
+        , k.ten_kho
+        , pnct.so_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap
+    FROM store_phieunhap_chitiet pnct
+        JOIN store_phieunhap pn ON pnct.phieunhap_id = pn.id
+        JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
+        JOIN store_sanpham sp ON pnct.sanpham_id = sp.id
+        JOIN store_donvitinh dvt ON sp.donvitinh_id = dvt.id
+        JOIN store_kho k ON pnct.nhap_vao_kho_id = k.id
+        JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id
+        WHERE pn.ngay_nhapkho BETWEEN p_ngay_batdau AND p_ngay_ketthuc
+        AND (p_nguoncungcap_id = 0 OR pnct.nguoncungcap_id = p_nguoncungcap_id)
+        AND (p_sanpham_id = 0 OR pnct.sanpham_id = p_sanpham_id)
+                AND (p_sanpham_nhom_id = 0 OR nlrel.sanpham_nhom_id = p_sanpham_nhom_id)
+                AND (p_sanpham_loai_id = 0 OR nlrel.sanpham_loai_id = p_sanpham_loai_id)
+    ') ;
         $chitiet = $data;
 
         $result = json_encode(
