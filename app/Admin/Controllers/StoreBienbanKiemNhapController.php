@@ -218,12 +218,14 @@ EOT;
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(2)
                 ->setWidth(12, 12, 3);
             $form->select('nhap_vao_kho_id', __('models.store_phieunhap.nhap_vao_kho_id'))
                 ->options(StoreKho::selectboxData())
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(1)
                 ->setWidth(12, 12, 3);
 
             
@@ -267,7 +269,7 @@ EOT;
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 3);
+                    ->setWidth(12, 12, 4);
                     //->config('templateResult', $templateResult);
                 // $form->select('donvitinh_id', __('models.store_phieunhap_chitiet.donvitinh_id'))
                 //     ->options(StoreDonvitinh::selectboxData())
@@ -295,21 +297,21 @@ EOT;
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 2);
-                $form->select('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
+                    ->setWidth(12, 12, 4);
+                $form->select('nuocsanxuat_id', 'Nước sản xuất')->options(
                     HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
                     )->rules('required')->attribute('tabindex', 6)
-                    ->setWidth(12, 12, 2);
+                    ->setWidth(12, 12, 4);
                 $form->text('nongdohamluong', 'Nồng độ/Hàm lượng')
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 2);
+                    ->setWidth(12, 12, 4);
                 $form->text('so_lo', __('models.store_phieunhap_chitiet.so_lo'))
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 1);
+                    ->setWidth(12, 12, 2);
                     // onlyControl, onlyLabel, LabelAndControl
                     // bootstrap_div_group_only_control
                     // bootstrap_div_group_only_label
@@ -335,21 +337,21 @@ EOT;
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 12);
+                    ->setWidth(12, 12, 2);
                 $form->currency('soluong_theohopdong', 'SL theo HĐ')
                     //->addElementClass(['soluong'])
                     ->rules('required')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 6);
+                    ->setWidth(12, 12, 2);
                 $form->currency('soluongnhap', 'Số lượng thực tế')
                     ->addElementClass(['soluong'])
                     ->rules('required')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 6);
+                    ->setWidth(12, 12, 2);
                 // $form->currency('soluong_conlai', __('models.store_phieunhap_chitiet.soluong_conlai'))
                 //     ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                 //     ->useTableDiv()

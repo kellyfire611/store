@@ -26,9 +26,9 @@ Biểu mẫu Phiếu xuất kho
     <article>
         <table class="tg" border="0">
             <tr>
-                <th class="tg-baqh">{{ config('company.parent.name') }}</th>
-                <th class="tg-baqh"></th>
-                <th class="tg-baqh">Mẫu số: C20-HD </th>
+                <th class="tg-baqh" style="width: 250px;">{{ config('company.parent.name') }}</th>
+                <th class="tg-baqh" style="width: 250px;"></th>
+                <th class="tg-baqh" style="width: 100%;">Mẫu số: C20-HD </th>
             </tr>
             <tr>
                 <td class="tg-baqh align-center valign-top">{{ config('company.name') }}</td>
@@ -47,8 +47,12 @@ Biểu mẫu Phiếu xuất kho
                 <td class="tg-031e"></td>
             </tr>
             <tr>
-                <td class="tg-031e align-left" colspan="2">Họ tên người nhận hàng : {{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
+                <td class="tg-031e align-left" colspan="2">Đơn vị nhận hàng : {{ $bag['data']->result[0]->ten_donvi }}</td>
                 <td class="tg-031e align-left" colspan="3">Số : {{ $bag['data']->result[0]->so_phieuxuat }}</td>
+            </tr>
+            <tr>
+                <td class="tg-031e align-left" colspan="2">Họ tên người nhận hàng : {{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
+                <td class="tg-031e align-left" colspan="3">Số CT: {{ $bag['data']->result[0]->so_chungtu }} - Ngày: {{ \Carbon\Carbon::parse($bag['data']->result[0]->ngay_chungtu)->format('d/m/Y') }}</td>
             </tr>
             <tr>
                 <td class="tg-031e align-left" colspan="3">Lý do xuất kho : {{ $bag['data']->result[0]->lydo_xuat }}</td>
@@ -56,25 +60,25 @@ Biểu mẫu Phiếu xuất kho
         </table>
         <table class="main">
             <tr>
-                <th class="main-s6z2" rowspan="2">STT</th>
-                <th class="main-s6z2" rowspan="2">Tên quy cách vật tư
+                <th class="main-s6z2" rowspan="2" style="width: 26px;">STT</th>
+                <th class="main-s6z2" rowspan="2" style="width: 90px;">Tên quy cách vật tư
                     <br>dụng cụ, sản phẩm</th>
-                <th class="main-s6z2" rowspan="2">Số lô</th>
-                <th class="main-s6z2" rowspan="2">Hạn SD</th>
-                <th class="main-s6z2" rowspan="2">Loại TS</th>
-                <th class="main-s6z2" rowspan="2">ĐVT</th>
+                <th class="main-s6z2" rowspan="2" style="width: 80px;">Số lô</th>
+                <th class="main-s6z2" rowspan="2" style="width: 60px;">Hạn SD</th>
+                <th class="main-s6z2" rowspan="2" style="width: 50px;">Nhóm sản phẩm</th>
+                <th class="main-s6z2" rowspan="2" style="width: 40px;">ĐVT</th>
 
-                <th class="main-s6z2" colspan="2">Số lượng nhận</th>
-                <th class="main-s6z2" rowspan="2">Đơn giá
+                <th class="main-s6z2" colspan="2" style="width: 100px;">Số lượng nhận</th>
+                <th class="main-s6z2" rowspan="2" style="width: 90px;">Đơn giá</th>
 
-                    <th class="main-s6z2" rowspan="2">Thành
+                    <th class="main-s6z2" rowspan="2" style="width: 92px;">Thành
                         <br> tiền</th>
-                    <th class="main-s6z2" rowspan="2">Ghi
+                    <th class="main-s6z2" rowspan="2" style="width: 10px;">Ghi
                         <br> chú</th>
             </tr>
             <tr>
-                <th style="text-align:  center;" class="main-yw4l">Yêu cầu</td>
-                    <th style="text-align:  center;" class="main-yw4l">Thực xuất</td>
+                <th style="text-align:  center; width: 55px;" class="main-yw4l" >Yêu cầu</td>
+                    <th style="text-align:  center; width: 55px;" class="main-yw4l" >Thực xuất</td>
             </tr>
             <?php
                 $stt = 1;
@@ -87,9 +91,9 @@ Biểu mẫu Phiếu xuất kho
             <tr class="page-break-inside-avoid">
                 <td>{{ $stt }}</td>
                 <td class="align-left" >{{ $detail->ten_sanpham }}</td>
-                <td>{{ $detail->SOLO }}</td>
-                <td>{{ $detail->HanSD }}</td>
-                <td></td>
+                <td class="align-left">{{ $detail->SOLO }}</td>
+                <td>{{ \Carbon\Carbon::parse($detail->HanSD)->format('m/Y') }}</td>
+                <td>{{ $detail->ten_nhom_sanpham}}</td>
                 <td>{{ $detail->ten_donvitinh }}</td>
                 <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
                 <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
@@ -100,6 +104,8 @@ Biểu mẫu Phiếu xuất kho
             <?php 
                 $stt++;
                 }
+
+                $sum = round($sum);
             ?>
             <tr>
                 <td></td>
@@ -119,15 +125,15 @@ Biểu mẫu Phiếu xuất kho
             <tr>
                 
 
-                <td class="main-yw4l no-border">Tổng số tiền (bằng chữ): </td>
-                <td class="main-yw4l align-left no-border bold" colspan="9"><?php echo decimalToTextVietnamese($sum); ?></td>
+                <td class="main-yw4l no-border align-left" style="width: 150px;">Tổng số tiền (bằng chữ): </td>
+                <td class="main-yw4l align-left no-border bold"><?php echo decimalToTextVietnamese($sum); ?>.</td>
 
             </tr>
             <tr>
                 
 
-                <td class="main-yw4l no-border">Chứng từ kèm theo: </td>
-                <td class="main-yw4l align-left no-border" colspan="9"></td>
+                <td class="main-yw4l no-border align-left">Chứng từ kèm theo: </td>
+                <td class="main-yw4l align-left no-border"></td>
 
             </tr>
             </table>

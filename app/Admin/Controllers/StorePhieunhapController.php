@@ -279,7 +279,7 @@ EOT;
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 3);
+                    ->setWidth(12, 12, 4);
                     //->config('templateResult', $templateResult);
                 $form->select('nguoncungcap_id', __('models.store_phieunhap_chitiet.nguoncungcap_id'))
                     ->options(StoreNguoncungcap::selectboxData())
@@ -287,11 +287,11 @@ EOT;
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 3);
-                $form->select('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
+                    ->setWidth(12, 12, 4);
+                $form->select('nuocsanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
                     HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
                     )->rules('required')->attribute('tabindex', 6)
-                    ->setWidth(12, 12, 3);
+                    ->setWidth(12, 12, 4);
                 // $form->select('donvitinh_id', __('models.store_phieunhap_chitiet.donvitinh_id'))
                 //     ->options(StoreDonvitinh::selectboxData())
                 //     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
@@ -302,7 +302,7 @@ EOT;
                 //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->useTableDiv()
-                ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 4);
                 $form->text('so_lo', __('models.store_phieunhap_chitiet.so_lo'))
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)

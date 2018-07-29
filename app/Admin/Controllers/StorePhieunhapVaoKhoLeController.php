@@ -292,7 +292,7 @@ EOT;
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
                     ->setWidth(12, 12, 4);
-                $form->select('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
+                $form->select('nuocsanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
                     HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
                     )->rules('required')->attribute('tabindex', 6)
                     ->setWidth(12, 12, 4);
@@ -306,7 +306,7 @@ EOT;
                 //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->useTableDiv()
-                ->setWidth(12, 12, 2);
+                ->setWidth(12, 12, 4);
                 $form->text('so_lo', __('models.store_phieunhap_chitiet.so_lo'))
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)

@@ -235,11 +235,11 @@ class PrintController extends Controller
         , pnct.so_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap
     FROM store_phieunhap_chitiet pnct
         JOIN store_phieunhap pn ON pnct.phieunhap_id = pn.id
-        JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
+        LEFT JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
         JOIN store_sanpham sp ON pnct.sanpham_id = sp.id
         JOIN store_donvitinh dvt ON sp.donvitinh_id = dvt.id
         JOIN store_kho k ON pnct.nhap_vao_kho_id = k.id
-        JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id
+        LEFT JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id
         WHERE pn.ngay_nhapkho BETWEEN :p_ngay_batdau AND :p_ngay_ketthuc
         AND (:p_nguoncungcap_id1 = 0 OR pnct.nguoncungcap_id = :p_nguoncungcap_id2)
         AND (:p_sanpham_id1 = 0 OR pnct.sanpham_id = :p_sanpham_id2)

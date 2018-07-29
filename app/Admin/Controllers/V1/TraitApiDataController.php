@@ -46,18 +46,20 @@ trait ApiDataController {
         $totalResult = 1;
         $totalPages = 1;
         $currentPage = 1;
-        $data = DB::select("select px.*
+        $data = DB::select("select px.*, dv.*
                             from store_phieuxuat px
-                                
                                 left join store_kho kxt on px.xuat_tu_kho_id = kxt.id
                                 left join store_kho kxd on px.xuat_den_kho_id = kxd.id
+                                left join store_donvi dv on px.donvi_id = dv.id
                             where px.id = $id");
-        $chitiet = DB::select("select *, pnct.hansudung HanSD, pnct.so_lo SOLO
+        $chitiet = DB::select("select *, pnct.hansudung HanSD, pnct.so_lo SOLO, spn.ten_nhom_sanpham
                             from store_phieuxuat_chitiet pxct
                                 left join store_sanpham sp on pxct.sanpham_id = sp.id
                                 
                                 left join store_phieunhap_chitiet pnct on pxct.phieunhap_chitiet_id = pnct.id
                                 left join store_donvitinh dvt on pnct.donvitinh_id = dvt.id
+                                left join store_sanpham_nhom_loai_rel spnlr on pnct.sanpham_id = spnlr.sanpham_id
+                                left join store_sanpham_nhom spn on spnlr.sanpham_nhom_id = spn.id
                             where pxct.phieuxuat_id = $id");
 
         // return response()->json(

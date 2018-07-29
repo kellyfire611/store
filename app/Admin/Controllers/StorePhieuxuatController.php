@@ -143,12 +143,12 @@ class StorePhieuxuatController extends Controller
                 // ->useTableDiv()
                 ->readOnly()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 4);
             $ngayXuatKho = $form->datetime('ngay_xuatkho', __('models.store_phieuxuat.ngay_xuatkho'))
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 4);
 
             $ajaxGenerateSoPhieuXuatUrl = route('store.ajax.generateSoPhieuXuat');
             $script = <<<EOT
@@ -207,10 +207,10 @@ EOT;
          
             $form->script($script);
 
-            $form->datetime('ngay_xacnhan', __('models.store_phieuxuat.ngay_xacnhan'))
-                // ->useTableDiv()
-                // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 3);
+            // $form->datetime('ngay_xacnhan', __('models.store_phieuxuat.ngay_xacnhan'))
+            //     // ->useTableDiv()
+            //     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+            //     ->setWidth(12, 12, 3);
             $form->text('lydo_xuat', __('models.store_phieuxuat.lydo_xuat'))
                 ->rules('required')
                 // ->useTableDiv()
@@ -227,24 +227,22 @@ EOT;
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 6);
             $form->text('so_chungtu', __('models.store_phieuxuat.so_chungtu'))
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 6);
+                ->setWidth(12, 12, 4);
             // $form->select('nhacungcap_id', __('models.store_phieuxuat.nhacungcap_id'))
             //     ->options(StoreNhacungcap::selectboxData())
             //     ->rules('required')
             //     ->useTableDiv()
             //     ->labelPosition(CommonModel::LABEL_POSITION_TOP)
             //     ->setWidth(12, 12, 3);
-            $form->select('soketoan_id', __('models.store_phieuxuat.soketoan_id'))
-                ->rules('required')
-                ->options(StoreSoketoan::selectBoxData())
-                ->rules('required')
-                // ->useTableDiv()
-                // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 3);
+            $form->datetime('ngay_chungtu', 'Ngày chứng từ')
+            // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
+            // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+            // ->useTableDiv()
+            ->setWidth(12, 12, 4);
 
             $form->select('xuat_tu_kho_id', __('models.store_phieuxuat.xuat_tu_kho_id'))
                 ->rules('required')
@@ -252,6 +250,7 @@ EOT;
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(1)
                 ->setWidth(12, 12, 3);
             $form->select('xuat_den_kho_id', __('models.store_phieuxuat.xuat_den_kho_id'))
                 ->rules('required')
@@ -259,8 +258,17 @@ EOT;
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(1)
                 ->setWidth(12, 12, 3);
                 //dd(Admin::user());
+                $form->select('soketoan_id', __('models.store_phieuxuat.soketoan_id'))
+                ->rules('required')
+                ->options(StoreSoketoan::selectBoxData())
+                ->rules('required')
+                // ->useTableDiv()
+                // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(2)
+                ->setWidth(12, 12, 3);
             $form->select('nguoi_lapphieu_id', __('models.store_phieuxuat.nguoi_lapphieu_id'))
                 ->options(CommonModel::administratorSelectboxData())
                 ->rules('required')

@@ -62,32 +62,32 @@ Biểu mẫu Phiếu xuất kho
             @foreach($bag['data']->detail as $key => $value)
             <?php
             $stt++;
-            $ttTonDauKy = $value->dongianhap * $value->tong_soluongnhap;
-            $ttTongNhap = 0;
-            $ttTongXuat = 0;
-            $ttTonCuoiKy = 0;
+            $ttTonDauKy = $value->dongianhap * $value->tong_soluong_tondauky;
+            $ttTongNhap = $value->dongianhap * $value->tong_soluongnhap;
+            $ttTongXuat = $value->dongianhap * $value->tong_soluongxuat;
+            $ttTonCuoiKy = $ttTonDauKy + $ttTongNhap - $ttTongXuat;
             ?>
             <tr>
                 <td>{{ $stt }}</td>
                 <td class="bold" >{{ $value->ten_sanpham }}</td>
-                <td></td>
-                <td></td>
+                <td>{{ $value->ten_nguoncungcap }}</td>
+                <td>{{ $value->ten_donvitinh }}</td>
                 <td class="dongia align-right">{{ number_format($value->dongianhap, 4) }}</td>
-                <td></td>
-                <td class="soluong align-right">{{ number_format($value->tong_soluongnhap, 0) }}</td>
+                <td>{{ \Carbon\Carbon::parse($value->hansudung)->format('m/Y') }}</td>
+                <td class="soluong align-right">{{ number_format($value->tong_soluong_tondauky, 0) }}</td>
                 <td class="thanhtien align-right">{{ number_format($ttTonDauKy, 0) }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{ $value->tong_soluongxuat }}</td>
-                <td></td>
+                <td class="soluong align-right">{{ number_format($value->tong_soluongnhap, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTongNhap, 0) }}</td>
+                <td class="soluong align-right">{{ number_format($value->tong_soluongxuat, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTongXuat, 0) }}</td>
+                <td class="soluong align-right">{{ number_format($value->tong_soluong_tondauky + $value->tong_soluongnhap - $value->tong_soluongxuat, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTonCuoiKy, 0) }}</td>
                 <td></td>
             </tr>
             <?php
             $sumTonDauKy += $ttTonDauKy;
-            $sumTongNhap += 0;
-            $sumTongXuat += 0;
+            $sumTongNhap += $ttTongNhap;
+            $sumTongXuat += $ttTongXuat;
             $sumTonCuoiKy = $sumTonDauKy + $sumTongNhap - $sumTongXuat;
             ?>
             @endforeach
@@ -101,7 +101,7 @@ Biểu mẫu Phiếu xuất kho
                 <td>0</td>
                 <td class="thanhtien align-right">{{ number_format($sumTonDauKy, 0) }}</td>
                 <td></td>
-                <td></td>
+                <td class="thanhtien align-right">{{ number_format($sumTongNhap, 0) }}</td>
                 <td></td>
                 <td class="thanhtien align-right">{{ number_format($sumTongXuat, 0) }}</td>
                 <td>0</td>

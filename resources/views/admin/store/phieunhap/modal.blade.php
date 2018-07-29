@@ -27,12 +27,7 @@
                             <label class="form-label">Tên hoạt chất</label>
                         </div>
                     </div>
-                    <div class="form-group form-float">
-                        <div class="form-line">
-                            <input type="text" id="nongdo_hamluong" name="nongdo_hamluong" class="form-control">
-                            <label class="form-label">Nồng độ / hàm lượng</label>
-                        </div>
-                    </div>
+                   
                     <div class="form-group form-float">
                         <div class="form-line">
                             <input type="text" id="quycachdonggoi" name="quycachdonggoi" class="form-control">

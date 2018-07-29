@@ -53,9 +53,16 @@ Biểu mẫu Phiếu nhập kho
                 <td class="tg-031e">Số : {{ $bag['data']->result[0]->so_phieunhap }}  </td>
             </tr>
            
-            <tr>
+            <tr class="align-left">
                 <td class="tg-031e align-left" colspan="2">Đơn vị giao hàng: (Nhà cung cấp)</td>
-                <td>Số CT:        Ngày:</td>
+                <td>
+                <?php foreach ($bag['data']->detail as $detail) {
+                ?>
+                    Số CT: {{ $detail->so_chungtu }} - Ngày: {{ \Carbon\Carbon::parse($detail->ngay_chungtu)->format('d/m/Y') }}<br />
+                <?php
+                }
+                ?>
+                </td>
             </tr>
             <tr>
                 <td class="tg-031e align-left" colspan="3">Lý do nhập : {{ $bag['data']->result[0]->lydo_nhap }}</td>
@@ -106,6 +113,8 @@ Biểu mẫu Phiếu nhập kho
             <?php 
                 $stt++;
                 }
+
+                $sum = round($sum);
             ?>
             <tr class="bold">
                 <td></td>
@@ -125,7 +134,7 @@ Biểu mẫu Phiếu nhập kho
                
 
                 <td class="main-yw4l align-left no-border" style="width: 150px">Tổng số tiền (bằng chữ): </td>
-                <td class="main-yw4l align-left no-border bold"><?php echo decimalToTextVietnamese($sum); ?></td>
+                <td class="main-yw4l align-left no-border bold"><?php echo decimalToTextVietnamese($sum); ?>.</td>
 
             </tr>
             <tr>
