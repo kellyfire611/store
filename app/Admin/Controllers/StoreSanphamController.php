@@ -86,11 +86,8 @@ class StoreSanphamController extends Controller
             $grid->column('ma_sanpham', __('models.store_sanpham.ma_sanpham'));
             $grid->column('ten_sanpham', __('models.store_sanpham.ten_sanpham'));
             $grid->column('ten_hoatchat', __('models.store_sanpham.ten_hoatchat'));
-            $grid->column('nongdo_hamluong', __('models.store_sanpham.nongdo_hamluong'));
             $grid->column('sokiemsoat', __('models.store_sanpham.sokiemsoat'));
-            $grid->column('nha_sanxuat_id', __('models.store_sanpham.nha_sanxuat_id'));
-            $grid->column('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'));
-
+           
             $grid->created_at(__('models.common.created_at'));
             $grid->updated_at(__('models.common.updated_at'));
 
@@ -169,15 +166,12 @@ $.ajax({
 */
 
             $form->text('ten_hoatchat', __('models.store_sanpham.ten_hoatchat'))->attribute('tabindex', 3);
-            $form->text('nongdo_hamluong', __('models.store_sanpham.nongdo_hamluong'))->attribute('tabindex', 4);
             $form->text('sokiemsoat', __('models.store_sanpham.sokiemsoat'))->attribute('tabindex', 5);
             $form->select('donvitinh_id', __('models.store_sanpham.donvitinh_id'))
                     ->options(StoreDonvitinh::selectboxData());
             $form->text('quycachdonggoi', __('models.store_sanpham.quycachdonggoi'))->attribute('tabindex', 6);
             
-            $form->select('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
-                HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
-                )->rules('required')->attribute('tabindex', 6);
+            
                 
             $form->image('anh', __('models.store_sanpham.anh'));
             $form->display('created_at', __('models.common.created_at'));
@@ -226,15 +220,12 @@ $.ajax({
             $ten_sanpham = $form->text('ten_sanpham', __('models.store_sanpham.ten_sanpham'))->attribute(['tabindex' => 2, 'autofocus' => 'autofocus']);
 
             $form->text('ten_hoatchat', __('models.store_sanpham.ten_hoatchat'))->attribute('tabindex', 3);
-            $form->text('nongdo_hamluong', __('models.store_sanpham.nongdo_hamluong'))->attribute('tabindex', 4);
             $form->text('sokiemsoat', __('models.store_sanpham.sokiemsoat'))->attribute('tabindex', 5);
             $form->select('donvitinh_id', __('models.store_sanpham.donvitinh_id'))
                 ->options(StoreDonvitinh::selectboxData());
             $form->text('quycachdonggoi', __('models.store_sanpham.quycachdonggoi'))->attribute('tabindex', 6);
             
-            $form->select('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
-                HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
-                )->rules('required')->attribute('tabindex', 6);
+           
                 
             $form->image('anh', __('models.store_sanpham.anh'));
             
@@ -254,7 +245,6 @@ $.ajax({
             $sp->ten_sanpham = $request->ten_sanpham;
             $sp->donvitinh_id = $request->donvitinh_id;
             $sp->ten_hoatchat = $request->ten_hoatchat;
-            $sp->nongdo_hamluong = $request->nongdo_hamluong;
             $sp->quycachdonggoi = $request->quycachdonggoi;
             $sp->save();
             return response()->json($sp);

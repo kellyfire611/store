@@ -9,6 +9,7 @@ use App\Models\StoreKho;
 use App\Models\StorePhieuxuatChitiet;
 use App\Models\StoreSanpham;
 use App\Models\StoreDonvitinh;
+use App\Models\StoreDonvi;
 use App\Models\StoreSystemConfig;
 use App\Models\StorePhieunhapChitiet;
 use App\Models\CommonModel;
@@ -220,6 +221,13 @@ EOT;
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 ->setWidth(12, 12, 6);
+            $form->select('donvi_id', 'Đơn vị nhận')
+                ->rules('required')
+                ->options(StoreDonvi::selectboxData())
+                ->rules('required')
+                // ->useTableDiv()
+                // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->setWidth(12, 12, 3);
             $form->text('so_chungtu', __('models.store_phieuxuat.so_chungtu'))
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)

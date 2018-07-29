@@ -261,7 +261,7 @@
 // // this is the id of the form
 // $("#conditionForm").submit(function(e) {
 
-//     // var url = "{{ route('store.ajax.reportBangKeNhapKhoTonghop') }}"; // the script where you handle the form input.
+//     // var url = ""; // the script where you handle the form input.
 //     // $.ajaxSetup({
 //     //     headers: {
 //     //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')

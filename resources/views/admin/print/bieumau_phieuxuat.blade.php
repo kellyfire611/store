@@ -24,7 +24,7 @@ Biểu mẫu Phiếu xuất kho
 @else
 <section class="sheet padding-10mm">
     <article>
-        <table class="tg">
+        <table class="tg" border="0">
             <tr>
                 <th class="tg-baqh">{{ config('company.parent.name') }}</th>
                 <th class="tg-baqh"></th>
@@ -47,23 +47,11 @@ Biểu mẫu Phiếu xuất kho
                 <td class="tg-031e"></td>
             </tr>
             <tr>
-                <td class="tg-031e align-left" ></td>
-                <td class="tg-031e align-left" ></td>
-                <td class="tg-031e align-center" >Số: {{ $bag['data']->result[0]->so_phieuxuat }}</td>
-            </tr>
-            <tr>
-                <td class="tg-031e align-left" colspan="3">Xuất qua kho :</td>
+                <td class="tg-031e align-left" colspan="2">Họ tên người nhận hàng : {{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
+                <td class="tg-031e align-left" colspan="3">Số : {{ $bag['data']->result[0]->so_phieuxuat }}</td>
             </tr>
             <tr>
                 <td class="tg-031e align-left" colspan="3">Lý do xuất kho : {{ $bag['data']->result[0]->lydo_xuat }}</td>
-            </tr>
-            <tr>
-                <td class="tg-031e align-left" colspan="3">Họ tên người nhận hàng : {{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
-            </tr>
-            <tr>
-                <td class="tg-031e align-left" >Nguồn :</td>
-                <td class="tg-031e align-left" >Số chứng từ : {{ $bag['data']->result[0]->so_chungtu }}</td>
-                <td class="tg-031e align-left" >Ngày :</td>
             </tr>
         </table>
         <table class="main">
@@ -99,8 +87,8 @@ Biểu mẫu Phiếu xuất kho
             <tr class="page-break-inside-avoid">
                 <td>{{ $stt }}</td>
                 <td class="align-left" >{{ $detail->ten_sanpham }}</td>
-                <td></td>
-                <td>{{ $detail->hansudung }}</td>
+                <td>{{ $detail->SOLO }}</td>
+                <td>{{ $detail->HanSD }}</td>
                 <td></td>
                 <td>{{ $detail->ten_donvitinh }}</td>
                 <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
@@ -126,34 +114,38 @@ Biểu mẫu Phiếu xuất kho
                 <td class="align-right">{{ number_format($sum, 0) }}</td>
                 <td></td>
             </tr>
+            </table>
+            <table>
             <tr>
-                <td class="main-yw4l no-border"></td>
+                
 
-                <td class="main-yw4l no-border align-right">Tổng số tiền (bằng chữ): </td>
-                <td class="main-yw4l align-left no-border bold " colspan="9"><?php echo decimalToTextVietnamese($sum); ?></td>
+                <td class="main-yw4l no-border">Tổng số tiền (bằng chữ): </td>
+                <td class="main-yw4l align-left no-border bold" colspan="9"><?php echo decimalToTextVietnamese($sum); ?></td>
 
             </tr>
             <tr>
-                <td class="main-yw4l no-border"></td>
+                
 
-                <td class="main-yw4l no-border align-right">Chứng từ kèm theo: </td>
+                <td class="main-yw4l no-border">Chứng từ kèm theo: </td>
                 <td class="main-yw4l align-left no-border" colspan="9"></td>
 
             </tr>
+            </table>
+            <table>
             <tr>
-                <td class="no-border bold" colspan="2">Người lập</td>
-                <td class="no-border bold" colspan="2">Người nhận hàng</td>
-                <td class="no-border bold" colspan="2">Thủ kho</td>
-                <td class="no-border bold" colspan="2">Kế toán trưởng</td>
-                <td class="no-border bold" colspan="2">Thủ trưởng đơn vị</td>
+                <td class="no-border bold" >Người lập</td>
+                <td class="no-border bold" >Người nhận hàng</td>
+                <td class="no-border bold" >Thủ kho</td>
+                <td class="no-border bold" >Kế toán trưởng</td>
+                <td class="no-border bold" >Thủ trưởng đơn vị</td>
             </tr>
             <tr style="height: 80px;"></tr>
             <tr>
-                <td class="no-border" colspan="2">{{ Admin::user()->name }}</td>
-                <td class="no-border" colspan="2">{{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
-                <td class="no-border" colspan="2"></td>
-                <td class="no-border" colspan="2">{{ config('company.chucvu.ketoantruong') }}</td>
-                <td class="no-border" colspan="2">{{ config('company.chucvu.thutruongdonvi') }}</td>
+                <td class="no-border" >{{ Admin::user()->name }}</td>
+                <td class="no-border" >{{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
+                <td class="no-border" ></td>
+                <td class="no-border" >{{ config('company.chucvu.ketoantruong') }}</td>
+                <td class="no-border" >{{ config('company.chucvu.thutruongdonvi') }}</td>
             </tr>
 
         </table>

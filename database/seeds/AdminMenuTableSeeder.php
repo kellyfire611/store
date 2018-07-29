@@ -63,7 +63,7 @@ class AdminMenuTableSeeder extends Seeder
                 /* --- Báo cáo --- */
                 ["id" => 31, "parent_id" => 0, "order" => 31, "title" => "Báo cáo", "icon" => "fa-bar-chart", "uri" => "", "created_at" => $now, "updated_at" => NULL,],
                 ["id" => 32, "parent_id" => 31, "order" => 32, "title" => "Nhập xuất tồn chi tiết", "icon" => "fa-bar-chart", "uri" => "/store/baocao/nhapxuatton_chitiet", "created_at" => $now, "updated_at" => NULL,],
-                ["id" => 38, "parent_id" => 31, "order" => 38, "title" => "Bảng kê Nhập kho theo nguồn vốn", "icon" => "fa-bar-chart", "uri" => "/store/baocao/bangkenhapkho_tonghop", "created_at" => $now, "updated_at" => NULL,],
+                ["id" => 38, "parent_id" => 31, "order" => 38, "title" => "Bảng kê Nhập kho theo nguồn vốn", "icon" => "fa-bar-chart", "uri" => "/store/baocao/bangkenhapkho_theonguonvon", "created_at" => $now, "updated_at" => NULL,],
                 ["id" => 39, "parent_id" => 31, "order" => 39, "title" => "Bảng kê Xuất kho theo Sản phẩm", "icon" => "fa-bar-chart", "uri" => "/store/baocao/bangkexuatkho_theosanpham", "created_at" => $now, "updated_at" => NULL,],
                 /* ./. --- Báo cáo --- */
             ]

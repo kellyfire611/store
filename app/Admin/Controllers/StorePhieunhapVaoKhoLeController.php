@@ -137,20 +137,20 @@ class StorePhieunhapVaoKhoLeController extends Controller
         return Admin::form(StorePhieunhap::class, function (Form $form) {
             //$form->display('id', 'ID');
             $form->hidden('nhapxuat_id', __('models.store_phieunhap.nhapxuat_id'))
-                ->default(CommonModel::getNhapXuat()['_NHAP_TON_KHO_DAU_KY_']);
+                ->default(CommonModel::getNhapXuat()['_NHAP_VAO_KHO_LE_']);
                 
             $sophieunhap = $form->text('so_phieunhap', __('models.store_phieunhap.so_phieunhap'))
                 ->attribute('tabindex', 1)
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 ->readOnly()
-                ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 4);
             
             $ngayNhapKho = $form->datetime('ngay_nhapkho', __('models.store_phieunhap.ngay_nhapkho'))
                 ->attribute('tabindex', 3)
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 3);
+                ->setWidth(12, 12, 4);
 
                 $ajaxGenerateSoPhieuNhapUrl = route('store.ajax.generateSoPhieuNhap');
                 $script = <<<EOT
@@ -198,13 +198,13 @@ EOT;
             ->attribute('tabindex', 3)
             // ->useTableDiv()
             // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-            ->setWidth(12, 12, 3);
+            ->setWidth(12, 12, 4);
 
-            $form->datetime('ngay_xacnhan', __('models.store_phieunhap.ngay_xacnhan'))
-            ->attribute('tabindex', 2)
-            // ->useTableDiv()
-            // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-            ->setWidth(12, 12, 3);
+            // $form->datetime('ngay_xacnhan', __('models.store_phieunhap.ngay_xacnhan'))
+            // ->attribute('tabindex', 2)
+            // // ->useTableDiv()
+            // // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+            // ->setWidth(12, 12, 3);
 
 
             $form->textarea('lydo_nhap', __('models.store_phieunhap.lydo_nhap'))
@@ -225,6 +225,7 @@ EOT;
                 //->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(2)
                 ->setWidth(12, 12, 3);
 
             $form->select('soketoan_id', __('models.store_phieunhap.soketoan_id'))
@@ -232,12 +233,14 @@ EOT;
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(2)
                 ->setWidth(12, 12, 3);
             $form->select('nhap_vao_kho_id', __('models.store_phieunhap.nhap_vao_kho_id'))
                 ->options(StoreKho::selectboxData())
                 ->rules('required')
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(1)
                 ->setWidth(12, 12, 3);
             $form->select('nguoi_lapphieu_id', __('models.store_phieunhap.nguoi_lapphieu_id'))
                 ->options(CommonModel::administratorSelectboxData())
@@ -250,7 +253,7 @@ EOT;
 
             $form->hasMany('chitiet', 'Chi tiết', function (Form\NestedForm $form) {
                 // $form->hidden('nhapxuat_id', __('models.store_phieunhap_chitiet.nhapxuat_id'))
-                //     ->default(CommonModel::getNhapXuat()['_NHAP_TON_KHO_DAU_KY_'])
+                //     ->default(CommonModel::getNhapXuat()['_NHAP_VAO_KHO_LE_'])
                 //     ->displayNone();
                 // $form->hidden('soketoan_id',  __('models.store_phieunhap_chitiet.soketoan_id'))
                 //     ->default(1)
@@ -280,7 +283,7 @@ EOT;
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 3);
+                    ->setWidth(12, 12, 4);
                     //->config('templateResult', $templateResult);
                 $form->select('nguoncungcap_id', __('models.store_phieunhap_chitiet.nguoncungcap_id'))
                     ->options(StoreNguoncungcap::selectboxData())
@@ -288,27 +291,37 @@ EOT;
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 2);
+                    ->setWidth(12, 12, 4);
                 $form->select('nuoc_sanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
                     HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
                     )->rules('required')->attribute('tabindex', 6)
-                    ->setWidth(12, 12, 2);
+                    ->setWidth(12, 12, 4);
                 // $form->select('donvitinh_id', __('models.store_phieunhap_chitiet.donvitinh_id'))
                 //     ->options(StoreDonvitinh::selectboxData())
                 //     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                 //     ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 //     ->useTableDiv()
                 //     ->setWidth(12, 12, 1);
+                $form->text('nongdohamluong', 'Nồng độ/Hàm lượng')
+                //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
+                // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                // ->useTableDiv()
+                ->setWidth(12, 12, 2);
                 $form->text('so_lo', __('models.store_phieunhap_chitiet.so_lo'))
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 1);
+                    ->setWidth(12, 12, 2);
                     // onlyControl, onlyLabel, LabelAndControl
                     // bootstrap_div_group_only_control
                     // bootstrap_div_group_only_label
                     // bootstrap_div_group_only_label_and_control
                 $form->text('so_chungtu', __('models.store_phieunhap_chitiet.so_chungtu'))
+                    // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 2);
+                $form->datetime('ngay_chungtu', 'Ngày chứng từ')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
@@ -324,14 +337,14 @@ EOT;
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 12);
+                    ->setWidth(12, 12, 2);
                 $form->currency('soluongnhap', __('models.store_phieunhap_chitiet.soluongnhap'))
                     ->addElementClass(['soluong'])
                     ->rules('required')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()
-                    ->setWidth(12, 12, 12);
+                    ->setWidth(12, 12, 2);
                 // $form->currency('soluong_conlai', __('models.store_phieunhap_chitiet.soluong_conlai'))
                 //     ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                 //     ->useTableDiv()
@@ -347,8 +360,14 @@ EOT;
             $form->display('created_at', __('models.common.created_at'));
             $form->display('updated_at', __('models.common.updated_at'));
 
+            $form->submitted(function (Form $form) {
+                $model = $form->model();
+                //dd($model);
+            });
+
             $form->savingInTransaction(function (Form $form) {
                 $model = $form->model();
+                //dd($model);
                 // $model->soluong_conlai = $model->soluongnhap;
                 // dd($model->soluongnhap);
 

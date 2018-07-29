@@ -193,7 +193,8 @@ EOT;
 
 
 
-            $form->textarea('bienban_kiemnhap_tokiemnhap', __('models.store_phieunhap.bienban_kiemnhap_tokiemnhap'));
+            $form->textarea('bienban_kiemnhap_tokiemnhap', __('models.store_phieunhap.bienban_kiemnhap_tokiemnhap'))
+                ->default(config('company.tokiemnhap'));
                 //->useTableDiv()
                 //->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 //->setWidth(12, 12, 3);
@@ -202,7 +203,8 @@ EOT;
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->setWidth(12, 12, 3);
-            $form->textarea('bienban_kiemnhap_diadiem', __('models.store_phieunhap.bienban_kiemnhap_diadiem'));
+            $form->textarea('bienban_kiemnhap_diadiem', __('models.store_phieunhap.bienban_kiemnhap_diadiem'))
+                ->default(config('company.diadiemkiemnhap'));
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->setWidth(12, 12, 3);
@@ -298,6 +300,11 @@ EOT;
                     HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
                     )->rules('required')->attribute('tabindex', 6)
                     ->setWidth(12, 12, 2);
+                $form->text('nongdohamluong', 'Nồng độ/Hàm lượng')
+                    //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 2);
                 $form->text('so_lo', __('models.store_phieunhap_chitiet.so_lo'))
                     //->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
@@ -308,6 +315,11 @@ EOT;
                     // bootstrap_div_group_only_label
                     // bootstrap_div_group_only_label_and_control
                 $form->text('so_chungtu', __('models.store_phieunhap_chitiet.so_chungtu'))
+                    // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
+                    // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                    // ->useTableDiv()
+                    ->setWidth(12, 12, 2);
+                $form->datetime('ngay_chungtu', 'Ngày chứng từ')
                     // ->renderStyle(CommonModel::RENDER_STYLE_ONLY_CONTROL)
                     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                     // ->useTableDiv()

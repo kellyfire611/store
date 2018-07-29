@@ -1,113 +1,88 @@
-table {
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    font-weight: normal;
-    padding: 15px 0;
-    width: 100%;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.main {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-.main td {
-    padding: 10px 5px;
-    border-style: solid;
-    border-width: 1px;
-    overflow: hidden;
-    word-break: normal;
-    border-color: black;
-}
-
-.main th {
-    padding: 10px 5px;
-    border-style: solid;
-    border-width: 1px;
-    overflow: hidden;
-    word-break: normal;
-    border-color: black;
-}
-
-.main .main-s6z2 {
-    text-align: center
-}
-
-.main .main-uys7 {
-    border-color: inherit;
-    text-align: center
-}
-
-.align-left {
-    text-align: left;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.valign-top {
-    vertical-align: top;
-}
-
-.valign-bottom {
-    vertical-align: bottom;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.name {
-    text-align: center;
-    font-size: 20px;
-}
-
-.no-border {
-    border-style: none !important;
-}
-
-.main .main-yw4l {
-    vertical-align: top
-}
-
-.tittle {
-    width: 100%;
-}
-
-.tittle .tieungu {
-    padding: 20px 0;
-}
-
-table .nguoithamgia tr {
-    padding: 10px 0;
-}
-
-table.fixed { table-layout:fixed; }
-table.fixed td { overflow: hidden; }
-
-.error {
-    background: #e8c4c4;
-}
-
-.dongia {
-    color: blue;
-}
-
-.soluong {
-    color: green;
-}
-
-.thanhtien {
-    color: red;
-}
-
-table.main thead tr {
-    background: grey;
-}
-
-table.main tfoot tr {
-    background: grey;
-}
+        table {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: normal;
+            padding: 15px 0;
+            width: 100%;
+            vertical-align: middle;
+            text-align: center;
+            table-layout: fixed;
+        }
+        
+        .main {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        
+        .main td {
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: break-word;
+            border-color: black;
+            text-overflow: ellipsis;
+        }
+        
+        .main th {
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: break-word;
+            border-color: black;
+        }
+        
+        .main .main-s6z2 {
+            text-align: center
+        }
+        
+        .main .main-uys7 {
+            border-color: inherit;
+            text-align: center
+        }
+        
+        .align-left {
+            text-align: left;
+        }
+        
+        .align-right {
+            text-align: right;
+        }
+        
+        .valign-top {
+            vertical-align: top;
+        }
+        
+        .valign-bottom {
+            vertical-align: bottom;
+        }
+        
+        .bold {
+            font-weight: bold;
+        }
+        
+        .name {
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .no-border {
+            border-style: none !important;
+        }
+        
+        .main .main-yw4l {
+            vertical-align: top
+        }
+        
+        .tittle {
+            width: 100%;
+        }
+        
+        .tittle .tieungu {
+            padding: 20px 0;
+        }
+        
+        table .nguoithamgia tr {
+            padding: 10px 0;
+        }

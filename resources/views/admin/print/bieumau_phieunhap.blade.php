@@ -30,7 +30,7 @@ Biểu mẫu Phiếu nhập kho
 @else
 <section class="sheet padding-10mm">
     <article>
-        <table class="tg">
+        <table class="tg" >
             <tr>
                 <th class="tg-baqh">{{ config('company.parent.name') }}</th>
                 <th class="tg-baqh"></th>
@@ -48,43 +48,39 @@ Biểu mẫu Phiếu nhập kho
                 <td class="tg-031e"></td>
                 <td class="tg-031e align-center"><?php
                 $ngayNhap = \Carbon\Carbon::parse($bag['data']->result[0]->ngay_nhapkho);
+                
                 ?>  Ngày {{ $ngayNhap->day }} tháng {{ $ngayNhap->month }} năm {{ $ngayNhap->year }}</td>
-                <td class="tg-031e"></td>
+                <td class="tg-031e">Số : {{ $bag['data']->result[0]->so_phieunhap }}  </td>
             </tr>
+           
             <tr>
-                <?php ?>
-                <td class="tg-031e align-left" colspan="3">Số : {{ $bag['data']->result[0]->so_phieunhap }}  </td>
-
-            </tr>
-            <tr>
-                <td class="tg-031e align-left" colspan="3">Đơn vị giao :</td>
+                <td class="tg-031e align-left" colspan="2">Đơn vị giao hàng: (Nhà cung cấp)</td>
+                <td>Số CT:        Ngày:</td>
             </tr>
             <tr>
                 <td class="tg-031e align-left" colspan="3">Lý do nhập : {{ $bag['data']->result[0]->lydo_nhap }}</td>
             </tr>
             <tr>
-                <td class="tg-031e align-left" colspan="3">Nhập tại kho :</td>
+                <td class="tg-031e align-left" colspan="3">Nhập tại kho : {{ $bag['data']->result[0]->ten_kho }}</td>
             </tr>
             <tr>
-                <td class="tg-031e align-left" >Nguồn :</td>
-                <td class="tg-031e align-left" >Số chứng từ : {{ $bag['data']->result[0]->so_chungtu }}</td>
-                <td class="tg-031e align-left" >Ngày :</td>
+                <td class="tg-031e align-left" colspan="3" >Nguồn :</td>
             </tr>
         </table>
         <table class="main">
             <tr>
-                <th class="main-s6z2" >STT</th>
-                <th class="main-s6z2" >Tên quy cách vật tư dụng cụ, sản phẩm</th>
-                <th class="main-s6z2" >Số lô</th>
-                <th class="main-s6z2" >Hạn SD</th>
-                <th class="main-s6z2" >Loại TS</th>
-                <th class="main-s6z2" >ĐVT</th>
+                <th class="main-s6z2" style="width: 25px;" >STT</th>
+                <th class="main-s6z2" style="width: 90px;">Tên quy cách vật tư dụng cụ, sản phẩm</th>
+                <th class="main-s6z2" style="width: 80px;">Số lô</th>
+                <th class="main-s6z2" style="width: 60px;">Hạn SD</th>
+                <th class="main-s6z2" style="width: 50px;">Nhóm sản phẩm</th>
+                <th class="main-s6z2" style="width: 40px;">ĐVT</th>
 
-                <th class="main-s6z2" >Số lượng</th>
-                <th class="main-s6z2" >Đơn giá</th>
+                <th class="main-s6z2" style="width: 55px;">Số lượng</th>
+                <th class="main-s6z2" style="width: 90px;">Đơn giá</th>
 
-                <th class="main-s6z2" >Thành<br> tiền</th>
-                <th class="main-s6z2" >Ghi<br> chú</th>
+                <th class="main-s6z2" style="width: 92px;">Thành<br> tiền</th>
+                <th class="main-s6z2" style="width: 25px;">Ghi<br> chú</th>
             </tr>
             <?php
                 $stt = 1;
@@ -97,9 +93,9 @@ Biểu mẫu Phiếu nhập kho
             <tr class="page-break-inside-avoid">
                 <td>{{ $stt }}</td>
                 <td class="align-left" >{{ $detail->ten_sanpham }}</td>
-                <td>{{ $detail->so_lo }}</td>
-                <td>{{ $detail->hansudung }}</td>
-                <td></td>
+                <td class="align-left">{{ $detail->so_lo }}</td>
+                <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('m/Y') }}</td>
+                <td>{{ $detail->ten_nhom_sanpham }}</td>
                 <td>{{ $detail->ten_donvitinh }}</td>
                 <td class="align-right">{{ number_format($detail->soluongnhap, 0) }}</td>
                 <td class="align-right">{{ number_format($detail->dongianhap, 2) }}</td>
@@ -123,36 +119,39 @@ Biểu mẫu Phiếu nhập kho
                 <td class="align-right">{{ number_format($sum, 0) }}</td>
                 <td></td>
             </tr>
+        </table>
+        <table>
             <tr>
-                <td class="main-yw4l no-border"></td>
+               
 
-                <td class="main-yw4l no-border">Tổng số tiền (bằng chữ): </td>
-                <td class="main-yw4l align-left no-border bold" colspan="9"><?php echo decimalToTextVietnamese($sum); ?></td>
+                <td class="main-yw4l align-left no-border" style="width: 150px">Tổng số tiền (bằng chữ): </td>
+                <td class="main-yw4l align-left no-border bold"><?php echo decimalToTextVietnamese($sum); ?></td>
 
             </tr>
             <tr>
-                <td class="main-yw4l no-border"></td>
+              
 
-                <td class="main-yw4l no-border">Chứng từ kèm theo: </td>
-                <td class="main-yw4l align-left no-border" colspan="9"></td>
+                <td class="main-yw4l align-left no-border">Chứng từ kèm theo: </td>
+                <td class="main-yw4l align-left no-border"></td>
 
             </tr>
+            </table>
+        <table>
             <tr>
-                <td class="no-border bold" colspan="2">Người lập</td>
-                <td class="no-border bold" colspan="2">Người giao hàng</td>
-                <td class="no-border bold" colspan="2">Thủ kho</td>
-                <td class="no-border bold" colspan="2">Kế toán trưởng</td>
-                <td class="no-border bold" colspan="2">Thủ trưởng đơn vị</td>
+                <td class="no-border bold" >Người lập</td>
+                <td class="no-border bold" >Người giao hàng</td>
+                <td class="no-border bold" >Thủ kho</td>
+                <td class="no-border bold" >Kế toán trưởng</td>
+                <td class="no-border bold" >Thủ trưởng đơn vị</td>
             </tr>
             <tr style="height: 80px;"></tr>
             <tr>
-                <td class="no-border" colspan="2">{{ Admin::user()->name }}</td>
-                <td class="no-border" colspan="2">{{ $bag['data']->result[0]->nguoi_giaohang }}</td>
-                <td class="no-border" colspan="2"></td>
-                <td class="no-border" colspan="2">{{ config('company.chucvu.ketoantruong') }}</td>
-                <td class="no-border" colspan="2">{{ config('company.chucvu.thutruongdonvi') }}</td>
+                <td class="no-border" >{{ Admin::user()->name }}</td>
+                <td class="no-border" >{{ $bag['data']->result[0]->nguoi_giaohang }}</td>
+                <td class="no-border" ></td>
+                <td class="no-border" >{{ config('company.chucvu.ketoantruong') }}</td>
+                <td class="no-border" >{{ config('company.chucvu.thutruongdonvi') }}</td>
             </tr>
-
         </table>
     </article>
 </section>
