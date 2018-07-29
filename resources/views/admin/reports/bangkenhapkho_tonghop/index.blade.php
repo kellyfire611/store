@@ -18,10 +18,10 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label for="p_nguoncungcap_id">Nguồn vốn cung cấp</label>
-                <select class="form-control" style="width: 100%;" name="p_nguoncungcap_id" id="p_nguoncungcap_id">
+                <select class="form-control" style="width: 100%;" name="p_nguoncungcap_id[]" multiple id="p_nguoncungcap_id">
                     <option value=""></option>
                     @foreach($nguonCungCap as $select => $option)
-                    <option value="{{$select}}">{{$option}}</option>
+                    <option value="{{$select}}" >{{$option}}</option>
                     @endforeach
                 </select>
             </div>
@@ -29,7 +29,7 @@
         <div class="col-sm-12">
                 <div class="form-group">
                     <label for="p_sanpham_id">Sản phẩm</label>
-                    <select class="form-control" style="width: 100%;" name="p_sanpham_id" id="p_sanpham_id">
+                    <select class="form-control" style="width: 100%;" name="p_sanpham_id[]" multiple id="p_sanpham_id">
                         <option value=""></option>
                         @foreach($sanPham as $select => $option)
                         <option value="{{$select}}">{{$option}}</option>
@@ -40,7 +40,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label for="p_nhomsanpham_id">Nhóm sản phẩm</label>
-                <select class="form-control" style="width: 100%;" name="p_nhomsanpham_id" id="p_nhomsanpham_id">
+                <select class="form-control" style="width: 100%;" name="p_nhomsanpham_id[]" multiple id="p_nhomsanpham_id">
                     <option value=""></option>
                     @foreach($nhomSanPham as $select => $option)
                     <option value="{{$select}}">{{$option}}</option>
@@ -51,7 +51,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label for="p_loaisanpham_id">Loại sản phẩm</label>
-                <select class="form-control" style="width: 100%;" name="p_loaisanpham_id" id="p_loaisanpham_id">
+                <select class="form-control" style="width: 100%;" name="p_loaisanpham_id[]" multiple id="p_loaisanpham_id">
                     <option value=""></option>
                     @foreach($loaiSanPham as $select => $option)
                     <option value="{{$select}}">{{$option}}</option>

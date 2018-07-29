@@ -69,22 +69,61 @@ class PrintController extends Controller
     }
 
     protected function getDataBieumau_report_bangkenhapkho_theonguonvon($query)
-    {
+    {   
         $totalResult = 1;
         $totalPages = 1;
         $currentPage = 1;
         $chitiet = null;
-        // dd($query);
+        $str_Optional = '';
+         //dd($query);
         $p_ngay_batdau = $query['p_ngay_batdau'];
         $p_ngay_ketthuc = $query['p_ngay_ketthuc'];
-        $p_nguoncungcap_id = $query['p_nguoncungcap_id'];
-
+        $p_nguoncungcap_id = $query['p_nguoncungcap_id'] ?? 0;
+        $p_sanpham_id = $query['p_sanpham_id'] ?? 0;
+        $p_sanpham_nhom_id = $query['p_sanpham_nhom_id'] ?? 0;
+        $p_sanpham_loai_id = $query['p_sanpham_loai_id'] ?? 0;
         $parameter = [
             $p_ngay_batdau,
             $p_ngay_ketthuc,
-            $p_nguoncungcap_id
+            $p_nguoncungcap_id,
+            $p_sanpham_id,
+            $p_sanpham_nhom_id,
+            $p_sanpham_loai_id
         ];
-        $data = DB::select('call usp_store_baocao_bangkenhapkho_theonguonvon(?,?,?)', $parameter);
+        // dd($parameter);
+        //$data = DB::select('call usp_store_baocao_bangkenhapkho_tonghop(?,?,?,?,?,?)', $parameter);
+        //$data = DB::select();
+        $fields = "ncc.ma_nguoncungcap, ncc.ten_nguoncungcap
+            , sp.ma_sanpham, sp.ten_sanpham, sp.ten_hoatchat, sp.nongdo_hamluong
+            , dvt.ten_donvitinh
+            , pn.ngay_laphoadon
+            , k.ten_kho
+            , pnct.so_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap";
+        $tables = "store_phieunhap_chitiet pnct
+            LEFT JOIN store_phieunhap pn ON pnct.phieunhap_id = pn.id
+            LEFT JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
+            LEFT JOIN store_sanpham sp ON pnct.sanpham_id = sp.id
+            LEFT JOIN store_donvitinh dvt ON sp.donvitinh_id = dvt.id
+            LEFT JOIN store_kho k ON pnct.nhap_vao_kho_id = k.id
+            LEFT JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id";
+        $wheres = "pn.ngay_nhapkho BETWEEN '$p_ngay_batdau' AND '$p_ngay_ketthuc'";
+
+        if(isset($p_nguoncungcap_id) && $p_nguoncungcap_id !='' ){
+            $str_Optional .= ' AND pnct.nguoncungcap_id IN ( '.implode(',', $p_nguoncungcap_id) . ')' ;
+        }   
+        if(isset($p_sanpham_id) && $p_sanpham_id !='' ){
+            $str_Optional .= ' AND pnct.sanpham_id IN ( '.implode(',', $p_sanpham_id) . ')' ;
+        }
+        if(isset($p_sanpham_nhom_id) && $p_sanpham_nhom_id !=''){
+            $str_Optional .= ' AND nlrel.sanpham_nhom_id IN ( '.implode(',', $p_sanpham_nhom_id) . ')' ;
+        }
+        if(isset($p_sanpham_loai_id) && $p_sanpham_loai_id !=''){
+            $str_Optional .= ' AND nlrel.sanpham_loai_id IN ( '.implode(',', $p_sanpham_loai_id) . ')' ;
+        }
+            
+        $data =  DB::select("SELECT $fields
+                                FROM $tables
+                                WHERE $wheres $str_Optional  ") ;
         $chitiet = $data;
 
         $result = json_encode(
@@ -96,10 +135,11 @@ class PrintController extends Controller
 
         $bag = [
             'meta' => [
-                'title' => 'Bảng kê nhập kho theo nguồn vốn',
+                'title' => 'Bảng kê nhập kho tổng hợp',
                 'p_ngay_batdau' => $p_ngay_batdau,
                 'p_ngay_ketthuc' => $p_ngay_ketthuc,
-                'p_nguoncungcap_id' => $p_nguoncungcap_id
+                'p_nguoncungcap_id' => $p_nguoncungcap_id,
+                'p_sanpham_id' => $p_sanpham_id,
             ],
             'data' => json_decode($result)
         ];
@@ -194,7 +234,8 @@ class PrintController extends Controller
         $totalPages = 1;
         $currentPage = 1;
         $chitiet = null;
-        // dd($query);
+        $str_Optional = '';
+         //dd($query);
         $p_ngay_batdau = $query['p_ngay_batdau'];
         $p_ngay_ketthuc = $query['p_ngay_ketthuc'];
         $p_nguoncungcap_id = $query['p_nguoncungcap_id'] ?? 0;
@@ -210,49 +251,48 @@ class PrintController extends Controller
             $p_sanpham_loai_id
         ];
         // dd($parameter);
-        $data = DB::select('call usp_store_baocao_bangkenhapkho_tonghop(?,?,?,?,?,?)', $parameter);
-        //dd($data);
+        //$data = DB::select('call usp_store_baocao_bangkenhapkho_tonghop(?,?,?,?,?,?)', $parameter);
         //$data = DB::select();
+        $fields = "ncc.ma_nguoncungcap, ncc.ten_nguoncungcap
+            , sp.ma_sanpham, sp.ten_sanpham, sp.ten_hoatchat, sp.nongdo_hamluong
+            , dvt.ten_donvitinh
+            , pn.ngay_laphoadon
+            , k.ten_kho
+            , pnct.so_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap";
+        $tables = "store_phieunhap_chitiet pnct
+            LEFT JOIN store_phieunhap pn ON pnct.phieunhap_id = pn.id
+            LEFT JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
+            LEFT JOIN store_sanpham sp ON pnct.sanpham_id = sp.id
+            LEFT JOIN store_donvitinh dvt ON sp.donvitinh_id = dvt.id
+            LEFT JOIN store_kho k ON pnct.nhap_vao_kho_id = k.id
+            LEFT JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id";
+        $wheres = "pn.ngay_nhapkho BETWEEN '$p_ngay_batdau' AND '$p_ngay_ketthuc'";
 
-        $p = [
-            "p_ngay_batdau" => $p_ngay_batdau,
-            "p_ngay_ketthuc" => $p_ngay_ketthuc,
-            "p_nguoncungcap_id1" => $p_nguoncungcap_id,
-            "p_nguoncungcap_id2" => $p_nguoncungcap_id,
-            "p_sanpham_id1" => $p_sanpham_id,
-            "p_sanpham_id2" => $p_sanpham_id,
-            "p_sanpham_nhom_id1" => $p_sanpham_nhom_id,
-            "p_sanpham_nhom_id2" => $p_sanpham_nhom_id,
-            "p_sanpham_loai_id1" => $p_sanpham_loai_id,
-            "p_sanpham_loai_id2" => $p_sanpham_loai_id
-        ];
-
-        $quey =  DB::select('SELECT ncc.ma_nguoncungcap, ncc.ten_nguoncungcap
-        , sp.ma_sanpham, sp.ten_sanpham, sp.ten_hoatchat, sp.nongdo_hamluong
-        , dvt.ten_donvitinh
-        , pn.ngay_laphoadon
-        , k.ten_kho
-        , pnct.so_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap
-    FROM store_phieunhap_chitiet pnct
-        JOIN store_phieunhap pn ON pnct.phieunhap_id = pn.id
-        LEFT JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
-        JOIN store_sanpham sp ON pnct.sanpham_id = sp.id
-        JOIN store_donvitinh dvt ON sp.donvitinh_id = dvt.id
-        JOIN store_kho k ON pnct.nhap_vao_kho_id = k.id
-        LEFT JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id
-        WHERE pn.ngay_nhapkho BETWEEN :p_ngay_batdau AND :p_ngay_ketthuc
-        AND (:p_nguoncungcap_id1 = 0 OR pnct.nguoncungcap_id = :p_nguoncungcap_id2)
-        AND (:p_sanpham_id1 = 0 OR pnct.sanpham_id = :p_sanpham_id2)
-                AND (:p_sanpham_nhom_id1 = 0 OR nlrel.sanpham_nhom_id = :p_sanpham_nhom_id2)
-                AND (:p_sanpham_loai_id1 = 0 OR nlrel.sanpham_loai_id = :p_sanpham_loai_id2)
-    ', $p) ;
+        if(isset($p_nguoncungcap_id) && $p_nguoncungcap_id !='' ){
+            $str_Optional .= ' AND pnct.nguoncungcap_id IN ( '.implode(',', $p_nguoncungcap_id) . ')' ;
+        }   
+        if(isset($p_sanpham_id) && $p_sanpham_id !='' ){
+            $str_Optional .= ' AND pnct.sanpham_id IN ( '.implode(',', $p_sanpham_id) . ')' ;
+        }
+        if(isset($p_sanpham_nhom_id) && $p_sanpham_nhom_id !=''){
+            $str_Optional .= ' AND nlrel.sanpham_nhom_id IN ( '.implode(',', $p_sanpham_nhom_id) . ')' ;
+        }
+        if(isset($p_sanpham_loai_id) && $p_sanpham_loai_id !=''){
+            $str_Optional .= ' AND nlrel.sanpham_loai_id IN ( '.implode(',', $p_sanpham_loai_id) . ')' ;
+        }
+            
+        $data =  DB::select("SELECT $fields
+                                FROM $tables
+                                WHERE $wheres $str_Optional  ") ;
         $chitiet = $data;
+
         $result = json_encode(
             array('totalResult' => $totalResult, 
                 'totalPages' => $totalPages, 
                 'currentPage' => $currentPage, 
                 'result' => $data,
                 'detail' => $chitiet));
+
         $bag = [
             'meta' => [
                 'title' => 'Bảng kê nhập kho tổng hợp',
@@ -263,7 +303,9 @@ class PrintController extends Controller
             ],
             'data' => json_decode($result)
         ];
+
         // dd($bag);   
         return $bag;
     }
+
 }
