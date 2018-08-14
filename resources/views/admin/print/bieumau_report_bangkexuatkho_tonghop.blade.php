@@ -1,7 +1,7 @@
 @extends('print.layout.paper')
 
 @section('title')
-Biểu mẫu Bảng kê Nhập kho tổng hợp
+Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
 @endsection
 
 @section('paper-size') A4 landscape @endsection
@@ -56,25 +56,25 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           </tr>
       </table>
       <table class="main">
-        <tr>
-          <th class="main-s6z2" rowspan="2">STT</th>
-          <th class="main-s6z2" colspan="2">Chứng từ</th>
-          <th class="main-s6z2" rowspan="2">Tên quy cách vật tư dụng cụ, sản phẩm</th>
-          <th class="main-s6z2" rowspan="2">Số lô</th>
-          <th class="main-s6z2" rowspan="2">Kho</th>
-          <th class="main-s6z2" rowspan="2">ĐVT</th>
-          <th class="main-s6z2" rowspan="2">Hạn SD</th>
+          <tr>
+              <th class="main-s6z2" rowspan="2">STT</th>
+              <th class="main-s6z2" colspan="2">Chứng từ</th>
+              <th class="main-s6z2" rowspan="2">Tên quy cách vật tư dụng cụ, sản phẩm</th>
+              <th class="main-s6z2" rowspan="2">Số lô</th>
+              <th class="main-s6z2" rowspan="2">Kho</th>
+              <th class="main-s6z2" rowspan="2">ĐVT</th>
+              <th class="main-s6z2" rowspan="2">Hạn SD</th>
 
-          <th class="main-s6z2" rowspan="2">Đơn giá</th>
-          <th class="main-s6z2" rowspan="2">Số lượng</th>
+              <th class="main-s6z2" rowspan="2">Đơn giá</th>
+              <th class="main-s6z2" rowspan="2">Số lượng</th>
 
-          <th class="main-s6z2" rowspan="2" style="width: 120px;">Thành<br> tiền</th>
-          <th class="main-s6z2" rowspan="2">Ghi<br> chú</th>
-      </tr>
-      <tr>
-        <th class="main-s6z2" >Số</th>
-        <th class="main-s6z2" >Ngày</th>
-    </tr>
+              <th class="main-s6z2" rowspan="2">Thành<br> tiền</th>
+              <th class="main-s6z2" rowspan="2">Ghi<br> chú</th>
+          </tr>
+          <tr>
+            <th class="main-s6z2" >Số</th>
+            <th class="main-s6z2" >Ngày</th>
+        </tr>
           <?php
               $stt = 1;
               $sum = 0;
@@ -86,12 +86,12 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           <tr class="page-break-inside-avoid">
               <td>{{ $stt }}</td>
               <td>{{ $detail->so_chungtu }}</td>
-              <td>{{ empty($detail->ngay_chungtu) ? '' : \Carbon\Carbon::parse($detail->ngay_chungtu)->format('d/m/Y') }}</td>
+              <td>{{ $detail->ngay_laphoadon }}</td>
               <td class="align-left" >{{ $detail->ten_sanpham }}</td>
               <td>{{ $detail->so_lo }}</td>
               <td>{{ $detail->ten_kho }}</td>
               <td>{{ $detail->ten_donvitinh }}</td>
-              <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('m/Y') }}</td>
+              <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('d/m/Y') }}</td>
               <td class="align-right">{{ number_format($detail->dongianhap, 2) }}</td>
               <td class="align-right">{{ number_format($detail->soluongnhap, 0) }}</td>
               <td class="align-right"><?php $tt = $detail->soluongnhap * $detail->dongianhap; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>

@@ -32,7 +32,7 @@ class StoreReportBangKeNhapKhoTongHopController extends Controller
         return Admin::content(function (Content $content) {
 
             $content->header('Báo cáo Bảng kê Nhập kho Tổng hợp');
-            $content->description('description');
+            $content->description('');
 
             // $parameter = [
             //     '2018-04-04',

@@ -5,6 +5,9 @@ namespace App\Admin\Controllers\Reports;
 use App\Models\StoreSoketoan;
 use App\Models\StoreNguoncungcap;
 use App\Models\StoreSanpham;
+use App\Models\StoreDonvi;
+use App\Models\StoreSanphamNhom;
+use App\Models\StoreSanphamLoai;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -28,8 +31,8 @@ class StoreReportBangKeXuatKhoTheoSanPhamController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('Báo cáo Bảng kê Xuất kho theo sản phẩm');
-            $content->description('description');
+            $content->header('Báo cáo Bảng kê Xuất kho tổng hợp');
+            $content->description('');
 
             // $parameter = [
             //     '2018-04-04',
@@ -38,10 +41,17 @@ class StoreReportBangKeXuatKhoTheoSanPhamController extends Controller
             // ];
             // $bag = DB::select('call usp_store_baocao_nhapxuatton_chitiet(?,?,?)', $parameter);
             // dd($bag);
-
-            $sanpham = StoreSanpham::selectboxData();
+            $donVi = StoreDonvi::selectboxData(); 
+            $nhomSanPham = StoreSanphamNhom::selectboxData(); 
+            $loaiSanPham = StoreSanphamLoai::selectboxData(); 
+            $sanPham = StoreSanpham::selectboxData();
             $content->body(view('admin.reports.bangkexuatkho_theosanpham.index')
-                ->with('sanpham', $sanpham));
+                ->with(Array('donVi'=> $donVi
+                            ,'sanPham' => $sanPham
+                            ,'nhomSanPham' => $nhomSanPham
+                            ,'loaiSanPham' => $loaiSanPham  
+                            
+            )));
         });
     }
 }

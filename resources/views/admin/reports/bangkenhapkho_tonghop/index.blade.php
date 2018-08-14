@@ -3,6 +3,17 @@
 <form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_bangkenhapkho_tonghop']) }}">
     {{ csrf_field() }}
     <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="p_nguoncungcap_id">Loại báo cáo</label>
+                <select class="form-control" style="width: 100%;" name="loai_bao_cao_ten"  id="loai_bao_cao_ten">                        
+                    <option value="tong_hop" >Báo cáo tổng hợp</option>
+                    <option value="nguon_von" >Báo cáo theo Nguồn vốn</option>
+                    <option value="san_pham" >Báo cáo Sản phẩm</option>
+                    <option value="nhom_loai" >Báo cáo Nhóm sản phẩm và loại sản phẩm</option>
+                </select>
+            </div>
+        </div>
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="p_ngay_batdau">Từ ngày</label>
@@ -37,7 +48,7 @@
                     </select>
                 </div>
             </div>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label for="p_nhomsanpham_id">Nhóm sản phẩm</label>
                 <select class="form-control" style="width: 100%;" name="p_nhomsanpham_id[]" multiple id="p_nhomsanpham_id">
@@ -48,7 +59,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label for="p_loaisanpham_id">Loại sản phẩm</label>
                 <select class="form-control" style="width: 100%;" name="p_loaisanpham_id[]" multiple id="p_loaisanpham_id">
@@ -66,228 +77,25 @@
         </div>
     </div>
 </form>
-<!-- <div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>
-                                INPUT
-                                <small>Different sizes and widths</small>
-                            </h2>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="body">
-                <h2 class="card-inside-title">Basic Examples</h2>
-                <div class="row clearfix">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="Username">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="password" class="form-control" placeholder="Password">
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <h2 class="card-inside-title">Different Widths</h2>
-                <div class="row clearfix">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-6">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-6">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row clearfix">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-4">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-4">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-4">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row clearfix">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-3">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-3">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-3">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="col-sm-3">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="card-inside-title">Different Sizes</h2>
-                <div class="row clearfix">
-                    <div class="col-sm-12">
-                        <div class="form-group form-group-lg">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="Large Input">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="Default Input">
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <div class="form-line">
-                                <input type="text" class="form-control" placeholder="Small Input">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="card-inside-title">Floating Label Examples</h2>
-                <div class="row clearfix">
-                    <div class="col-sm-12">
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" class="form-control">
-                                <label class="form-label">Username</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="password" class="form-control">
-                                <label class="form-label">Password</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="form-group form-float form-group-lg">
-                            <div class="form-line">
-                                <input type="text" class="form-control">
-                                <label class="form-label">Large Input</label>
-                            </div>
-                        </div>
-                        <div class="form-group form-float">
-                            <div class="form-line">
-                                <input type="text" class="form-control">
-                                <label class="form-label">Default Input</label>
-                            </div>
-                        </div>
-                        <div class="form-group form-float form-group-sm">
-                            <div class="form-line">
-                                <input type="text" class="form-control">
-                                <label class="form-label">Small Input</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="card-inside-title">Input Status</h2>
-                <div class="row clearfix">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="form-line focused">
-                                <input type="text" class="form-control" value="Focused" placeholder="Statu Focused">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <div class="form-line disabled">
-                                <input type="text" class="form-control" placeholder="Disabled" disabled="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <script>
-// // this is the id of the form
-// $("#conditionForm").submit(function(e) {
-
-//     // var url = ""; // the script where you handle the form input.
-//     // $.ajaxSetup({
-//     //     headers: {
-//     //         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-//     //     }
-//     // });
-
-//     // $.ajax({
-//     //     type: "POST",
-//     //     url: url,
-//     //     data: $("#conditionForm").serialize(), // serializes the form's elements.
-//     //     beforeSend: function(){
-//     //         $('<div />').attr('class', 'loading').appendTo('body');
-//     //     },
-//     //     success: function(data)
-//     //     {
-//     //         alert(data); // show response from the php script.
-//     //     },
-//     //     error: function(data) {
-//     //         console.log(data);
-//     //     }
-//     // }).done(function(data) {
-//     //     $('.loading').remove();
-//     // });
-
-//     e.preventDefault(); // avoid to execute the actual submit of the form.
-// });
+$('#loai_bao_cao_ten').change(function(){
+        if($('#loai_bao_cao_ten').val() == 'tong_hop'){
+            disabling_control(false,false,false,false);
+        } else if($('#loai_bao_cao_ten').val() == 'nguon_von'){
+            disabling_control(false,true,true,true);
+        } else if($('#loai_bao_cao_ten').val() == 'san_pham'){
+            disabling_control(true,false,true,true);
+        } else if($('#loai_bao_cao_ten').val() == 'nhom_loai'){
+            disabling_control(true,true,false,false);
+        }
+    });
+    function disabling_control(nguoncungcap, sanpham, nhomsanpham, loaisanpham){
+        $('#p_nguoncungcap_id').attr('disabled', nguoncungcap) ;
+        $('#p_sanpham_id').attr('disabled', sanpham) ;
+        $('#p_nhomsanpham_id').attr('disabled', nhomsanpham) ;
+        $('#p_loaisanpham_id').attr('disabled', loaisanpham) ;
+    }
 </script>
 
 <link rel="stylesheet" href="{{ admin_asset("/vendor/laravel-admin/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css") }}">
