@@ -7,7 +7,7 @@ use App\Models\StoreNguoncungcap;
 use App\Models\StoreSanpham;
 use App\Models\StoreSanphamNhom;
 use App\Models\StoreSanphamLoai;
-use App\Models\StoreNhaCungCap;
+use App\Models\StoreNhacungcap;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -32,7 +32,7 @@ class StoreReportBangKeNhapKhoTongHopController extends Controller
         return Admin::content(function (Content $content) {
 
             $content->header('Báo cáo Bảng kê Nhập kho Tổng hợp');
-            $content->description('');
+            $content->description('description');
 
             // $parameter = [
             //     '2018-04-04',
@@ -46,7 +46,7 @@ class StoreReportBangKeNhapKhoTongHopController extends Controller
             $sanPham = StoreSanpham::selectboxData();
             $nhomSanPham = StoreSanphamNhom::selectboxData(); 
             $loaiSanPham = StoreSanphamLoai::selectboxData(); 
-            $nhaCungCap = StoreNhaCungCap::selectboxData();
+            $nhaCungCap = StoreNhacungcap::selectboxData();
             $content->body(view('admin.reports.bangkenhapkho_tonghop.index')
                 ->with(Array('nguonCungCap'=> $nguonCungCap
                             ,'sanPham' => $sanPham

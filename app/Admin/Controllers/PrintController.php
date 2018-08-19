@@ -290,7 +290,8 @@ class PrintController extends Controller
             , sp.ma_sanpham, sp.ten_sanpham, sp.ten_hoatchat, sp.nongdo_hamluong
             , dvt.ten_donvitinh
             , date(pn.ngay_laphoadon) ngay_laphoadon
-            , k.ten_kho
+            , k.ma_kho
+            , pn.so_phieunhap, date(pn.ngay_nhapkho) as ngay_nhapkho
             , pnct.so_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap";
         $tables = "store_phieunhap_chitiet pnct
             LEFT JOIN store_phieunhap pn ON pnct.phieunhap_id = pn.id
@@ -455,5 +456,4 @@ class PrintController extends Controller
         // dd($bag);   
         return $bag;
     }
-
 }

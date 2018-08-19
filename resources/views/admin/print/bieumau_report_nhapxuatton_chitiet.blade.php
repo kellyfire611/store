@@ -34,28 +34,21 @@ Biểu mẫu Phiếu xuất kho
         <caption>{{ $bag['meta']['title'] }}</caption>
         <thead>
             <tr class="bold" >
-                <td rowspan="2">STT</td>
-                <td rowspan="2">Tên sản phẩm</td>
-                <td rowspan="2">Nguồn vốn</td>
-                <td rowspan="2">ĐVT</td>
-                <td rowspan="2">Đơn giá</td>
-                <td rowspan="2">HSD</td>
-
-                <td colspan="2" >Tồn<br>đầu kỳ</td>
-                <td colspan="2" >Nhập</td>
-                <td colspan="2" >Tổng xuất</td>
-                <td colspan="2" >Tồn<br>cuối kỳ</td>
-                <td rowspan="2">Ghi chú</td>
-            </tr>
-            <tr>
-                <td rowspan="1">Số lượng<br></td>
-                <td rowspan="1">Thành tiền<br></td>
-                <td rowspan="1">Số lượng<br></td>
-                <td rowspan="1">Thành tiền<br></td>
-                <td rowspan="1">Số lượng<br></td>
-                <td rowspan="1">Thành tiền<br></td>
-                <td rowspan="1">Số lượng<br></td>
-                <td rowspan="1">Thành tiền<br></td>
+                <td>STT</td>
+                <td>Tên sản phẩm</td>
+                <td>Nguồn vồn</td>
+                <td>ĐVT</td>
+                <td>Đơn giá</td>
+                <td>HSD</td>
+                <td>Tồn<br>đầu kỳ</td>
+                <td>Thành tiền<br></td>
+                <td>Nhập</td>
+                <td>Thành tiền</td>
+                <td>Tổng xuất</td>
+                <td>Thành tiền</td>
+                <td>Tồn<br>cuối kỳ</td>
+                <td>Thành tiền</td>
+                <td>Ghi chú</td>
             </tr>
         </thead>
         <tbody>

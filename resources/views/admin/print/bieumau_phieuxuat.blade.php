@@ -28,11 +28,16 @@ Biểu mẫu Phiếu xuất kho
             <tr>
                 <th class="tg-baqh" style="width: 250px;">{{ config('company.parent.name') }}</th>
                 <th class="tg-baqh" style="width: 250px;"></th>
-                <th class="tg-baqh" style="width: 100%;">Mẫu số: C20-HD </th>
+                <th class="tg-baqh" style="width: 100%;">Mẫu số: C21-HD </th>
             </tr>
             <tr>
                 <td class="tg-baqh align-center valign-top">{{ config('company.name') }}</td>
-                <td class="bold name">{{ $bag['meta']['title'] }}</td>
+                <td class="name"><b>{{ $bag['meta']['title'] }}</b><br/>
+                <?php
+                $ngayXuat = \Carbon\Carbon::parse($bag['data']->result[0]->ngay_xuatkho);
+
+                ?><span style="font-size: 14px;">Ngày {{ $ngayXuat->day }} tháng {{ $ngayXuat->month }} năm {{ $ngayXuat->year }}</span>
+                </td>
                 <td class="tg-s6z2 align-center">Ban hành theo quy định số:
                     <br>19/2006/QĐ-BTC
                     <br>ngày 30/03/2006
@@ -40,10 +45,7 @@ Biểu mẫu Phiếu xuất kho
             </tr>
             <tr>
                 <td class="tg-031e"></td>
-                <td class="tg-031e align-center"><?php
-                $ngayXuat = \Carbon\Carbon::parse($bag['data']->result[0]->ngay_xuatkho);
-
-                ?>  Ngày {{ $ngayXuat->day }} tháng {{ $ngayXuat->month }} năm {{ $ngayXuat->year }}</td>
+                <td class="tg-031e align-center"></td>
                 <td class="tg-031e"></td>
             </tr>
             <tr>
@@ -52,7 +54,7 @@ Biểu mẫu Phiếu xuất kho
             </tr>
             <tr>
                 <td class="tg-031e align-left" colspan="2">Họ tên người nhận hàng : {{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
-                <td class="tg-031e align-left" colspan="3">Số CT: {{ $bag['data']->result[0]->so_chungtu }} - Ngày: {{ \Carbon\Carbon::parse($bag['data']->result[0]->ngay_chungtu)->format('d/m/Y') }}</td>
+                <td class="tg-031e align-left" colspan="3">Số CT: {{ $bag['data']->result[0]->so_chungtu }}<br />Ngày: {{ empty($bag['data']->result[0]->ngay_chungtu) ? '' : \Carbon\Carbon::parse($bag['data']->result[0]->ngay_chungtu)->format('d/m/Y') }}</td>
             </tr>
             <tr>
                 <td class="tg-031e align-left" colspan="3">Lý do xuất kho : {{ $bag['data']->result[0]->lydo_xuat }}</td>
@@ -60,25 +62,22 @@ Biểu mẫu Phiếu xuất kho
         </table>
         <table class="main">
             <tr>
-                <th class="main-s6z2" rowspan="2" style="width: 26px;">STT</th>
-                <th class="main-s6z2" rowspan="2" style="width: 90px;">Tên quy cách vật tư
+                <th class="main-s6z2"  style="width: 26px;">STT</th>
+                <th class="main-s6z2"  style="width: 90px;">Tên quy cách vật tư
                     <br>dụng cụ, sản phẩm</th>
-                <th class="main-s6z2" rowspan="2" style="width: 80px;">Số lô</th>
-                <th class="main-s6z2" rowspan="2" style="width: 60px;">Hạn SD</th>
-                <th class="main-s6z2" rowspan="2" style="width: 50px;">Nhóm sản phẩm</th>
-                <th class="main-s6z2" rowspan="2" style="width: 40px;">ĐVT</th>
+                <th class="main-s6z2"  style="width: 80px;">Số lô</th>
+                <th class="main-s6z2" style="width: 50px;">Nguồn</th>
+                <th class="main-s6z2"  style="width: 60px;">Hạn SD</th>
+                <th class="main-s6z2"  style="width: 50px;">Nhóm sản phẩm</th>
+                <th class="main-s6z2"  style="width: 40px;">ĐVT</th>
 
-                <th class="main-s6z2" colspan="2" style="width: 100px;">Số lượng nhận</th>
-                <th class="main-s6z2" rowspan="2" style="width: 90px;">Đơn giá</th>
+                <th class="main-s6z2" style="width: 60px;">Số lượng</th>
+                
+                <th class="main-s6z2" style="width: 65px;">Đơn giá</th>
 
-                    <th class="main-s6z2" rowspan="2" style="width: 92px;">Thành
+                    <th class="main-s6z2"  style="width: 70px;">Thành
                         <br> tiền</th>
-                    <th class="main-s6z2" rowspan="2" style="width: 10px;">Ghi
-                        <br> chú</th>
-            </tr>
-            <tr>
-                <th style="text-align:  center; width: 55px;" class="main-yw4l" >Yêu cầu</td>
-                    <th style="text-align:  center; width: 55px;" class="main-yw4l" >Thực xuất</td>
+                    <th class="main-s6z2"  style="width: 24px;">Ghi<br>chú</th>
             </tr>
             <?php
                 $stt = 1;
@@ -90,12 +89,12 @@ Biểu mẫu Phiếu xuất kho
             
             <tr class="page-break-inside-avoid">
                 <td>{{ $stt }}</td>
-                <td class="align-left" >{{ $detail->ten_sanpham }}</td>
+                <td class="align-left" >{{ $detail->ten_sanpham }} - {{ $detail->nongdohamluong }}</td>
                 <td class="align-left">{{ $detail->SOLO }}</td>
+                <td>{{ $detail->ma_nguoncungcap }}</td>
                 <td>{{ \Carbon\Carbon::parse($detail->HanSD)->format('m/Y') }}</td>
-                <td>{{ $detail->ten_nhom_sanpham}}</td>
+                <td>{{ $detail->ma_nhom_sanpham}}</td>
                 <td>{{ $detail->ten_donvitinh }}</td>
-                <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
                 <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
                 <td class="align-right">{{ number_format($detail->dongiaxuat, 0) }}</td>
                 <td class="align-right"><?php $tt = $detail->soluongxuat * $detail->dongiaxuat; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
@@ -149,7 +148,7 @@ Biểu mẫu Phiếu xuất kho
             <tr>
                 <td class="no-border" >{{ Admin::user()->name }}</td>
                 <td class="no-border" >{{ $bag['data']->result[0]->nguoi_nhanhang }}</td>
-                <td class="no-border" ></td>
+                <td class="no-border" >Dương Trung</td>
                 <td class="no-border" >{{ config('company.chucvu.ketoantruong') }}</td>
                 <td class="no-border" >{{ config('company.chucvu.thutruongdonvi') }}</td>
             </tr>

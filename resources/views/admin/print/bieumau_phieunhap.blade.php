@@ -54,14 +54,34 @@ Biểu mẫu Phiếu nhập kho
             </tr>
            
             <tr class="align-left">
-                <td class="tg-031e align-left" colspan="2">Đơn vị giao hàng: (Nhà cung cấp)</td>
+                <td class="tg-031e align-left" colspan="2">Đơn vị giao hàng: {{ $bag['data']->result[0]->ten_nhacungcap }}</td>
                 <td>
-                <?php foreach ($bag['data']->detail as $detail) {
+                <?php 
+                $dataCT = array();
+                $dataNguon = array();
+                
+                foreach ($bag['data']->detail as $detail) {
+                    //dd($detail);
+                    $dataCT[] = [
+                        'so_chungtu' => $detail->so_chungtu,
+                        'ngay_chungtu' => $detail->ngay_chungtu
+                    ];
+
+                    $dataNguon[] = [
+                        'ten_nguoncungcap' => $detail->ten_nguoncungcap
+                    ];
                 ?>
-                    Số CT: {{ $detail->so_chungtu }} - Ngày: {{ \Carbon\Carbon::parse($detail->ngay_chungtu)->format('d/m/Y') }}<br />
                 <?php
                 }
+
+                //dd($bag['data']->detail);
+                //dd($data);
+                
+                $dataCT = array_unique_multidimensional($dataCT);
+                foreach($dataCT as $CT) {
                 ?>
+                Số CT: {{ $CT['so_chungtu'] }} - Ngày: {{ empty($CT['ngay_chungtu']) ? '' : \Carbon\Carbon::parse($CT['ngay_chungtu'])->format('d/m/Y') }}<br />
+                <?php } ?>
                 </td>
             </tr>
             <tr>
@@ -71,14 +91,22 @@ Biểu mẫu Phiếu nhập kho
                 <td class="tg-031e align-left" colspan="3">Nhập tại kho : {{ $bag['data']->result[0]->ten_kho }}</td>
             </tr>
             <tr>
-                <td class="tg-031e align-left" colspan="3" >Nguồn :</td>
+                <td class="tg-031e align-left" colspan="3" >Nguồn : 
+                <?php 
+                //dd(unique_multidim_array($dataNguon, 'ten_nguoncungcap'));
+                $dataNguonCungCap = unique_multidim_array($dataNguon, 'ten_nguoncungcap');
+                foreach($dataNguonCungCap as $nguonCungCap) {
+                ?>
+                {{ $nguonCungCap['ten_nguoncungcap'] }},
+                <?php } ?>
+                </td>
             </tr>
         </table>
         <table class="main">
             <tr>
-                <th class="main-s6z2" style="width: 25px;" >STT</th>
+                <th class="main-s6z2" style="width: 30px;" >STT</th>
                 <th class="main-s6z2" style="width: 90px;">Tên quy cách vật tư dụng cụ, sản phẩm</th>
-                <th class="main-s6z2" style="width: 80px;">Số lô</th>
+                <th class="main-s6z2" style="width: 90px;">Số lô</th>
                 <th class="main-s6z2" style="width: 60px;">Hạn SD</th>
                 <th class="main-s6z2" style="width: 50px;">Nhóm sản phẩm</th>
                 <th class="main-s6z2" style="width: 40px;">ĐVT</th>
@@ -99,10 +127,10 @@ Biểu mẫu Phiếu nhập kho
             
             <tr class="page-break-inside-avoid">
                 <td>{{ $stt }}</td>
-                <td class="align-left" >{{ $detail->ten_sanpham }}</td>
+                <td class="align-left" >{{ $detail->ten_sanpham }} - {{ $detail->nongdohamluong }}</td>
                 <td class="align-left">{{ $detail->so_lo }}</td>
                 <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('m/Y') }}</td>
-                <td>{{ $detail->ten_nhom_sanpham }}</td>
+                <td>{{ $detail->ma_nhom_sanpham }}</td>
                 <td>{{ $detail->ten_donvitinh }}</td>
                 <td class="align-right">{{ number_format($detail->soluongnhap, 0) }}</td>
                 <td class="align-right">{{ number_format($detail->dongianhap, 2) }}</td>
@@ -157,7 +185,7 @@ Biểu mẫu Phiếu nhập kho
             <tr>
                 <td class="no-border" >{{ Admin::user()->name }}</td>
                 <td class="no-border" >{{ $bag['data']->result[0]->nguoi_giaohang }}</td>
-                <td class="no-border" ></td>
+                <td class="no-border" >Dương Trung</td>
                 <td class="no-border" >{{ config('company.chucvu.ketoantruong') }}</td>
                 <td class="no-border" >{{ config('company.chucvu.thutruongdonvi') }}</td>
             </tr>

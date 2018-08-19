@@ -62,7 +62,8 @@ class StorePhieuxuatController extends Controller
             $content->header('Sửa phiếu xuất');
             $content->description('Hiệu chỉnh');
 
-            $content->body($this->form()->edit($id));
+            $a = $content->body($this->form()->edit($id));
+            //dd($a);
         });
     }
 
@@ -141,7 +142,7 @@ class StorePhieuxuatController extends Controller
             $sophieuxuat = $form->text('so_phieuxuat', __('models.store_phieuxuat.so_phieuxuat'))
                 ->rules('required')
                 // ->useTableDiv()
-                ->readOnly()
+                //->readOnly()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 ->setWidth(12, 12, 4);
             $ngayXuatKho = $form->datetime('ngay_xuatkho', __('models.store_phieuxuat.ngay_xuatkho'))
@@ -166,7 +167,7 @@ class StorePhieuxuatController extends Controller
                 url: '$ajaxGenerateSoPhieuXuatUrl',
                 dataType: 'json',
                 data: {
-                    nhapxuat: 'xkl'
+                    nhapxuat: 'XKM'
                 },
                 beforeSend: function(){
                     $('<div />').attr('class', 'loading').appendTo('body');
@@ -252,14 +253,14 @@ EOT;
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 ->default(1)
                 ->setWidth(12, 12, 3);
-            $form->select('xuat_den_kho_id', __('models.store_phieuxuat.xuat_den_kho_id'))
-                ->rules('required')
-                ->options(StoreKho::selectboxData())
-                ->rules('required')
-                // ->useTableDiv()
-                // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->default(1)
-                ->setWidth(12, 12, 3);
+            // $form->select('xuat_den_kho_id', __('models.store_phieuxuat.xuat_den_kho_id'))
+            //     //->rules('required')
+            //     ->options(StoreKho::selectboxData())
+            //     ->rules('required')
+            //     // ->useTableDiv()
+            //     // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+            //     ->default(1)
+            //     ->setWidth(12, 12, 3);
                 //dd(Admin::user());
                 $form->select('soketoan_id', __('models.store_phieuxuat.soketoan_id'))
                 ->rules('required')
@@ -307,21 +308,26 @@ function(data) {
     var ma_sanpham = '<span class="bold">(' + arr[0] + ')</span> ';
     var ten_sanpham = '<span>' + arr[1] + '</span> ';
     var ten_hoatchat = '<span>' + arr[2] + '</span> ';
-    var nongdo_hamluong = '<span>' + arr[3] + '</span> ';
+    var nongdohamluong = '<span>' + arr[3] + '</span> ';
     var ten_donvitinh = '<span>' + arr[4] + '</span> ';
     var dongianhap = '<span class="dongia"><b>' + arr[5] + 'đ</b></span> ';
     var soluong_conlai = '<span class="" style="color:red"><b>' + arr[6] + '</b></span> ';
-    var sokiemsoat = '<span class="">' + arr[7] + '</span> ';
+    var solo = '<span class="">' + arr[7] + '</span> ';
     var hansudung = '<span class="" style="color: green"><b>' + arr[8] + '</b></span> ';
+    var nguoncungcap = '<span class="" style="color: green"><i>' + arr[9] + '</i></span> ';
 
-    template = ma_sanpham + ten_sanpham + ten_hoatchat + nongdo_hamluong + sokiemsoat + hansudung + dongianhap + soluong_conlai + ten_donvitinh;
-    template = '<div class="row"><div class="col-sm-1">'+ ma_sanpham +'</div><div class="col-sm-3">'+ ten_sanpham +'</div><div class="col-sm-2">'+ ten_hoatchat +'</div>' 
-        + '<div class="col-sm-1">'+ nongdo_hamluong +'</div>' 
-        + '<div class="col-sm-1">'+ sokiemsoat +'</div>' 
+    template = ma_sanpham + ten_sanpham + ten_hoatchat + nongdohamluong + solo + hansudung + dongianhap + soluong_conlai + ten_donvitinh + nguoncungcap;
+    template = '<div class="row">'
+        +' <div class="col-sm-1">'+ ma_sanpham +'</div>'
+        + '<div class="col-sm-2">'+ ten_sanpham +'</div>'
+        + '<div class="col-sm-2">'+ ten_hoatchat +'</div>' 
+        + '<div class="col-sm-1" style="padding-right: 3px; border-right: 1px solid red; word-wrap: break-word;">'+ nongdohamluong +'</div>' 
+        + '<div class="col-sm-1">'+ solo +'</div>' 
         + '<div class="col-sm-1">'+ hansudung +'</div>' 
         + '<div class="col-sm-1">'+ dongianhap +'</div>' 
         + '<div class="col-sm-1">'+ soluong_conlai +'</div>' 
         + '<div class="col-sm-1">'+ ten_donvitinh +'</div>' 
+        + '<div class="col-sm-1">'+ nguoncungcap +'</div>' 
         + '</div>';
     return template;
   }
@@ -336,14 +342,16 @@ function(data) {
     var ma_sanpham = '<span class="bold">(' + arr[0] + ')</span> ';
     var ten_sanpham = '<span>' + arr[1] + '</span> ';
     var ten_hoatchat = '<span>' + arr[2] + '</span> ';
-    var nongdo_hamluong = '<span>' + arr[3] + '</span> ';
+    var nongdohamluong = '<span style="padding-right: 3px; border-right: 1px solid red;">' + arr[3] + '</span> ';
     var ten_donvitinh = '<span>' + arr[4] + '</span> ';
     var dongianhap = '<span class="dongia"><b>' + arr[5] + 'đ</b></span> ';
     var soluong_conlai = '<span class="" style="color:red"><b>' + arr[6] + '</b></span> ';
-    var sokiemsoat = '<span class=""><b>' + arr[7] + '</b></span> ';
+    var solo = '<span class=""><b>' + arr[7] + '</b></span> ';
     var hansudung = '<span class="" style="color: green"><i>' + arr[8] + '</i></span> ';
+    var nguoncungcap = '<span class="" style="color: green"><i>' + arr[9] + '</i></span> ';
 
-    template = ma_sanpham + ten_sanpham + ten_hoatchat + nongdo_hamluong + sokiemsoat + hansudung + dongianhap + soluong_conlai + ten_donvitinh;
+
+    template = ma_sanpham + ten_sanpham + ten_hoatchat + nongdohamluong + solo + hansudung + dongianhap + soluong_conlai + ten_donvitinh + nguoncungcap;
     return template;
   }
 EOT;

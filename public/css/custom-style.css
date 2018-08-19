@@ -108,3 +108,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     border-color: #3c8dbc;
     background: #faffbd;
 }
+
+.select2-results__option {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}

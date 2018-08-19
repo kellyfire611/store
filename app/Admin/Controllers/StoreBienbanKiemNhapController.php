@@ -213,6 +213,14 @@ EOT;
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
                 // ->setWidth(12, 12, 3);
 
+                $form->select('nhacungcap_id', __('models.store_phieunhap.nhacungcap_id'))
+                ->options(StoreNhacungcap::selectboxData())
+                //->rules('required')
+                // ->useTableDiv()
+                // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
+                ->default(1)
+                ->setWidth(12, 12, 3);
+
             $form->select('soketoan_id', __('models.store_phieunhap.soketoan_id'))
                 ->options(StoreSoketoan::selectBoxData())
                 ->rules('required')
@@ -235,7 +243,7 @@ EOT;
                 //->useTableDiv()
                 ->default(Admin::user()->id)
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->setWidth(12, 12, 6);
+                ->setWidth(12, 12, 3);
 
             $form->hasMany('chitiet', 'Chi tiết', function (Form\NestedForm $form) {
                 // $form->hidden('nhapxuat_id', __('models.store_phieunhap_chitiet.nhapxuat_id'))

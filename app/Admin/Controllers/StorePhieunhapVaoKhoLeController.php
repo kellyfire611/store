@@ -143,7 +143,7 @@ class StorePhieunhapVaoKhoLeController extends Controller
                 ->attribute('tabindex', 1)
                 // ->useTableDiv()
                 // ->labelPosition(CommonModel::LABEL_POSITION_TOP)
-                ->readOnly()
+                // ->readOnly()
                 ->setWidth(12, 12, 4);
             
             $ngayNhapKho = $form->datetime('ngay_nhapkho', __('models.store_phieunhap.ngay_nhapkho'))
@@ -168,7 +168,7 @@ class StorePhieunhapVaoKhoLeController extends Controller
                 url: '$ajaxGenerateSoPhieuNhapUrl',
                 dataType: 'json',
                 data: {
-                    nhapxuat: 'nkl'
+                    nhapxuat: 'NKM'
                 },
                 beforeSend: function(){
                     $('<div />').attr('class', 'loading').appendTo('body');
@@ -294,7 +294,9 @@ EOT;
                     ->setWidth(12, 12, 4);
                 $form->select('nuocsanxuat_id', __('models.store_sanpham.nuoc_sanxuat_id'))->options(
                     HrmQuocgia::NoneDelete()->pluck('ten_quocgia', 'id')
-                    )->rules('required')->attribute('tabindex', 6)
+                    )
+                    //->rules('required')
+                    ->attribute('tabindex', 6)
                     ->setWidth(12, 12, 4);
                 // $form->select('donvitinh_id', __('models.store_phieunhap_chitiet.donvitinh_id'))
                 //     ->options(StoreDonvitinh::selectboxData())

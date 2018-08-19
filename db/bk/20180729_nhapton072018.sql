@@ -13726,12 +13726,13 @@ CREATE TABLE IF NOT EXISTS `store_phieunhap` (
   CONSTRAINT `store_phieunhap_nhapxuat_id_foreign` FOREIGN KEY (`nhapxuat_id`) REFERENCES `store_nhapxuat` (`id`),
   CONSTRAINT `store_phieunhap_phieuxuat_id_foreign` FOREIGN KEY (`phieuxuat_id`) REFERENCES `store_phieuxuat` (`id`),
   CONSTRAINT `store_phieunhap_soketoan_id_foreign` FOREIGN KEY (`soketoan_id`) REFERENCES `store_soketoan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table u883604362_store.store_phieunhap: ~1 rows (approximately)
+-- Dumping data for table u883604362_store.store_phieunhap: ~2 rows (approximately)
 /*!40000 ALTER TABLE `store_phieunhap` DISABLE KEYS */;
 INSERT INTO `store_phieunhap` (`id`, `so_phieunhap`, `ngay_nhapkho`, `ngay_laphoadon`, `ngay_xacnhan`, `lydo_nhap`, `nguoi_giaohang`, `so_chungtu`, `bienban_kiemnhap_sophieu`, `bienban_kiemnhap_ngay_lapbienban`, `bienban_kiemnhap_tokiemnhap`, `bienban_kiemnhap_lydo`, `bienban_kiemnhap_diadiem`, `bienban_kiemnhap_ykiendexuat`, `nhapxuat_id`, `phieuxuat_id`, `nhacungcap_id`, `chuongtrinh_id`, `soketoan_id`, `nhap_tu_kho_id`, `nhap_vao_kho_id`, `nguoi_lapphieu_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-	(1, 'NTDK1', '2018-07-25 07:53:48', NULL, NULL, 'Nhập tồn kho đầu kỳ 07/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 45, NULL, NULL, NULL, 2, NULL, 1, 1, NULL, NULL, NULL);
+	(1, 'NTDK1', '2018-07-25 07:53:48', NULL, NULL, 'Nhập tồn kho đầu kỳ 07/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 45, NULL, NULL, NULL, 2, NULL, 1, 1, NULL, NULL, NULL),
+	(47, 'nkl13', '2018-07-29 14:18:45', NULL, NULL, 'Chuyển dữ liệu từ Biên bản kiểm nhập bbkn2', NULL, NULL, 'bbkn2', '2018-07-29 00:00:00', 'Ông: AAAAAAAAAAAAAAA\r\nBà: BBBBBBBBB\r\nÔng: CCCCCCCCCCCCC\r\nÔng: DDDDDDDDDDDDDD', 'Kiểm nhập test', 'Tại kho Miền Tây, ...', 'OKey', 29, NULL, NULL, NULL, 2, NULL, 1, 1, NULL, '2018-07-29 14:07:53', '2018-07-29 14:18:45');
 /*!40000 ALTER TABLE `store_phieunhap` ENABLE KEYS */;
 
 -- Dumping structure for table u883604362_store.store_phieunhap_chitiet
@@ -13779,9 +13780,9 @@ CREATE TABLE IF NOT EXISTS `store_phieunhap_chitiet` (
   CONSTRAINT `store_phieunhap_chitiet_phieunhap_id_foreign` FOREIGN KEY (`phieunhap_id`) REFERENCES `store_phieunhap` (`id`),
   CONSTRAINT `store_phieunhap_chitiet_sanpham_id_foreign` FOREIGN KEY (`sanpham_id`) REFERENCES `store_sanpham` (`id`),
   CONSTRAINT `store_phieunhap_chitiet_soketoan_id_foreign` FOREIGN KEY (`soketoan_id`) REFERENCES `store_soketoan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table u883604362_store.store_phieunhap_chitiet: ~46 rows (approximately)
+-- Dumping data for table u883604362_store.store_phieunhap_chitiet: ~48 rows (approximately)
 /*!40000 ALTER TABLE `store_phieunhap_chitiet` DISABLE KEYS */;
 INSERT INTO `store_phieunhap_chitiet` (`id`, `ngay_sudungdautien`, `dongianhap`, `soluongnhap`, `soluong_conlai`, `soluong_theohopdong`, `thue`, `hansudung`, `nongdohamluong`, `so_lo`, `so_chungtu`, `ngay_chungtu`, `nhapxuat_id`, `phieunhap_id`, `soketoan_id`, `nhap_vao_kho_id`, `sanpham_id`, `donvitinh_id`, `nguoncungcap_id`, `nuocsanxuat_id`, `deleted_at`, `created_at`, `updated_at`, `nhap_vao_donvi_id`) VALUES
 	(1, NULL, 867.000000, 33200.000000, 33200.000000, NULL, NULL, '2021-04-01 00:00:00', '100mg', 'EEB2710C', NULL, NULL, 45, 1, 2, 1, 3, 27, 6, NULL, NULL, NULL, NULL, NULL),
@@ -13829,7 +13830,9 @@ INSERT INTO `store_phieunhap_chitiet` (`id`, `ngay_sudungdautien`, `dongianhap`,
 	(43, NULL, 8850.000000, 9000.000000, 9000.000000, NULL, NULL, '2027-07-28 00:00:00', '100g', '', NULL, NULL, 45, 1, 2, 1, 2, 8, 1, NULL, NULL, NULL, NULL, NULL),
 	(44, NULL, 228984.570000, 2100.000000, 2100.000000, NULL, NULL, '2019-10-28 00:00:00', '', '', NULL, NULL, 45, 1, 2, 1, 25, 38, 2, NULL, NULL, NULL, NULL, NULL),
 	(45, NULL, 228984.570000, 1150.000000, 1150.000000, NULL, NULL, '2019-11-28 00:00:00', '', '', NULL, NULL, 45, 1, 2, 1, 24, 38, 2, NULL, NULL, NULL, NULL, NULL),
-	(46, NULL, 228984.570000, 0.000000, 0.000000, NULL, NULL, '2019-11-28 00:00:00', '', '', NULL, NULL, 45, 1, 2, 1, 24, 38, 2, NULL, NULL, NULL, NULL, NULL);
+	(46, NULL, 228984.570000, 0.000000, 0.000000, NULL, NULL, '2019-11-28 00:00:00', '', '', NULL, NULL, 45, 1, 2, 1, 24, 38, 2, NULL, NULL, NULL, NULL, NULL),
+	(205, NULL, 568774.000000, 58400.000000, 58000.000000, 58400.000000, NULL, '2019-06-14 00:00:00', '500mg', 'số lô', 'chứng từ 1', '2018-07-20 00:00:00', NULL, 47, 2, 1, 200, 27, 6, 3, NULL, '2018-07-29 14:07:54', '2018-07-29 14:31:17', NULL),
+	(206, NULL, 3312.000000, 332.000000, 332.000000, 332.000000, NULL, '2018-07-13 00:00:00', '800mg', 'số lô 2', 'ct2', '2018-07-12 00:00:00', NULL, 47, 2, 1, 2, 8, 2, 12, NULL, '2018-07-29 14:07:55', '2018-07-29 14:18:10', NULL);
 /*!40000 ALTER TABLE `store_phieunhap_chitiet` ENABLE KEYS */;
 
 -- Dumping structure for table u883604362_store.store_phieuxuat
@@ -13871,10 +13874,12 @@ CREATE TABLE IF NOT EXISTS `store_phieuxuat` (
   CONSTRAINT `store_phieuxuat_store_donvi_foreign` FOREIGN KEY (`donvi_id`) REFERENCES `store_donvi` (`id`),
   CONSTRAINT `store_phieuxuat_xuat_den_kho_id_foreign` FOREIGN KEY (`xuat_den_kho_id`) REFERENCES `store_kho` (`id`),
   CONSTRAINT `store_phieuxuat_xuat_tu_kho_id_foreign` FOREIGN KEY (`xuat_tu_kho_id`) REFERENCES `store_kho` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table u883604362_store.store_phieuxuat: ~0 rows (approximately)
 /*!40000 ALTER TABLE `store_phieuxuat` DISABLE KEYS */;
+INSERT INTO `store_phieuxuat` (`id`, `so_phieuxuat`, `ngay_xuatkho`, `ngay_xacnhan`, `lydo_xuat`, `nguoi_nhanhang`, `so_chungtu`, `ngay_chungtu`, `nhapxuat_id`, `nhacungcap_id`, `chuongtrinh_id`, `soketoan_id`, `xuat_tu_kho_id`, `xuat_den_kho_id`, `nguoi_lapphieu_id`, `deleted_at`, `created_at`, `updated_at`, `donvi_id`) VALUES
+	(2, 'xkl10', '2018-07-21 00:00:00', NULL, 'lý do xuất', 'nguyễn nhận hàng', 'ct xuất 1', '2018-07-20 00:00:00', 9, NULL, NULL, 2, 1, 1, 1, NULL, '2018-07-29 14:31:15', '2018-07-29 14:31:15', 5);
 /*!40000 ALTER TABLE `store_phieuxuat` ENABLE KEYS */;
 
 -- Dumping structure for table u883604362_store.store_phieuxuat_chitiet
@@ -13920,10 +13925,12 @@ CREATE TABLE IF NOT EXISTS `store_phieuxuat_chitiet` (
   CONSTRAINT `store_phieuxuat_chitiet_xuat_den_donvi_id_foreign` FOREIGN KEY (`xuat_den_donvi_id`) REFERENCES `store_donvi` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `store_phieuxuat_chitiet_xuat_den_kho_id_foreign` FOREIGN KEY (`xuat_den_kho_id`) REFERENCES `store_kho` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `store_phieuxuat_chitiet_xuat_tu_kho_id_foreign` FOREIGN KEY (`xuat_tu_kho_id`) REFERENCES `store_kho` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table u883604362_store.store_phieuxuat_chitiet: ~0 rows (approximately)
 /*!40000 ALTER TABLE `store_phieuxuat_chitiet` DISABLE KEYS */;
+INSERT INTO `store_phieuxuat_chitiet` (`id`, `ngay_sudungdautien`, `dongiaxuat`, `soluongxuat`, `cotinhphi`, `nhapxuat_id`, `phieuxuat_id`, `soketoan_id`, `xuat_tu_kho_id`, `sanpham_id`, `phieunhap_chitiet_id`, `deleted_at`, `created_at`, `updated_at`, `so_chungtu`, `ngay_chungtu`, `so_lo`, `hansudung`, `thue`, `donvitinh_id`, `xuat_den_donvi_id`, `xuat_den_kho_id`) VALUES
+	(3, NULL, 568774.000000, 400.000000, 1, 9, 2, 1, 1, 200, 205, NULL, '2018-07-29 14:31:17', '2018-07-29 14:31:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `store_phieuxuat_chitiet` ENABLE KEYS */;
 
 -- Dumping structure for table u883604362_store.store_sanpham
@@ -13942,7 +13949,7 @@ CREATE TABLE IF NOT EXISTS `store_sanpham` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `store_sanpham_ma_sanpham_unique` (`ma_sanpham`)
-) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table u883604362_store.store_sanpham: ~27 rows (approximately)
 /*!40000 ALTER TABLE `store_sanpham` DISABLE KEYS */;
@@ -13973,7 +13980,8 @@ INSERT INTO `store_sanpham` (`id`, `ma_sanpham`, `ten_sanpham`, `ten_hoatchat`, 
 	(24, '24', 'Kít chuẩn đoán Xpert MTB/RIF', NULL, NULL, NULL, NULL, NULL, 38, NULL, NULL, NULL),
 	(25, '25', 'Kít thử Xpert MTB/RIF', NULL, NULL, NULL, NULL, NULL, 38, NULL, NULL, NULL),
 	(26, '26', 'Lam kính', NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL),
-	(198, 'par01', 'Para', 'Pa', NULL, NULL, NULL, NULL, 11, NULL, '2018-07-16 19:51:41', '2018-07-16 19:51:41');
+	(198, 'par01', 'Para', 'Pa', NULL, NULL, NULL, NULL, 11, NULL, '2018-07-16 19:51:41', '2018-07-16 19:51:41'),
+	(200, 'masp1', 'sản phẩm thêm mới', 'test thử', NULL, NULL, 'Quy cách', NULL, 27, NULL, '2018-07-29 14:06:41', '2018-07-29 14:06:41');
 /*!40000 ALTER TABLE `store_sanpham` ENABLE KEYS */;
 
 -- Dumping structure for table u883604362_store.store_sanpham_loai
@@ -14109,8 +14117,8 @@ CREATE TABLE IF NOT EXISTS `store_system_config` (
 /*!40000 ALTER TABLE `store_system_config` DISABLE KEYS */;
 INSERT INTO `store_system_config` (`id`, `name`, `value`, `description`, `deleted_at`, `created_at`, `updated_at`) VALUES
 	(1, 'store.masanpham', '{"par":2,"sda":"2","aa":false,"aab":"b1"}', NULL, NULL, NULL, '2018-05-14 02:19:08'),
-	(2, 'store.sophieunhap', '{"tkdk":2,"nkl":"12","":false,"tkd":"k3"}', NULL, NULL, NULL, '2018-07-25 13:46:15'),
-	(3, 'store.sophieuxuat', '{"xkl":"9","":false,"xhb":"2"}', NULL, NULL, NULL, '2018-06-20 18:31:54'),
+	(2, 'store.sophieunhap', '{"tkdk":2,"nkl":13,"":false,"tkd":"k3"}', NULL, NULL, NULL, '2018-07-29 14:18:45'),
+	(3, 'store.sophieuxuat', '{"xkl":"10","":false,"xhb":"2"}', NULL, NULL, NULL, '2018-07-29 14:31:16'),
 	(4, 'store.sobienbankiemnhap', '{"bbkn":"1","":false}', NULL, NULL, NULL, '2018-05-03 00:47:46');
 /*!40000 ALTER TABLE `store_system_config` ENABLE KEYS */;
 
@@ -14171,6 +14179,8 @@ CREATE DEFINER=`u883604362_store`@`%` PROCEDURE `usp_store_baocao_bangkenhapkho_
 	IN `p_sanpham_id` INT,
 	IN `p_sanpham_nhom_id` INT,
 	IN `p_sanpham_loai_id` INT
+
+
 )
 BEGIN
 	SELECT ncc.ma_nguoncungcap, ncc.ten_nguoncungcap
@@ -14178,14 +14188,14 @@ BEGIN
 		, dvt.ten_donvitinh
 		, pn.ngay_laphoadon
 		, k.ten_kho
-		, pnct.so_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap
+		, pnct.so_chungtu, pnct.ngay_chungtu, pnct.so_lo, pnct.hansudung, pnct.dongianhap, pnct.soluongnhap
 	FROM store_phieunhap_chitiet pnct
 		JOIN store_phieunhap pn ON pnct.phieunhap_id = pn.id
-		JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
+		LEFT JOIN store_nguoncungcap ncc ON pnct.nguoncungcap_id = ncc.id
 		JOIN store_sanpham sp ON pnct.sanpham_id = sp.id
 		JOIN store_donvitinh dvt ON sp.donvitinh_id = dvt.id
 		JOIN store_kho k ON pnct.nhap_vao_kho_id = k.id
-		JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id
+		LEFT JOIN store_sanpham_nhom_loai_rel nlrel ON pnct.sanpham_id = nlrel.sanpham_id
 	WHERE pn.ngay_nhapkho BETWEEN p_ngay_batdau AND p_ngay_ketthuc
 		AND (p_nguoncungcap_id = 0 OR pnct.nguoncungcap_id = p_nguoncungcap_id)
         AND (p_sanpham_id = 0 OR pnct.sanpham_id = p_sanpham_id)

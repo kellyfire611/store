@@ -512,6 +512,7 @@ class ComposerStaticInit350e1cdd75989d4718e7af487eecd4f1
         'App\\Models\\CommonModel' => __DIR__ . '/../..' . '/app/Models/CommonModel.php',
         'App\\Models\\HrmQuocgia' => __DIR__ . '/../..' . '/app/Models/HrmQuocgia.php',
         'App\\Models\\StoreChuongtrinh' => __DIR__ . '/../..' . '/app/Models/StoreChuongtrinh.php',
+        'App\\Models\\StoreDonvi' => __DIR__ . '/../..' . '/app/Models/StoreDonvi.php',
         'App\\Models\\StoreDonvitinh' => __DIR__ . '/../..' . '/app/Models/StoreDonvitinh.php',
         'App\\Models\\StoreKho' => __DIR__ . '/../..' . '/app/Models/StoreKho.php',
         'App\\Models\\StoreKhoLoai' => __DIR__ . '/../..' . '/app/Models/StoreKhoLoai.php',

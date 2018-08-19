@@ -88,6 +88,7 @@ return array(
     'App\\Models\\CommonModel' => $baseDir . '/app/Models/CommonModel.php',
     'App\\Models\\HrmQuocgia' => $baseDir . '/app/Models/HrmQuocgia.php',
     'App\\Models\\StoreChuongtrinh' => $baseDir . '/app/Models/StoreChuongtrinh.php',
+    'App\\Models\\StoreDonvi' => $baseDir . '/app/Models/StoreDonvi.php',
     'App\\Models\\StoreDonvitinh' => $baseDir . '/app/Models/StoreDonvitinh.php',
     'App\\Models\\StoreKho' => $baseDir . '/app/Models/StoreKho.php',
     'App\\Models\\StoreKhoLoai' => $baseDir . '/app/Models/StoreKhoLoai.php',

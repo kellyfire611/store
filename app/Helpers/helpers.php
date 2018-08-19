@@ -146,3 +146,29 @@ if(!function_exists('convert_number_to_words')) {
 		return $string;
 	}
 }
+
+if(!function_exists('unique_multidim_array')) {
+    function unique_multidim_array($array, $key) { 
+		$temp_array = array(); 
+		$i = 0; 
+		$key_array = array(); 
+		
+		foreach($array as $val) { 
+			if (!in_array($val[$key], $key_array)) { 
+				$key_array[$i] = $val[$key]; 
+				$temp_array[$i] = $val; 
+			} 
+			$i++; 
+		} 
+		return $temp_array; 
+	}
+}
+
+if(!function_exists('array_unique_multidimensional')) {
+	function array_unique_multidimensional($input)
+	{
+		$serialized = array_map('serialize', $input);
+		$unique = array_unique($serialized);
+		return array_intersect_key($input, $unique);
+	}
+}

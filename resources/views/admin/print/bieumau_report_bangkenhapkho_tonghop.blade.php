@@ -57,19 +57,19 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
       </table>
       <table class="main">
         <tr>
-          <th class="main-s6z2" rowspan="2">STT</th>
-          <th class="main-s6z2" colspan="2">Chứng từ</th>
+          <th class="main-s6z2" rowspan="2" style="width: 25px;">STT</th>
+          <th class="main-s6z2" colspan="2" style="width: 150px;">Chứng từ</th>
           <th class="main-s6z2" rowspan="2">Tên quy cách vật tư dụng cụ, sản phẩm</th>
-          <th class="main-s6z2" rowspan="2">Số lô</th>
-          <th class="main-s6z2" rowspan="2">Kho</th>
-          <th class="main-s6z2" rowspan="2">ĐVT</th>
-          <th class="main-s6z2" rowspan="2">Hạn SD</th>
+          <th class="main-s6z2" rowspan="2" style="width: 110px;">Số lô</th>
+          <th class="main-s6z2" rowspan="2" style="width: 45px;">Kho</th>
+          <th class="main-s6z2" rowspan="2" style="width: 45px;">ĐVT</th>
+          <th class="main-s6z2" rowspan="2" style="width: 55px;">Hạn SD</th>
 
-          <th class="main-s6z2" rowspan="2">Đơn giá</th>
-          <th class="main-s6z2" rowspan="2">Số lượng</th>
+          <th class="main-s6z2" rowspan="2" style="width: 120px;">Đơn giá</th>
+          <th class="main-s6z2" rowspan="2" style="width: 60px;">Số lượng</th>
 
-          <th class="main-s6z2" rowspan="2" style="width: 120px;">Thành<br> tiền</th>
-          <th class="main-s6z2" rowspan="2">Ghi<br> chú</th>
+          <th class="main-s6z2" rowspan="2" style="width: 95px;">Thành tiền</th>
+          <th class="main-s6z2" rowspan="2" style="width: 30px;">Ghi<br> chú</th>
       </tr>
       <tr>
         <th class="main-s6z2" >Số</th>
@@ -85,11 +85,11 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           
           <tr class="page-break-inside-avoid">
               <td>{{ $stt }}</td>
-              <td>{{ $detail->so_chungtu }}</td>
-              <td>{{ empty($detail->ngay_chungtu) ? '' : \Carbon\Carbon::parse($detail->ngay_chungtu)->format('d/m/Y') }}</td>
-              <td class="align-left" >{{ $detail->ten_sanpham }}</td>
-              <td>{{ $detail->so_lo }}</td>
-              <td>{{ $detail->ten_kho }}</td>
+              <td>{{ $detail->so_phieunhap }}</td>
+              <td>{{ empty($detail->ngay_nhapkho) ? '' : \Carbon\Carbon::parse($detail->ngay_nhapkho)->format('d/m/Y') }}</td>
+              <td class="align-left">{{ $detail->ten_sanpham }}</td>
+              <td class="align-left">{{ $detail->so_lo }}</td>
+              <td>{{ $detail->ma_kho }}</td>
               <td>{{ $detail->ten_donvitinh }}</td>
               <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('m/Y') }}</td>
               <td class="align-right">{{ number_format($detail->dongianhap, 2) }}</td>
@@ -100,7 +100,11 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           </tr>
           <?php 
               $stt++;
+              
               }
+
+              
+              $sum = round($sum);
           ?>
           <tr class="bold">
               <td></td>
