@@ -9,7 +9,7 @@
   </div>
   <div class="col-sm-6">
   <div class="form-group">
-    <label for="p_ngay_ketthuc">Từ ngày</label>
+    <label for="p_ngay_ketthuc">Đến ngày</label>
     <input type="text" class="form-control" id="p_ngay_ketthuc" name="p_ngay_ketthuc">
   </div>
   </div>

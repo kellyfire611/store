@@ -30,8 +30,32 @@ Biểu mẫu Phiếu xuất kho
 @else
 <section class="sheet padding-10mm">
     <article>
+        <table class="tg">
+          <tr>
+              <th class="tg-baqh">{{ config('company.parent.name') }}</th>
+              <th></th>
+              <th class="tg-baqh">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</th>
+          </tr>
+          <tr>
+              <td class="tg-baqh align-center valign-top">{{ config('company.name') }}</td>
+              <td class="bold name">{{ $bag['meta']['title'] }}</td>
+              <td class="tg-s6z2 align-center">
+                  Độc lập - Tự do - Hạnh phúc
+              </td>
+          </tr>
+          <tr>
+              <td class="tg-031e"></td>
+              <td class="tg-031e align-center"><?php
+              $p_ngay_batdau = \Carbon\Carbon::parse($bag['meta']['p_ngay_batdau']);
+              $p_ngay_ketthuc = \Carbon\Carbon::parse($bag['meta']['p_ngay_ketthuc']);
+
+              ?> Từ ngày {{ $p_ngay_batdau->format('d/m/Y') }} đến ngày {{ $p_ngay_ketthuc->format('d/m/Y') }}</td>
+              <td class="tg-031e"></td>
+          </tr>
+
+      </table>
       <table class="main">
-        <caption>{{ $bag['meta']['title'] }}</caption>
+        
         <thead>
             <tr class="bold" >
                 <td>STT</td>
@@ -90,10 +114,10 @@ Biểu mẫu Phiếu xuất kho
             $sumTongXuat += $ttTongXuat;
             $sumTonCuoiKy = $sumTonDauKy + $sumTongNhap - $sumTongXuat;
             ?>
-            @endforeach
-            <tr>
-                <td></td>
-                <td>CỘNG</td>
+            @endforeach    
+            <tr class="bold">
+              <td></td>
+                <td>Tổng</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -107,32 +131,37 @@ Biểu mẫu Phiếu xuất kho
                 <td>0</td>
                 <td class="thanhtien align-right">{{ number_format($sumTonCuoiKy, 0) }}</td>
                 <td></td>
-            </tr>
+          </tr>
+          <tr>
+              <td class="main-yw4l no-border"></td>
+
+              <td class="main-yw4l no-border" colspan="3" align = "left">Tổng số tiền (bằng chữ): </td>
+              <td class="main-yw4l align-left no-border bold" colspan="11"><?php echo decimalToTextVietnamese($sumTonCuoiKy); ?></td>
+
+          </tr>
+          
+          <tr>
+              <td class="no-border bold" colspan="2"></td>
+              <td class="no-border bold" colspan="2">Người lập</td>
+              <td class="no-border bold" colspan="2"></td>
+              <td class="no-border bold" colspan="2"></td>
+              <td class="no-border bold" colspan="2"></td>
+              <td class="no-border bold" colspan="2">Thủ trưởng đơn vị</td>
+              <td class="no-border bold" colspan="2"></td>
+
+          </tr>
+          <tr style="height: 80px;"></tr>
+          <tr>
+              <td class="no-border" colspan="2"></td>
+              <td class="no-border" colspan="2">{{ Admin::user()->name }}</td>
+              <td class="no-border" colspan="2"></td>
+              <td class="no-border" colspan="2"></td>
+              <td class="no-border" colspan="2"></td>
+              <td class="no-border" colspan="2">{{ config('company.chucvu.thutruongdonvi') }}</td>
+              <td class="no-border" colspan="2"></td>
+          </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td>CỘNG</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>0</td>
-                <td class="thanhtien align-right">{{ number_format($sumTonDauKy, 0) }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="thanhtien align-right">{{ number_format($sumTongXuat, 0) }}</td>
-                <td>0</td>
-                <td class="thanhtien align-right">{{ number_format($sumTonCuoiKy, 0) }}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td class="no-border" ></td>
-                <td class="no-border" >Tiền bằng chữ: </td>
-                <td colspan="14" class="bold align-left no-border"><?php echo decimalToTextVietnamese($sumTonCuoiKy); ?></td>
-            </tr>
-        </tfoot>
+        
     </table> 
     </article>
 </section>

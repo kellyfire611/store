@@ -29,7 +29,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label for="p_donvi_id">Đơn vị nhận</label>
-                <select class="form-control" style="width: 100%;" name="p_donvi_id[]" id="p_donvi_id">
+                <select class="form-control" style="width: 100%;" name="p_donvi_id"  id="p_donvi_id">
                     <option value="">--Tất cả--</option>
                     @foreach($donVi as $select => $option)
                     <option value="{{$select}}" >{{$option}}</option>

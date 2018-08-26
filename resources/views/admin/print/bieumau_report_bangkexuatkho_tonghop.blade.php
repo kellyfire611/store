@@ -49,10 +49,16 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
               <td class="tg-031e"></td>
           </tr>
           <tr>
-              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so1'] }}  </td>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_donvi'] }}  </td>
           </tr>
           <tr>
-              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so2'] }}  </td>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_sanpham'] }}  </td>
+          </tr>
+          <tr>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_nhom'] }}  </td>
+          </tr>
+          <tr>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_loai'] }}  </td>
           </tr>
       </table>
       <table class="main">
@@ -86,15 +92,15 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
           <tr class="page-break-inside-avoid">
               <td>{{ $stt }}</td>
               <td>{{ $detail->so_chungtu }}</td>
-              <td>{{ $detail->ngay_laphoadon }}</td>
+              <td>{{ $detail->ngay_xacnhan }}</td>
               <td class="align-left" >{{ $detail->ten_sanpham }}</td>
               <td>{{ $detail->so_lo }}</td>
               <td>{{ $detail->ten_kho }}</td>
               <td>{{ $detail->ten_donvitinh }}</td>
               <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('d/m/Y') }}</td>
-              <td class="align-right">{{ number_format($detail->dongianhap, 2) }}</td>
-              <td class="align-right">{{ number_format($detail->soluongnhap, 0) }}</td>
-              <td class="align-right"><?php $tt = $detail->soluongnhap * $detail->dongianhap; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
+              <td class="align-right">{{ number_format($detail->dongiaxuat, 2) }}</td>
+              <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
+              <td class="align-right"><?php $tt = $detail->soluongxuat * $detail->dongiaxuat; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
               <td></td>
               
           </tr>

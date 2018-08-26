@@ -49,17 +49,23 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
               <td class="tg-031e"></td>
           </tr>
           <tr>
-              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so1'] }}  </td>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_ncc'] }}  </td>
           </tr>
           <tr>
-              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so2'] }}  </td>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_sanpham'] }}  </td>
+          </tr>
+          <tr>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_nhom'] }}  </td>
+          </tr>
+          <tr>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_loai'] }}  </td>
           </tr>
       </table>
       <table class="main">
         <tr>
           <th class="main-s6z2" rowspan="2" style="width: 25px;">STT</th>
           <th class="main-s6z2" colspan="2" style="width: 150px;">Chứng từ</th>
-          <th class="main-s6z2" rowspan="2">Tên quy cách vật tư dụng cụ, sản phẩm</th>
+          <th class="main-s6z2" rowspan="2">Thông tin quy cách vật tư dụng cụ, sản phẩm</th>
           <th class="main-s6z2" rowspan="2" style="width: 110px;">Số lô</th>
           <th class="main-s6z2" rowspan="2" style="width: 45px;">Kho</th>
           <th class="main-s6z2" rowspan="2" style="width: 45px;">ĐVT</th>
@@ -87,7 +93,8 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
               <td>{{ $stt }}</td>
               <td>{{ $detail->so_phieunhap }}</td>
               <td>{{ empty($detail->ngay_nhapkho) ? '' : \Carbon\Carbon::parse($detail->ngay_nhapkho)->format('d/m/Y') }}</td>
-              <td class="align-left">{{ $detail->ten_sanpham }}</td>
+              <td class="align-left"><b>+ {{ $detail->ten_sanpham }}</b><br>- Nhóm:{{ $detail->ten_nhom_sanpham }} 
+                  <br>- Loại:{{ $detail->ten_loai_sanpham }}<br>- Nguồn cung cấp:{{ $detail->ten_nguoncungcap }} </td>
               <td class="align-left">{{ $detail->so_lo }}</td>
               <td>{{ $detail->ma_kho }}</td>
               <td>{{ $detail->ten_donvitinh }}</td>
