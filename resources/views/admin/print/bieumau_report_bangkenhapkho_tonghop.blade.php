@@ -84,17 +84,33 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           <?php
               $stt = 1;
               $sum = 0;
-              foreach ($bag['data']->detail as $detail) {
-                  # code...
+              foreach ($bag['data']->detail as $k => $detail) {
+                  # code...                
               
           ?>
+          <?php
+            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_nguoncungcap) && $bag['data']->detail[$k-1]->ten_nguoncungcap != $bag['data']->detail[$k]->ten_nguoncungcap)  ){
+          ?>
+            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- Nguồn vốn:<b> {{$bag['data']->detail[$k]->ten_nguoncungcap}} </b> </td></tr>            
+            
+          <?php 
+            }
+          ?>
+            
+          <?php
+            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_nhom_sanpham) && $bag['data']->detail[$k-1]->ten_nhom_sanpham != $bag['data']->detail[$k]->ten_nhom_sanpham)  ){
+          ?>
+            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- - Nhóm sản phẩm:<b> {{$bag['data']->detail[$k]->ten_nhom_sanpham}} </b> </td></tr>
+        <?php 
+            }
+          ?>  
           
           <tr class="page-break-inside-avoid">
               <td>{{ $stt }}</td>
               <td>{{ $detail->so_phieunhap }}</td>
               <td>{{ empty($detail->ngay_nhapkho) ? '' : \Carbon\Carbon::parse($detail->ngay_nhapkho)->format('d/m/Y') }}</td>
-              <td class="align-left"><b>+ {{ $detail->ten_sanpham }}</b><br>- Nhóm:{{ $detail->ten_nhom_sanpham }} 
-                  <br>- Loại:{{ $detail->ten_loai_sanpham }}<br>- Nguồn cung cấp:{{ $detail->ten_nguoncungcap }} </td>
+              <td class="align-left"><b>+ {{ $detail->ten_sanpham }}</b>
+                  <br>- Loại:{{ $detail->ten_loai_sanpham }}<br> </td>
               <td class="align-left">{{ $detail->so_lo }}</td>
               <td>{{ $detail->ma_kho }}</td>
               <td>{{ $detail->ten_donvitinh }}</td>

@@ -65,7 +65,7 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
           <tr>
               <th class="main-s6z2" rowspan="2">STT</th>
               <th class="main-s6z2" colspan="2">Chứng từ</th>
-              <th class="main-s6z2" rowspan="2">Tên quy cách vật tư dụng cụ, sản phẩm</th>
+              <th class="main-s6z2" rowspan="2" style="width: 11%;">Tên quy cách vật tư dụng cụ, sản phẩm</th>
               <th class="main-s6z2" rowspan="2">Số lô</th>
               <th class="main-s6z2" rowspan="2">Kho</th>
               <th class="main-s6z2" rowspan="2">ĐVT</th>
@@ -74,8 +74,8 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
               <th class="main-s6z2" rowspan="2">Đơn giá</th>
               <th class="main-s6z2" rowspan="2">Số lượng</th>
 
-              <th class="main-s6z2" rowspan="2">Thành<br> tiền</th>
-              <th class="main-s6z2" rowspan="2">Ghi<br> chú</th>
+              <th class="main-s6z2" rowspan="2" style="width: 10%;">Thành<br> tiền</th>
+              <th class="main-s6z2" rowspan="2" style="width: 30px;">Ghi<br> chú</th>
           </tr>
           <tr>
             <th class="main-s6z2" >Số</th>
@@ -84,16 +84,32 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
           <?php
               $stt = 1;
               $sum = 0;
-              foreach ($bag['data']->detail as $detail) {
+              foreach ($bag['data']->detail as $k => $detail) {
                   # code...
               
           ?>
-          
+          <?php
+            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_donvi) && $bag['data']->detail[$k-1]->ten_donvi != $bag['data']->detail[$k]->ten_donvi)  ){
+          ?>
+            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- Đơn vị nhận:<b> {{$bag['data']->detail[$k]->ten_donvi}} </b> </td></tr>            
+            
+          <?php 
+            }
+          ?>
+            
+          <?php
+            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_nhom_sanpham) && $bag['data']->detail[$k-1]->ten_nhom_sanpham != $bag['data']->detail[$k]->ten_nhom_sanpham)  ){
+          ?>
+            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- - Nhóm sản phẩm:<b> {{$bag['data']->detail[$k]->ten_nhom_sanpham}} </b> </td></tr>
+        <?php 
+            }
+          ?>  
           <tr class="page-break-inside-avoid">
               <td>{{ $stt }}</td>
               <td>{{ $detail->so_chungtu }}</td>
               <td>{{ $detail->ngay_xacnhan }}</td>
-              <td class="align-left" >{{ $detail->ten_sanpham }}</td>
+              <td class="align-left"><b>+ {{ $detail->ten_sanpham }}</b>
+                  <br>- Loại:{{ $detail->ten_loai_sanpham }}<br> </td>
               <td>{{ $detail->so_lo }}</td>
               <td>{{ $detail->ten_kho }}</td>
               <td>{{ $detail->ten_donvitinh }}</td>

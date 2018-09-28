@@ -1,7 +1,7 @@
 
 
-<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_bangkenhapkho_tonghop']) }}">
-    {{ csrf_field() }}
+<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_bangkenhapkho_tonghop']) }}" target="_blank">
+    {{ csrf_field() }} 
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
@@ -9,8 +9,8 @@
                 <select class="form-control" style="width: 100%;" name="loai_bao_cao_ten"  id="loai_bao_cao_ten">                        
                     <option value="tong_hop" >Báo cáo tổng hợp</option>
                     <option value="nguon_von" >Báo cáo theo Nguồn vốn</option>
-                    <option value="san_pham" >Báo cáo Sản phẩm</option>
-                    <option value="nhom_loai" >Báo cáo Nhóm sản phẩm và loại sản phẩm</option>
+                    <option value="san_pham" >Báo cáo theo  Sản phẩm</option>
+                    <option value="nhom_loai" >Báo cáo theo Nhóm sản phẩm và loại sản phẩm</option>
                 </select>
             </div>
         </div>
@@ -36,18 +36,7 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-        <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="p_sanpham_id">Sản phẩm</label>
-                    <select class="form-control" style="width: 100%;" name="p_sanpham_id[]" multiple id="p_sanpham_id">
-                        <option value=""></option>
-                        @foreach($sanPham as $select => $option)
-                        <option value="{{$select}}">{{$option}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
+        </div>        
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="p_nhomsanpham_id">Nhóm sản phẩm</label>

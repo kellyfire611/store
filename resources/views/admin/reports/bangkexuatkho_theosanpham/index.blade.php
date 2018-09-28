@@ -1,6 +1,6 @@
 
 
-<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_bangkexuatkho_tonghop']) }}">
+<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_bangkexuatkho_tonghop']) }}" target="_blank">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-sm-12">
@@ -9,7 +9,7 @@
                 <select class="form-control" style="width: 100%;" name="loai_bao_cao_ten"  id="loai_bao_cao_ten">                        
                     <option value="tong_hop" >Báo cáo tổng hợp</option>
                     <option value="don_vi" >Báo cáo theo Đơn vị nhận</option>
-                    <option value="san_pham" >Báo cáo Sản phẩm</option>
+                    <option value="san_pham" >Báo cáo theo Sản phẩm</option>
                     <option value="nhom_loai" >Báo cáo Nhóm sản phẩm và loại sản phẩm</option>
                 </select>
             </div>
@@ -36,18 +36,18 @@
                     @endforeach
                 </select>
             </div>
-        </div>        
+        </div>    
         <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="p_sanpham_id">Sản phẩm</label>
-                    <select class="form-control" style="width: 100%;" name="p_sanpham_id[]" multiple id="p_sanpham_id">
-                        <option value=""></option>
-                        @foreach($sanPham as $select => $option)
-                        <option value="{{$select}}">{{$option}}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="p_nguoncungcap_id">Nguồn vốn cung cấp</label>
+                <select class="form-control" style="width: 100%;" name="p_nguoncungcap_id[]" multiple id="p_nguoncungcap_id">
+                    <option value=""></option>
+                    @foreach($nguonCungCap as $select => $option)
+                    <option value="{{$select}}" >{{$option}}</option>
+                    @endforeach
+                </select>
             </div>
+        </div>     
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="p_nhomsanpham_id">Nhóm sản phẩm</label>
@@ -70,6 +70,17 @@
                 </select>
             </div>
         </div>
+        <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="p_sanpham_id">Sản phẩm</label>
+                    <select class="form-control" style="width: 100%;" name="p_sanpham_id[]" multiple id="p_sanpham_id">
+                        <option value=""></option>
+                        @foreach($sanPham as $select => $option)
+                        <option value="{{$select}}">{{$option}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
     </div>
     <div class="row">
         <div class="col-sm-12">

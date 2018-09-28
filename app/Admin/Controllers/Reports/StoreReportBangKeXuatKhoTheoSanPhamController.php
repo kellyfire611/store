@@ -41,15 +41,17 @@ class StoreReportBangKeXuatKhoTheoSanPhamController extends Controller
             // ];
             // $bag = DB::select('call usp_store_baocao_nhapxuatton_chitiet(?,?,?)', $parameter);
             // dd($bag);
-            $donVi = StoreDonvi::selectboxData(); 
-            $nhomSanPham = StoreSanphamNhom::selectboxData(); 
+            $donVi = StoreDonvi::selectboxData();
+            $nhomSanPham = StoreSanphamNhom::selectboxData();
             $loaiSanPham = StoreSanphamLoai::selectboxData(); 
+            $nguonCungCap = StoreNguoncungcap::selectboxData(); 
             $sanPham = StoreSanpham::selectboxData();
             $content->body(view('admin.reports.bangkexuatkho_theosanpham.index')
-                ->with(Array('donVi'=> $donVi
+                ->with(Array('donVi'=> $nhomSanPham
                             ,'sanPham' => $sanPham
                             ,'nhomSanPham' => $nhomSanPham
                             ,'loaiSanPham' => $loaiSanPham  
+                            ,'nguonCungCap'=> $nguonCungCap
                             
             )));
         });

@@ -229,7 +229,7 @@ class PrintController extends Controller
     }
 
     protected function getDataBieumau_report_bangkenhapkho_tonghop($query)
-    {   
+    { 
         $totalResult = 1;
         $totalPages = 1;
         $currentPage = 1;
@@ -249,24 +249,24 @@ class PrintController extends Controller
         $ten_thong_so_sanpham = '';
         $ten_thong_so_nhom = '';
         $ten_thong_so_loai = '';
-        $order = 'ten_sanpham';
+        $order = ' ma_nguoncungcap,ten_nhom_sanpham,ten_loai_sanpham,ten_sanpham';
         if($p_loai_bao_cao == 'tong_hop'){
             $str_loai_bao_cao = 'Bảng kê nhập kho tổng hợp';
         } elseif ($p_loai_bao_cao == 'nguon_von') {
            $str_loai_bao_cao = 'Bảng kê nhập kho theo nguồn vốn';
-           $order = ' ten_nguoncungcap ';
+//           $order = ' ten_nguoncungcap ';
         } elseif ($p_loai_bao_cao == 'san_pham') {
            $str_loai_bao_cao = 'Bảng kê nhập kho theo sản phẩm';
-           $order = ' ten_sanpham ';
+//           $order = ' ten_sanpham ';
         } elseif ($p_loai_bao_cao == 'nhom_loai') {
            $str_loai_bao_cao = 'Bảng kê nhập kho theo nhóm & loại sản phẩm';
-           $order = ' ten_sanpham  ';
+//           $order = ' ten_sanpham  ';
         }  
         
                  
         
         $fields = "ncc.ma_nguoncungcap, ncc.ten_nguoncungcap
-            , sp.ma_sanpham, sp.ten_sanpham, ten_nhom_sanpham, ten_loai_sanpham, ten_loai_sanpham,
+            , sp.ma_sanpham, sp.ten_sanpham, ten_nhom_sanpham, ten_loai_sanpham, 
             sp.ten_hoatchat, sp.nongdo_hamluong
             , dvt.ten_donvitinh
             , date(pn.ngay_laphoadon) ngay_laphoadon
@@ -377,7 +377,7 @@ class PrintController extends Controller
         $ten_thong_so_sanpham = '';
         $ten_thong_so_nhom = '';
         $ten_thong_so_loai = '';
-        $order = 'ten_sanpham';
+        $order = 'ten_donvi,ten_nhom_sanpham,ten_loai_sanpham,ten_sanpham';
         if($p_loai_bao_cao == 'tong_hop'){
             $str_loai_bao_cao = 'Bảng kê xuất kho tổng hợp';
         } elseif ($p_loai_bao_cao == 'don_vi') {
@@ -395,7 +395,7 @@ class PrintController extends Controller
         
         $fields = "dv.ma_donvi,
 	dv.ten_donvi,
-	sp.ma_sanpham,
+	sp.ma_sanpham,ten_nhom_sanpham, ten_loai_sanpham, 
 	sp.ten_sanpham,
 	sp.ten_hoatchat,
 	sp.nongdo_hamluong,

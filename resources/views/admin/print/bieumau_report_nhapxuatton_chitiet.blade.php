@@ -58,12 +58,19 @@ Biểu mẫu Phiếu xuất kho
         
         <thead>
             <tr class="bold" >
-                <td>STT</td>
-                <td>Tên sản phẩm</td>
-                <td>Nguồn vồn</td>
-                <td>ĐVT</td>
-                <td>Đơn giá</td>
-                <td>HSD</td>
+                <td rowspan="2">STT</td>
+                <td rowspan="2">Tên sản phẩm</td>
+                <td rowspan="2">Nguồn vồn</td>
+                <td rowspan="2">ĐVT</td>
+                <td rowspan="2">Đơn giá</td>
+                <td rowspan="2">HSD</td>
+                <td colspan="2">Tồn đầu kỳ</td>
+                <td colspan="2">Xuất</td>
+                <td colspan="2">Nhập</td>
+                <td colspan="2">Cuối kỳ</td>     
+                <td rowspan="2">Ghi chú</td>
+            </tr>
+            <tr>    
                 <td>Tồn<br>đầu kỳ</td>
                 <td>Thành tiền<br></td>
                 <td>Nhập</td>
@@ -72,7 +79,6 @@ Biểu mẫu Phiếu xuất kho
                 <td>Thành tiền</td>
                 <td>Tồn<br>cuối kỳ</td>
                 <td>Thành tiền</td>
-                <td>Ghi chú</td>
             </tr>
         </thead>
         <tbody>
@@ -93,7 +99,7 @@ Biểu mẫu Phiếu xuất kho
             ?>
             <tr>
                 <td>{{ $stt }}</td>
-                <td class="bold" >{{ $value->ten_sanpham }}</td>
+                <td class="bold" align="left" > + {{ $value->ten_sanpham }}</td>
                 <td>{{ $value->ma_nguoncungcap }}</td>
                 <td>{{ $value->ten_donvitinh }}</td>
                 <td class="dongia align-right">{{ number_format($value->dongianhap, 4) }}</td>

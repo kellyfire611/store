@@ -1,4 +1,4 @@
-<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_nhapxuatton_chitiet']) }}">
+<form id="conditionForm" method="post" action="{{ route('store.print', ['view' => 'bieumau_report_nhapxuatton_chitiet']) }}" target="_blank">
     {{ csrf_field() }}
     <div class="row">
     <div class="col-sm-6">
