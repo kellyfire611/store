@@ -64,7 +64,7 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
       <table class="main">
           <tr>
               <th class="main-s6z2" rowspan="2">STT</th>
-              <th class="main-s6z2" colspan="2">Chứng từ</th>
+              <th class="main-s6z2" colspan="2">Số phiếu</th>
               <th class="main-s6z2" rowspan="2" style="width: 11%;">Tên quy cách vật tư dụng cụ, sản phẩm</th>
               <th class="main-s6z2" rowspan="2">Số lô</th>
               <th class="main-s6z2" rowspan="2">Kho</th>
@@ -106,8 +106,8 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
           ?>  
           <tr class="page-break-inside-avoid">
               <td>{{ $stt }}</td>
-              <td>{{ $detail->so_chungtu }}</td>
-              <td>{{ $detail->ngay_xacnhan }}</td>
+              <td>{{ $detail->so_phieuxuat }}</td>
+              <td>{{ \Carbon\Carbon::parse($detail->ngay_xuatkho)->format('d/m/Y') }}</td>
               <td class="align-left"><b>+ {{ $detail->ten_sanpham }}</b>
                   <br>- Loại:{{ $detail->ten_loai_sanpham }}<br> </td>
               <td>{{ $detail->so_lo }}</td>

@@ -19,7 +19,7 @@ class StorePhieuxuat extends Model
 
     public function scopePhieuXuat($nhapxuat_id)
     {
-        return $this->where('nhapxuat_id', $nhapxuat_id);
+        return $this->where('nhapxuat_id', $nhapxuat_id)->orderBy('ngay_xuatkho', 'desc');;
     }
 
     public static function options($id)
@@ -35,4 +35,33 @@ class StorePhieuxuat extends Model
     {
         return $this->hasMany(StorePhieuxuatChitiet::class, 'phieuxuat_id', 'id');
     }
+
+    public function tongthanhtien()
+    {
+        $query = $this->chitiet()
+            ->selectRaw('sum(soluongxuat * dongiaxuat) as aggregate')
+            ->groupBy('phieuxuat_id');
+        return $query;
+        // return $query->first()->aggregate;
+    }
+
+    // Post model
+    // public function commentsCount()
+    // {
+    //     return $this->hasOne('Comment')
+    //         ->selectRaw('post_id, count(*) as aggregate')
+    //         ->groupBy('post_id');
+    // }
+    
+    // public function getCommentsCountAttribute()
+    // {
+    //     // if relation is not loaded already, let's do it first
+    //     if ( ! array_key_exists('commentsCount', $this->relations)) 
+    //         $this->load('commentsCount');
+        
+    //     $related = $this->getRelation('commentsCount');
+        
+    //     // then return the count directly
+    //     return ($related) ? (int) $related->aggregate : 0;
+    // }
 }

@@ -485,7 +485,7 @@ class PrintController extends Controller
             'data' => json_decode($result)
         ];        
 
-//         dd($bag);   
+        // dd($bag);   
         return $bag;
     }
 }
