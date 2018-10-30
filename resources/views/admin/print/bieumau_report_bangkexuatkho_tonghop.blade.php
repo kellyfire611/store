@@ -16,7 +16,7 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
 @endsection
 
 @section('content')
-@if(empty($bag['data']->result))
+@if(empty($bag['data']->detail))
 <section class="sheet padding-10mm">
     <article>
         <h1>Không tìm thấy dữ liệu</h1>
@@ -25,6 +25,10 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
 </section>
 @else
 <section class="sheet padding-10mm">
+    <?php  
+        foreach ($bag['data']->detail as $k => $v) {    
+    
+    ?>
   <article>
       <table class="tg">
           <tr>
@@ -49,7 +53,7 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
               <td class="tg-031e"></td>
           </tr>
           <tr>
-              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_donvi'] }}  </td>
+              <td class="tg-031e align-left" colspan="3">Đơn vị nhận: {{ $k }}  </td>
           </tr>
           <tr>
               <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_sanpham'] }}  </td>
@@ -64,7 +68,7 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
       <table class="main">
           <tr>
               <th class="main-s6z2" rowspan="2">STT</th>
-              <th class="main-s6z2" colspan="2">Chứng từ</th>
+              <th class="main-s6z2" colspan="2">Phiếu xuất</th>
               <th class="main-s6z2" rowspan="2" style="width: 11%;">Tên quy cách vật tư dụng cụ, sản phẩm</th>
               <th class="main-s6z2" rowspan="2">Số lô</th>
               <th class="main-s6z2" rowspan="2">Kho</th>
@@ -84,39 +88,33 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
           <?php
               $stt = 1;
               $sum = 0;
-              foreach ($bag['data']->detail as $k => $detail) {
+              foreach ($v as $kv => $vv) {
                   # code...
               
           ?>
-          <?php
-            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_donvi) && $bag['data']->detail[$k-1]->ten_donvi != $bag['data']->detail[$k]->ten_donvi)  ){
-          ?>
-            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- Đơn vị nhận:<b> {{$bag['data']->detail[$k]->ten_donvi}} </b> </td></tr>            
-            
-          <?php 
-            }
-          ?>
+          
             
           <?php
-            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_nhom_sanpham) && $bag['data']->detail[$k-1]->ten_nhom_sanpham != $bag['data']->detail[$k]->ten_nhom_sanpham)  ){
+            if($kv == 0  || ( isset($v[$kv-1]->ten_nhom_sanpham) && $v[$kv-1]->ten_nhom_sanpham != $v[$kv]->ten_nhom_sanpham)  ){
           ?>
-            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- - Nhóm sản phẩm:<b> {{$bag['data']->detail[$k]->ten_nhom_sanpham}} </b> </td></tr>
+            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- - Nhóm sản phẩm:<b> {{$v[$kv]->ten_nhom_sanpham}} </b> </td></tr>
         <?php 
-            }
+           }
           ?>  
+
           <tr class="page-break-inside-avoid">
               <td>{{ $stt }}</td>
-              <td>{{ $detail->so_chungtu }}</td>
-              <td>{{ $detail->ngay_xacnhan }}</td>
-              <td class="align-left"><b>+ {{ $detail->ten_sanpham }}</b>
-                  <br>- Loại:{{ $detail->ten_loai_sanpham }}<br> </td>
-              <td>{{ $detail->so_lo }}</td>
-              <td>{{ $detail->ten_kho }}</td>
-              <td>{{ $detail->ten_donvitinh }}</td>
-              <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('d/m/Y') }}</td>
-              <td class="align-right">{{ number_format($detail->dongiaxuat, 2) }}</td>
-              <td class="align-right">{{ number_format($detail->soluongxuat, 0) }}</td>
-              <td class="align-right"><?php $tt = $detail->soluongxuat * $detail->dongiaxuat; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
+              <td>{{ $vv->so_phieuxuat }}</td>
+              <td>{{ $vv->ngay_xuatkho }}</td>
+              <td class="align-left"><b>+ {{ $vv->ten_sanpham }}</b>
+                  <br>- Loại:{{ $vv->ten_loai_sanpham }}<br> </td>
+              <td>{{ $vv->so_lo }}</td>
+              <td>{{ $vv->ten_kho }}</td>
+              <td>{{ $vv->ten_donvitinh }}</td>
+              <td>{{ \Carbon\Carbon::parse($vv->hansudung)->format('d/m/Y') }}</td>
+              <td class="align-right">{{ number_format($vv->dongiaxuat, 2) }}</td>
+              <td class="align-right">{{ number_format($vv->soluongxuat, 0) }}</td>
+              <td class="align-right"><?php $tt = $vv->soluongxuat * $vv->dongiaxuat; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
               <td></td>
               
           </tr>
@@ -164,6 +162,11 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
 
       </table>
   </article>
+  <?php 
+    } 
+  ?>
+    
 </section>
+
 @endif
 @endsection

@@ -6,12 +6,13 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <label for="p_nguoncungcap_id">Loại báo cáo</label>
-                <select class="form-control" style="width: 100%;" name="loai_bao_cao_ten"  id="loai_bao_cao_ten">                        
+                <input name="loai_bao_cao_ten"  id="loai_bao_cao_ten" class="form-control" style="width: 100%;"  value="Báo cáo nhập kho tổng hợp" />
+<!--                <select class="form-control" style="width: 100%;" name="loai_bao_cao_ten"  id="loai_bao_cao_ten">                        
                     <option value="tong_hop" >Báo cáo tổng hợp</option>
                     <option value="nguon_von" >Báo cáo theo Nguồn vốn</option>
                     <option value="san_pham" >Báo cáo theo  Sản phẩm</option>
                     <option value="nhom_loai" >Báo cáo theo Nhóm sản phẩm và loại sản phẩm</option>
-                </select>
+                </select>-->
             </div>
         </div>
         <div class="col-sm-6">
@@ -59,6 +60,17 @@
                 </select>
             </div>
         </div>
+        <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="p_sanpham_id">Sản phẩm</label>
+                    <select class="form-control" style="width: 100%;" name="p_sanpham_id[]" multiple id="p_sanpham_id">
+                        <option value=""></option>
+                        @foreach($sanPham as $select => $option)
+                        <option value="{{$select}}">{{$option}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
     </div>
     <div class="row">
         <div class="col-sm-12">

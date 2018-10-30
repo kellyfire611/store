@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Reports;
 
 use App\Models\StoreSoketoan;
 use App\Models\StoreKho;
+use App\Models\StoreSanpham;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -31,8 +32,14 @@ class StoreReportNhapxuattonChitietController extends Controller
             $content->description('description');
 
             $kho = StoreKho::selectboxData();
+            $sanpham = StoreSanpham::selectboxData();
             $content->body(view('admin.reports.nhapxuatton_chitiet.index')
-                ->with('kho', $kho));
+                ->with(Array(
+                    'sanpham'=> $sanpham,
+                    'kho'=> $kho
+                    )
+                        
+                        ));
         });
     }
 }

@@ -47,7 +47,7 @@ class StoreReportBangKeXuatKhoTheoSanPhamController extends Controller
             $nguonCungCap = StoreNguoncungcap::selectboxData(); 
             $sanPham = StoreSanpham::selectboxData();
             $content->body(view('admin.reports.bangkexuatkho_theosanpham.index')
-                ->with(Array('donVi'=> $nhomSanPham
+                ->with(Array('donVi'=> $donVi
                             ,'sanPham' => $sanPham
                             ,'nhomSanPham' => $nhomSanPham
                             ,'loaiSanPham' => $loaiSanPham  

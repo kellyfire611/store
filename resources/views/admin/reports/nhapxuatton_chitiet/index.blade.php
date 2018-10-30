@@ -13,12 +13,31 @@
     <input type="text" class="form-control" id="p_ngay_ketthuc" name="p_ngay_ketthuc">
   </div>
   </div>
-  <div class="col-sm-12">
-  <div class="form-group">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <label for="p_nguoncungcap_id">Loại báo cáo</label>
+            <!--<input name="loai_bao_cao_ten"  id="loai_bao_cao_ten" class="form-control" style="width: 100%;"  value="Báo cáo xuất kho tổng hợp" />-->
+            <select class="form-control" style="width: 100%;" name="loai_bao_cao_ten"  id="loai_bao_cao_ten">                        
+                <option value="xnt" >Báo cáo xuất nhập tồn chi tiết</option>
+                <option value="tk" >Báo cáo tồn kho</option>
+            </select>
+        </div>
+    </div>
+  <div class="col-sm-12">  
+      <div class="form-group">
     <label for="p_kho_id">Kho</label>
-    <select class="form-control" style="width: 100%;" name="p_kho_id" id="p_kho_id">
+    <select class="form-control" style="width: 100%;" name="p_kho_id"  id="p_kho_id">
         <option value=""></option>
         @foreach($kho as $select => $option)
+            <option value="{{$select}}">{{$option}}</option>
+        @endforeach
+    </select>
+    </div>
+      <div class="form-group">
+    <label for="p_sanpham_id">Sản phẩm</label>
+    <select class="form-control" style="width: 100%;" name="p_sanpham_id[]" multiple  id="p_sanpham_id">
+        <option value=""></option>
+        @foreach($sanpham as $select => $option)
             <option value="{{$select}}">{{$option}}</option>
         @endforeach
     </select>
@@ -49,4 +68,5 @@
   $('#p_ngay_batdau').datetimepicker(option);
   $('#p_ngay_ketthuc').datetimepicker(option);
   $('#p_kho_id').select2({'allowClear': 'true'});
+  $('#p_sanpham_id').select2({'allowClear': 'true'});
 </script>

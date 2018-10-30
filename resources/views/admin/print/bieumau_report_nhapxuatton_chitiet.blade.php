@@ -1,7 +1,7 @@
 @extends('print.layout.paper')
 
 @section('title')
-Biểu mẫu Phiếu xuất kho
+ {{$bag['meta']['title']}}
 @endsection
 
 @section('paper-size') A4 landscape @endsection
@@ -57,13 +57,18 @@ Biểu mẫu Phiếu xuất kho
       <table class="main">
         
         <thead>
+            <?php 
+                if($bag['meta']['loai_bao_cao_ten'] == 'xnt'  ){
+            ?>
             <tr class="bold" >
-                <td rowspan="2">STT</td>
-                <td rowspan="2">Tên sản phẩm</td>
-                <td rowspan="2">Nguồn vồn</td>
-                <td rowspan="2">ĐVT</td>
+                <td rowspan="2" style="width:4%">STT</td>
+                <td rowspan="2" style="width:240px" >Sản phẩm</td>
+                <!--<td rowspan="2">Nguồn vồn</td>-->
+<!--                <td rowspan="2">ĐVT</td>
                 <td rowspan="2">Đơn giá</td>
-                <td rowspan="2">HSD</td>
+                <td rowspan="2">HSD</td>-->
+                <?php if ($bag['meta']['p_ngay_batdau'])
+                ?>
                 <td colspan="2">Tồn đầu kỳ</td>
                 <td colspan="2">Xuất</td>
                 <td colspan="2">Nhập</td>
@@ -80,8 +85,38 @@ Biểu mẫu Phiếu xuất kho
                 <td>Tồn<br>cuối kỳ</td>
                 <td>Thành tiền</td>
             </tr>
+            <?php
+                }else {
+            ?>
+            <tr class="bold" >
+                <td rowspan="2" style="width:4%">STT</td>
+                <td rowspan="2" style="width:350px" >Sản phẩm</td>
+                <!--<td rowspan="2">Nguồn vồn</td>-->
+<!--                <td rowspan="2">ĐVT</td>
+                <td rowspan="2">Đơn giá</td>
+                <td rowspan="2">HSD</td>-->
+                <?php if ($bag['meta']['p_ngay_batdau'])
+                ?>
+                <td colspan="2">Tồn đầu kỳ</td>
+                <td colspan="2">Cuối kỳ</td>     
+                <td rowspan="2">Ghi chú</td>
+            </tr>
+            <tr>    
+                <td>Tồn<br>đầu kỳ</td>
+                <td>Thành tiền<br></td>
+                <td>Tồn<br>cuối kỳ</td>
+                <td>Thành tiền</td>
+            </tr>
+            <?php
+                }
+            ?>
         </thead>
         <tbody>
+            <?php 
+                if($bag['meta']['loai_bao_cao_ten'] == 'xnt'  ){
+            ?>
+            
+            
             <?php
             $stt = 0;
             $sumTonDauKy = 0;
@@ -97,13 +132,27 @@ Biểu mẫu Phiếu xuất kho
             $ttTongXuat = $value->dongianhap * $value->tong_soluongxuat;
             $ttTonCuoiKy = $ttTonDauKy + $ttTongNhap - $ttTongXuat;
             ?>
+            
+            <?php
+                if($key == 0  || ( isset($bag['data']->detail[$key-1]->ma_nguoncungcap) && $bag['data']->detail[$key-1]->ma_nguoncungcap != $bag['data']->detail[$key]->ma_nguoncungcap)  ){
+                    $nguon_new = true;
+              ?>
+                <tr class="page-break-inside-avoid"><td colspan="11" align = "left">- Nguồn vốn:<b> {{$bag['data']->detail[$key]->ma_nguoncungcap}}   </b> 
+                        <!--- Tổng giá trị nhập: <b>{{  number_format(0, 0)}} đ</b> </td></tr>-->            
+
+              <?php 
+                }
+              ?>
             <tr>
                 <td>{{ $stt }}</td>
-                <td class="bold" align="left" > + {{ $value->ten_sanpham }}</td>
-                <td>{{ $value->ma_nguoncungcap }}</td>
-                <td>{{ $value->ten_donvitinh }}</td>
-                <td class="dongia align-right">{{ number_format($value->dongianhap, 4) }}</td>
-                <td>{{ \Carbon\Carbon::parse($value->hansudung)->format('m/Y') }}</td>
+                <td  align="left" ><b> + {{ $value->ten_sanpham }} </b>
+                    <br>Đơn vị tính: {{ $value->ten_donvitinh }} 
+                    <br> Đơn giá: {{ number_format($value->dongianhap, 4) }} 
+                    <br> HSD: {{ \Carbon\Carbon::parse($value->hansudung)->format('m/Y') }}   </td>
+                <!--<td>{{ $value->ma_nguoncungcap }}</td>-->
+<!--                <td></td>
+                <td class="dongia align-right"></td>
+                <td></td>-->
                 <td class="soluong align-right">{{ number_format($value->tong_soluong_tondauky, 0) }}</td>
                 <td class="thanhtien align-right">{{ number_format($ttTonDauKy, 0) }}</td>
                 <td class="soluong align-right">{{ number_format($value->tong_soluongnhap, 0) }}</td>
@@ -124,10 +173,9 @@ Biểu mẫu Phiếu xuất kho
             <tr class="bold">
               <td></td>
                 <td>Tổng</td>
+<!--                <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td></td>-->
                 <td>0</td>
                 <td class="thanhtien align-right">{{ number_format($sumTonDauKy, 0) }}</td>
                 <td></td>
@@ -141,33 +189,118 @@ Biểu mẫu Phiếu xuất kho
           <tr>
               <td class="main-yw4l no-border"></td>
 
-              <td class="main-yw4l no-border" colspan="3" align = "left">Tổng số tiền (bằng chữ): </td>
-              <td class="main-yw4l align-left no-border bold" colspan="11"><?php echo decimalToTextVietnamese($sumTonCuoiKy); ?></td>
+              <td class="main-yw4l no-border" colspan="2" align = "left">Tổng số tiền (bằng chữ): </td>
+              <td class="main-yw4l align-left no-border bold" colspan="8"><?php echo decimalToTextVietnamese($sumTonCuoiKy); ?></td>
 
           </tr>
           
           <tr>
-              <td class="no-border bold" colspan="2"></td>
+              <td class="no-border bold" colspan="1"></td>
               <td class="no-border bold" colspan="2">Người lập</td>
-              <td class="no-border bold" colspan="2"></td>
-              <td class="no-border bold" colspan="2"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
               <td class="no-border bold" colspan="2"></td>
               <td class="no-border bold" colspan="2">Thủ trưởng đơn vị</td>
-              <td class="no-border bold" colspan="2"></td>
+              <td class="no-border bold" colspan="1"></td>
 
           </tr>
           <tr style="height: 80px;"></tr>
           <tr>
-              <td class="no-border" colspan="2"></td>
+              <td class="no-border" colspan="1"></td>
               <td class="no-border" colspan="2">{{ Admin::user()->name }}</td>
-              <td class="no-border" colspan="2"></td>
-              <td class="no-border" colspan="2"></td>
+              <td class="no-border" colspan="1"></td>
+              <td class="no-border" colspan="1"></td>
+              <td class="no-border" colspan="1"></td>
               <td class="no-border" colspan="2"></td>
               <td class="no-border" colspan="2">{{ config('company.chucvu.thutruongdonvi') }}</td>
-              <td class="no-border" colspan="2"></td>
+              <td class="no-border" colspan="1"></td>
           </tr>
         </tbody>
-        
+        <?php
+                } else {
+        ?>
+        <?php
+            $stt = 0;
+            $sumTonDauKy = 0;
+            $sumTongNhap = 0;
+            $sumTongXuat = 0;
+            $sumTonCuoiKy = 0;
+            ?>
+            @foreach($bag['data']->detail as $key => $value)
+            <?php
+            $stt++;
+            $ttTonDauKy = $value->dongianhap * $value->tong_soluong_tondauky;
+            $ttTongNhap = $value->dongianhap * $value->tong_soluongnhap;
+            $ttTongXuat = $value->dongianhap * $value->tong_soluongxuat;
+            $ttTonCuoiKy = $ttTonDauKy + $ttTongNhap - $ttTongXuat;
+            ?>
+            
+            
+            <tr>
+                <td>{{ $stt }}</td>
+                 <td  align="left" ><b> + {{ $value->ten_sanpham }} </b>
+                    <br>Đơn vị tính: {{ $value->ten_donvitinh }} 
+                    <br> Đơn giá: {{ number_format($value->dongianhap, 4) }} 
+                    <br> HSD: {{ \Carbon\Carbon::parse($value->hansudung)->format('m/Y') }}   </td>
+                
+                <td class="soluong align-right">{{ number_format($value->tong_soluong_tondauky, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTonDauKy, 0) }}</td>
+<!--                <td class="soluong align-right">{{ number_format($value->tong_soluongnhap, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTongNhap, 0) }}</td>
+                <td class="soluong align-right">{{ number_format($value->tong_soluongxuat, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTongXuat, 0) }}</td>-->
+                <td class="soluong align-right">{{ number_format($value->tong_soluong_tondauky + $value->tong_soluongnhap - $value->tong_soluongxuat, 0) }}</td>
+                <td class="thanhtien align-right">{{ number_format($ttTonCuoiKy, 0) }}</td>
+                <td></td>
+            </tr>
+            <?php
+            $sumTonDauKy += $ttTonDauKy;
+            $sumTongNhap += $ttTongNhap;
+            $sumTongXuat += $ttTongXuat;
+            $sumTonCuoiKy = $sumTonDauKy + $sumTongNhap - $sumTongXuat;
+            ?>
+            @endforeach    
+            <tr class="bold">
+              <td></td>
+                <td>Tổng</td>
+<!--                <td></td>
+                <td></td>
+                <td></td>-->
+                <td>0</td>
+                <td class="thanhtien align-right">{{ number_format($sumTonDauKy, 0) }}</td>
+                <td></td>
+                <td class="thanhtien align-right">{{ number_format($sumTonCuoiKy, 0) }}</td>
+                <td></td>
+          </tr>
+          <tr>
+              <td class="main-yw4l no-border"></td>
+
+              <td class="main-yw4l no-border" colspan="1" align = "left">Tổng số tiền (bằng chữ): </td>
+              <td class="main-yw4l align-left no-border bold" colspan="4"><?php echo decimalToTextVietnamese($sumTonCuoiKy); ?></td>
+
+          </tr>
+          
+          <tr>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="2">Người lập</td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="2">Thủ trưởng đơn vị</td>
+              <td class="no-border bold" colspan="1"></td>
+
+          </tr>
+          <tr style="height: 80px;"></tr>
+          <tr>
+              <td class="no-border" colspan="1"></td>
+              <td class="no-border" colspan="2">{{ Admin::user()->name }}</td>
+              <td class="no-border" colspan="1"></td>
+              <td class="no-border" colspan="2">{{ config('company.chucvu.thutruongdonvi') }}</td>
+              <td class="no-border" colspan="1"></td>
+          </tr>
+        </tbody>
+        <?php 
+                }
+        ?>
     </table> 
     </article>
 </section>

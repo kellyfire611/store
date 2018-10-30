@@ -64,7 +64,7 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
       <table class="main">
         <tr>
           <th class="main-s6z2" rowspan="2" style="width: 25px;">STT</th>
-          <th class="main-s6z2" colspan="2" style="width: 150px;">Chứng từ</th>
+          <th class="main-s6z2" colspan="2" style="width: 150px;">Phiếu nhập</th>
           <th class="main-s6z2" rowspan="2">Thông tin quy cách vật tư dụng cụ, sản phẩm</th>
           <th class="main-s6z2" rowspan="2" style="width: 110px;">Số lô</th>
           <th class="main-s6z2" rowspan="2" style="width: 45px;">Kho</th>
@@ -84,21 +84,25 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           <?php
               $stt = 1;
               $sum = 0;
+              
               foreach ($bag['data']->detail as $k => $detail) {
+                  $nguon_new = false;
                   # code...                
               
           ?>
           <?php
             if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_nguoncungcap) && $bag['data']->detail[$k-1]->ten_nguoncungcap != $bag['data']->detail[$k]->ten_nguoncungcap)  ){
+                $nguon_new = true;
           ?>
-            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- Nguồn vốn:<b> {{$bag['data']->detail[$k]->ten_nguoncungcap}} </b> </td></tr>            
+            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- Nguồn vốn:<b> {{$bag['data']->detail[$k]->ten_nguoncungcap}}   </b> 
+                    <!--- Tổng giá trị nhập: <b>{{  number_format($bag['data']->detail[$k]->tong_ncc, 0)}} đ</b> </td></tr>-->            
             
           <?php 
             }
           ?>
             
           <?php
-            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_nhom_sanpham) && $bag['data']->detail[$k-1]->ten_nhom_sanpham != $bag['data']->detail[$k]->ten_nhom_sanpham)  ){
+            if($nguon_new  || ( isset($bag['data']->detail[$k-1]->ten_nhom_sanpham) && $bag['data']->detail[$k-1]->ten_nhom_sanpham != $bag['data']->detail[$k]->ten_nhom_sanpham)  ){
           ?>
             <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- - Nhóm sản phẩm:<b> {{$bag['data']->detail[$k]->ten_nhom_sanpham}} </b> </td></tr>
         <?php 
