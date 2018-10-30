@@ -92,24 +92,41 @@ class StorePhieuxuatController extends Controller
     {
         return Admin::grid(StorePhieuxuat::class, function (Grid $grid) {
             $grid->model()->scopePhieuXuat(CommonModel::getNhapXuat()['_XUAT_QUA_KHO_LE_']);
-            $grid->id('ID')->sortable();
+            // $grid->id('ID')->sortable();
 
             $grid->column('so_phieuxuat', __('models.store_phieuxuat.so_phieuxuat'));
             $grid->column('ngay_xuatkho', __('models.store_phieuxuat.ngay_xuatkho'));
-            $grid->column('ngay_xacnhan', __('models.store_phieuxuat.ngay_xacnhan'));
+            //$grid->column('ngay_xacnhan', __('models.store_phieuxuat.ngay_xacnhan'));
             $grid->column('lydo_xuat', __('models.store_phieuxuat.lydo_xuat'));
-            $grid->column('nguoi_giaohang', __('models.store_phieuxuat.nguoi_giaohang'));
-            $grid->column('so_chungtu', __('models.store_phieuxuat.so_chungtu'));
-            $grid->column('xuatxuat_id', __('models.store_phieuxuat.nhapxuat_id'));
-            $grid->column('phieuxuat_id', __('models.store_phieuxuat.phieuxuat_id'));
-            $grid->column('nhacungcap_id', __('models.store_phieuxuat.nhacungcap_id'));
-            $grid->column('chuongtrinh_id', __('models.store_phieuxuat.chuongtrinh_id'));
-            $grid->column('soketoan_id', __('models.store_phieuxuat.soketoan_id'));
-            $grid->column('xuat_tu_kho_id', __('models.store_phieuxuat.xuat_tu_kho_id'));
-            $grid->column('xuat_den_kho_id', __('models.store_phieuxuat.xuat_den_kho_id'));
-            $grid->column('nguoi_lapphieu_id', __('models.store_phieuxuat.nguoi_lapphieu_id'));
-            $grid->created_at(__('models.common.created_at'));
-            $grid->updated_at(__('models.common.updated_at'));
+            //$grid->column('nguoi_giaohang', __('models.store_phieuxuat.nguoi_giaohang'));
+            //$grid->column('so_chungtu', __('models.store_phieuxuat.so_chungtu'));
+            //$grid->column('nhapxuat_id', __('models.store_phieuxuat.nhapxuat_id'));
+            // $grid->column('nhacungcap_id', __('models.store_phieuxuat.nhacungcap_id'));
+            // $grid->column('chuongtrinh_id', __('models.store_phieuxuat.chuongtrinh_id'));
+            $grid->column('soketoan_id', __('models.store_phieuxuat.soketoan_id'))
+                ->display(function($id) {
+                    return StoreSoketoan::find($id)->ma_soketoan;
+                });
+            
+            $grid->column('xuat_tu_kho_id', __('models.store_phieuxuat.xuat_tu_kho_id'))
+                ->display(function($id) {
+                    return StoreKho::find($id)->ten_kho;
+                });
+            // $grid->column('xuat_den_kho_id', __('models.store_phieuxuat.xuat_den_kho_id'));
+            // $grid->column('nguoi_lapphieu_id', __('models.store_phieuxuat.nguoi_lapphieu_id'))
+            // ->display(function($id) {
+            //     return StoreKho::find($id)->ten_kho;
+            // });
+            // $grid->created_at(__('models.common.created_at'));
+            // $grid->updated_at(__('models.common.updated_at'));
+            $grid->tongthanhtien('Tổng thành tiền');
+
+            // $grid->chitiet('Comments count')->display(function ($comments) {
+            //     $query = $comments
+            //         ->selectRaw('sum(soluongxuat * dongiaxuat) as aggregate')
+            //         ->groupBy('phieuxuat_id');
+            //     return "<span class='label label-warning'>{$query->first()->aggregate}</span>";
+            // });
 
             $grid->actions(function ($actions) {
                 $token = csrf_token();
