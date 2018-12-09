@@ -24,7 +24,9 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
     </article>
 </section>
 @else
+
 <section class="sheet padding-10mm">
+<p style="page-break-before: always">
   <article>
       <table class="tg">
           <tr>
@@ -84,54 +86,49 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           <?php
               $stt = 1;
               $sum = 0;
-              
+              $arr_tongncc = Array();
               foreach ($bag['data']->detail as $k => $detail) {
                   $nguon_new = false;
+                  $tong_ncc = 0;
+                  
                   # code...                
               
           ?>
+    <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- Nguồn vốn:<b> {{$k}}  </b>   - Tổng: <span class="bold" id = 'ncc_{{$k}}' >123</span>
           <?php
-            if($k == 0  || ( isset($bag['data']->detail[$k-1]->ten_nguoncungcap) && $bag['data']->detail[$k-1]->ten_nguoncungcap != $bag['data']->detail[$k]->ten_nguoncungcap)  ){
-                $nguon_new = true;
-          ?>
-            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- Nguồn vốn:<b> {{$bag['data']->detail[$k]->ten_nguoncungcap}}   </b> 
-                    <!--- Tổng giá trị nhập: <b>{{  number_format($bag['data']->detail[$k]->tong_ncc, 0)}} đ</b> </td></tr>-->            
-            
-          <?php 
-            }
-          ?>
-            
-          <?php
-            if($nguon_new  || ( isset($bag['data']->detail[$k-1]->ten_nhom_sanpham) && $bag['data']->detail[$k-1]->ten_nhom_sanpham != $bag['data']->detail[$k]->ten_nhom_sanpham)  ){
-          ?>
-            <tr class="page-break-inside-avoid"><td colspan="12" align = "left">- - Nhóm sản phẩm:<b> {{$bag['data']->detail[$k]->ten_nhom_sanpham}} </b> </td></tr>
-        <?php 
-            }
-          ?>  
-          
-          <tr class="page-break-inside-avoid">
-              <td>{{ $stt }}</td>
-              <td>{{ $detail->so_phieunhap }}</td>
-              <td>{{ empty($detail->ngay_nhapkho) ? '' : \Carbon\Carbon::parse($detail->ngay_nhapkho)->format('d/m/Y') }}</td>
-              <td class="align-left"><b>+ {{ $detail->ten_sanpham }}</b>
-                  <br>- Loại:{{ $detail->ten_loai_sanpham }}<br> </td>
-              <td class="align-left">{{ $detail->so_lo }}</td>
-              <td>{{ $detail->ma_kho }}</td>
-              <td>{{ $detail->ten_donvitinh }}</td>
-              <td>{{ \Carbon\Carbon::parse($detail->hansudung)->format('m/Y') }}</td>
-              <td class="align-right">{{ number_format($detail->dongianhap, 2) }}</td>
-              <td class="align-right">{{ number_format($detail->soluongnhap, 0) }}</td>
-              <td class="align-right"><?php $tt = $detail->soluongnhap * $detail->dongianhap; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
-              <td></td>
+                foreach ($detail as $key => $value) {
+                
+                
+          ?>        
+                  <tr class="page-break-inside-avoid">
+                <td>{{ $stt }}</td>
+                <td>{{ $value->so_phieunhap }}</td>
+                <td>{{ empty($value->ngay_nhapkho) ? '' : \Carbon\Carbon::parse($value->ngay_nhapkho)->format('d/m/Y') }}</td>
+                <td class="align-left"><b>+ {{ $value->ten_sanpham }}</b>
+                    <br>- Loại:{{ $value->ten_loai_sanpham }}<br> </td>
+                <td class="align-left">{{ $value->so_lo }}</td>
+                <td>{{ $value->ma_kho }}</td>
+                <td>{{ $value->ten_donvitinh }}</td>
+                <td>{{ \Carbon\Carbon::parse($value->hansudung)->format('m/Y') }}</td>
+                <td class="align-right">{{ number_format($value->dongianhap, 2) }}</td>
+                <td class="align-right">{{ number_format($value->soluongnhap, 0) }}</td>
+                <td class="align-right"><?php $tt = $value->soluongnhap * $value->dongianhap; $sum += $tt; ?>{{ number_format($tt, 0) }}</td>
+                <td></td>
               
           </tr>
-          <?php 
+          <?php
+                $tong_ncc += $tt;
+                }
+          ?>        
+    
+            <?php 
               $stt++;
-              
+              $arr_tongncc[$k] = $tong_ncc;
               }
 
               
               $sum = round($sum);
+//              print_r($arr_tongncc);
           ?>
           <tr class="bold">
               <td></td>
@@ -172,7 +169,18 @@ Biểu mẫu Bảng kê Nhập kho tổng hợp
           </tr>
 
       </table>
-  </article>
+      <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+      <script>
+          $(document).ready(function(){
+              <?php
+              foreach ($arr_tongncc as $key => $value) {
+                  $value = number_format($value, 0);
+                  print_r("document.getElementById('ncc_$key').innerHTML = '$value';");
+              }
+              ?>
+          });
+      </script>
+<p style="page-break-before: always">
 </section>
 @endif
 @endsection

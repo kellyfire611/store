@@ -213,7 +213,7 @@ class PrintController extends Controller
             $title = 'Báo cáo tồn kho';
         }
         
-        $data = DB::select('call usp_store_baocao_nhapxuatton_chitiet_test(?,?,?)', $parameter);
+        $data = DB::select('call test(?,?,?)', $parameter);
         $data1 = Array();
         if($p_sanpham_id != 0){
             foreach ($data  as $k => $v) {
@@ -333,12 +333,12 @@ class PrintController extends Controller
             
         $data =  DB::select("SELECT $fields
                                 FROM $tables
-                                WHERE $wheres $str_Optional ORDER BY $order  ") ;
-//        foreach ($data as $k => $v) {
-//            if(isset($data[$k+1]) && $data[$k+1])  ){
-//                
-//            }
-//        }
+                                WHERE $wheres $str_Optional ORDER BY $order  ") ; 
+        $arr_temp = Array();
+        foreach ($data as $k => $v) {
+           $arr_temp[$v->ma_nguoncungcap][] = $v;
+        }
+         
         $chitiet = $data;
 
         $result = json_encode(
@@ -346,7 +346,7 @@ class PrintController extends Controller
                 'totalPages' => $totalPages, 
                 'currentPage' => $currentPage, 
                 'result' => $data,
-                'detail' => $chitiet));        
+                'detail' => $arr_temp));        
         $bag = [
             'meta' => [
                 'title' => $str_loai_bao_cao,
@@ -401,7 +401,7 @@ class PrintController extends Controller
 	px.so_phieuxuat,
 	date( px.ngay_xuatkho ) AS ngay_xuatkho,
 	pxct.so_chungtu,
-	pnct.so_lo,
+	pxct.so_lo,
 	pxct.hansudung,
 	pxct.dongiaxuat,
 	pxct.soluongxuat";
@@ -409,13 +409,12 @@ class PrintController extends Controller
 	LEFT JOIN store_phieuxuat px ON pxct.phieuxuat_id = px.id
 	LEFT JOIN store_donvi dv ON px.donvi_id = dv.id
 	LEFT JOIN store_sanpham sp ON pxct.sanpham_id = sp.id
-        LEFT JOIN store_phieunhap_chitiet pnct ON sp.id = pnct.sanpham_id
 	LEFT JOIN store_donvitinh dvt ON sp.donvitinh_id = dvt.id
 	LEFT JOIN store_kho k ON pxct.xuat_tu_kho_id = k.id
 	LEFT JOIN store_sanpham_nhom_loai_rel nlrel ON pxct.sanpham_id = nlrel.sanpham_id
         LEFT JOIN store_sanpham_nhom nhom ON nlrel.sanpham_nhom_id = nhom.id
 	LEFT JOIN store_sanpham_loai loai ON nlrel.sanpham_loai_id = loai.id";
-        $wheres = "px.ngay_xuatkho BETWEEN '$p_ngay_batdau' AND '$p_ngay_ketthuc'";     
+        $wheres = "px.ngay_xuatkho BETWEEN '$p_ngay_batdau' AND '$p_ngay_ketthuc'";   
         
         if(isset($p_sanpham_id) && $p_sanpham_id !=0 ){
             $str_Optional .= ' AND pxct.sanpham_id IN ( '.implode(',', $p_sanpham_id) . ')' ;
@@ -446,12 +445,12 @@ class PrintController extends Controller
             }
         }
         
-        //xử lý thông số đơn vị, nếu chọn tất cả thì sẽ xuất ra 1 đơn vị là 1 trang in
+        //xử lý thông số đơn vị, nếu ch�?n tất cả thì sẽ xuất ra 1 đơn vị là 1 trang in
         
         if(isset($p_donvi_id) && $p_donvi_id !=0 ){     
             $id_donvi =   ($p_donvi_id != 0) ? implode(',', $p_donvi_id) : 0 ;
             $str_Optional .= " AND px.donvi_id IN ( $id_donvi )" ;
-//            $ten_thong_so_donvi = 'Đơn vị nhận: ';
+//            $ten_thong_so_donvi = '�?ơn vị nhận: ';
 //            $data_thong_so_donvi = (DB::select("SELECT ten_donvi "
 //                       . "FROM store_donvi WHERE id = ($p_donvi_id)"));        
 //            foreach ($data_thong_so_donvi[0] as $key => $value) {
@@ -464,22 +463,34 @@ class PrintController extends Controller
                                 WHERE $wheres $str_Optional ORDER BY $order ") ;             
 
         $detail_data = Array();
-        foreach ($data as $k => $v) {
-            if(isset($data[$k+1]) && ($data[$k]->ma_donvi == $data[$k+1]->ma_donvi)){                
+        $arr_donvi = Array();
+        foreach ($data as $k => $v) {            
                 $detail_data[$data[$k]->ten_donvi][] = $v;
-            } else if(!isset($data[$k+1])){
-                $detail_data[$data[$k]->ten_donvi][] = $v;
-            }
         }
-//        dd($detail_data);
-        
+        foreach ($detail_data as $key => $value) {
+            $tong_sp = 0;
+            $tong_giatri = 0;
+                foreach ($value as $k => $v) {                    
+                    if($k == 0){
+                        $arr_donvi[$key] = $v;
+                    } else {
+                        $tong_sp ++;
+                        $tong_giatri += $v->dongiaxuat * $v->soluongxuat;
+                    }
+                }
+            
+            $arr_donvi[$key]->tong_sp = $tong_sp;
+            $arr_donvi[$key]->tong_giatri = $tong_giatri;
+        }
 
         $result = json_encode(
             array('totalResult' => $totalResult, 
                 'totalPages' => $totalPages, 
                 'currentPage' => $currentPage, 
 //                'result' => $data,
-                'detail' => $detail_data));        
+                'detail' => $detail_data,
+                'arr_donvi' => $arr_donvi
+                ));        
         $bag = [
             'meta' => [
                 'title' => $str_loai_bao_cao,
@@ -494,7 +505,7 @@ class PrintController extends Controller
             'data' => json_decode($result)
         ];        
 
-//        print_r($bag);exit;
+        //dd($bag);
         return $bag;
     }
 }

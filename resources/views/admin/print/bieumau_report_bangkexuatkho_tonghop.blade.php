@@ -24,8 +24,111 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
     </article>
 </section>
 @else
+
 <section class="sheet padding-10mm">
+    <article>
+      <table class="tg">
+          <tr>
+              <th class="tg-baqh">{{ config('company.parent.name') }}</th>
+              <th></th>
+              <th class="tg-baqh">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</th>
+          </tr>
+          <tr>
+              <td class="tg-baqh align-center valign-top">{{ config('company.name') }}</td>
+              <td class="bold name">Báo cáo xuất kho tổng hợp</td>
+              <td class="tg-s6z2 align-center">
+                  Độc lập - Tự do - Hạnh phúc
+              </td>
+          </tr>
+          <tr>
+              <td class="tg-031e"></td>
+              <td class="tg-031e align-center"><?php
+              $p_ngay_batdau = \Carbon\Carbon::parse($bag['meta']['p_ngay_batdau']);
+              $p_ngay_ketthuc = \Carbon\Carbon::parse($bag['meta']['p_ngay_ketthuc']);
+
+              ?> Từ ngày {{ $p_ngay_batdau->format('d/m/Y') }} đến ngày {{ $p_ngay_ketthuc->format('d/m/Y') }}</td>
+              <td class="tg-031e"></td>
+          </tr>          
+          <tr>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_sanpham'] }}  </td>
+          </tr>
+          <tr>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_nhom'] }}  </td>
+          </tr>
+          <tr>
+              <td class="tg-031e align-left" colspan="3">{{ $bag['meta']['ten_thong_so_loai'] }}  </td>
+          </tr>
+      </table>
+      <table class="main">
+          <tr>
+              <th class="main-s6z2" style="width:5%" >STT</th>
+              <th class="main-s6z2 align-left"   style="width:10% ;"  >Mã đơn vị nhận</th>
+              <th class="main-s6z2 align-left"  style="width:50% ; " >Tên đơn vị nhận</th>
+              <th class="main-s6z2 align-right"  style="width:10%" >Số sản phẩm</th>
+              <th class="main-s6z2 align-right"  >Tổng giá trị xuất</th>
+              <th class="main-s6z2"   style="width: 10%;">Ghi chú</th>
+          </tr>
+          
+            
+          <?php  
+            $sum_total = 0;
+                    $stt = 1;
+                foreach ($bag['data']->arr_donvi as $k => $v) {    
+          ?>
+
+          <tr class="page-break-inside-avoid">
+              <td>{{$stt}}</td>
+              <td class="align-left">{{$v->ma_donvi}}</td>
+              <td class="align-left">{{$v->ten_donvi}}</td>
+              <td class="align-right">{{$v->tong_sp}}</td>
+              <td class="align-right">{{number_format($v->tong_giatri, 0)}}</td>
+              <td></td>
+              
+          </tr>
+          <?php 
+              $stt++;
+              $sum_total += $v->tong_giatri;
+              }
+          ?>
+          <tr class="bold">
+              <td></td>
+              <td class="bold">Tổng</td>
+              <td></td>
+              <td></td>
+              <td class="align-right">{{ number_format($sum_total, 0) }}</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td class="main-yw4l no-border"></td>
+
+              <td class="main-yw4l no-border" colspan="1">Tổng số tiền (bằng chữ): </td>
+              <td class="main-yw4l align-left no-border bold" colspan="4"><?php echo decimalToTextVietnamese($sum_total); ?></td>
+
+          </tr>
+          
+          <tr>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">Người lập</td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">Thủ trưởng đơn vị</td>
+              <td class="no-border bold" colspan="1"></td>
+          </tr>
+          <tr style="height: 80px;"></tr>
+          <tr>
+              <td class="no-border" colspan="1"></td>
+              <td class="no-border" colspan="1">{{ Admin::user()->name }}</td>
+              <td class="no-border" colspan="1"></td>
+              <td class="no-border" colspan="1"></td>
+              <td class="no-border" colspan="1">{{ config('company.chucvu.thutruongdonvi') }}</td>
+              <td class="no-border" colspan="1"></td>
+          </tr>
+
+      </table>
+  </article>
+        <p style="page-break-before: always">
     <?php  
+    $sum_total = 0;
         foreach ($bag['data']->detail as $k => $v) {    
     
     ?>
@@ -162,8 +265,13 @@ Biểu mẫu Báo cáo Bảng kê xuất kho theo sản phẩm
 
       </table>
   </article>
+        <p style="page-break-before: always">
+
   <?php 
+  
+  $sum_total += $sum;
     } 
+    print_r(number_format($sum_total, 0));
   ?>
     
 </section>

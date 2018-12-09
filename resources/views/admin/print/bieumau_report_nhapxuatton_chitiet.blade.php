@@ -15,7 +15,7 @@
 <form method="post" action="{{ route('store.print', ['view' => 'bieumau_report_nhapxuatton_chitiet']) }}">
   {{ csrf_field() }}
   <input type="hidden" name="phieuxuat_id" value="1" />
-  <button class="btn btn-sm btn-primary grid-refresh" type="submit"><i class="fa fa-refresh"></i> Xuất Excel</button>
+  <button class="btn btn-sm btn-primary grid-refresh" type="submit"><i class="fa fa-refresh"></i> Xu?t Excel</button>
 </form>
 @endsection
 
@@ -24,7 +24,7 @@
 <section class="sheet padding-10mm">
     <article>
         <h1>Không tìm thấy dữ liệu</h1>
-        <a href="{{ admin_base_path('/') }}"><b>Quay về Trang chủ</b></a>
+        <a href="{{ admin_base_path('/') }}"><b>Quay về trang chủ</b></a>
     </article>
 </section>
 @else
@@ -49,7 +49,7 @@
               $p_ngay_batdau = \Carbon\Carbon::parse($bag['meta']['p_ngay_batdau']);
               $p_ngay_ketthuc = \Carbon\Carbon::parse($bag['meta']['p_ngay_ketthuc']);
 
-              ?> Từ ngày {{ $p_ngay_batdau->format('d/m/Y') }} đến ngày {{ $p_ngay_ketthuc->format('d/m/Y') }}</td>
+              ?> Từ ngày {{ $p_ngay_batdau->format('d/m/Y') }} Đến ngày {{ $p_ngay_ketthuc->format('d/m/Y') }}</td>
               <td class="tg-031e"></td>
           </tr>
 
@@ -63,15 +63,15 @@
             <tr class="bold" >
                 <td rowspan="2" style="width:4%">STT</td>
                 <td rowspan="2" style="width:240px" >Sản phẩm</td>
-                <!--<td rowspan="2">Nguồn vồn</td>-->
-<!--                <td rowspan="2">ĐVT</td>
-                <td rowspan="2">Đơn giá</td>
+                <!--<td rowspan="2">Ngu?n v?n</td>-->
+<!--                <td rowspan="2">�VT</td>
+                <td rowspan="2">��n gi�</td>
                 <td rowspan="2">HSD</td>-->
                 <?php if ($bag['meta']['p_ngay_batdau'])
                 ?>
                 <td colspan="2">Tồn đầu kỳ</td>
-                <td colspan="2">Xuất</td>
                 <td colspan="2">Nhập</td>
+                <td colspan="2">Xuất</td>
                 <td colspan="2">Cuối kỳ</td>     
                 <td rowspan="2">Ghi chú</td>
             </tr>
@@ -91,9 +91,9 @@
             <tr class="bold" >
                 <td rowspan="2" style="width:4%">STT</td>
                 <td rowspan="2" style="width:350px" >Sản phẩm</td>
-                <!--<td rowspan="2">Nguồn vồn</td>-->
-<!--                <td rowspan="2">ĐVT</td>
-                <td rowspan="2">Đơn giá</td>
+                <!--<td rowspan="2">Ngu?n v?n</td>-->
+<!--                <td rowspan="2">�VT</td>
+                <td rowspan="2">��n gi�</td>
                 <td rowspan="2">HSD</td>-->
                 <?php if ($bag['meta']['p_ngay_batdau'])
                 ?>
@@ -138,10 +138,11 @@
                     $nguon_new = true;
               ?>
                 <tr class="page-break-inside-avoid"><td colspan="11" align = "left">- Nguồn vốn:<b> {{$bag['data']->detail[$key]->ma_nguoncungcap}}   </b> 
-                        <!--- Tổng giá trị nhập: <b>{{  number_format(0, 0)}} đ</b> </td></tr>-->            
+                        <!--- T?ng gi� tr? nh?p: <b>{{  number_format(0, 0)}} �</b> </td></tr>-->            
 
               <?php 
                 }
+                //if( $value->tong_soluong_tondauky!= 0 && $value->tong_soluongnhap!= 0 && $value->tong_soluongxuat!= 0 ){
               ?>
             <tr>
                 <td>{{ $stt }}</td>
@@ -164,15 +165,17 @@
                 <td></td>
             </tr>
             <?php
+                
             $sumTonDauKy += $ttTonDauKy;
             $sumTongNhap += $ttTongNhap;
             $sumTongXuat += $ttTongXuat;
             $sumTonCuoiKy = $sumTonDauKy + $sumTongNhap - $sumTongXuat;
+                //}
             ?>
             @endforeach    
             <tr class="bold">
               <td></td>
-                <td>Tổng</td>
+                <td>T?ng</td>
 <!--                <td></td>
                 <td></td>
                 <td></td>-->
@@ -196,25 +199,34 @@
           
           <tr>
               <td class="no-border bold" colspan="1"></td>
-              <td class="no-border bold" colspan="2">Người lập</td>
+              <td class="no-border bold" colspan="1">Người lập</td>
               <td class="no-border bold" colspan="1"></td>
               <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">Thủ kho</td>
               <td class="no-border bold" colspan="1"></td>
-              <td class="no-border bold" colspan="2"></td>
-              <td class="no-border bold" colspan="2">Thủ trưởng đơn vị</td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">Kế toán trưởng</td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">Thủ trưởng đơn vị</td>
               <td class="no-border bold" colspan="1"></td>
 
           </tr>
           <tr style="height: 80px;"></tr>
           <tr>
-              <td class="no-border" colspan="1"></td>
-              <td class="no-border" colspan="2">{{ Admin::user()->name }}</td>
-              <td class="no-border" colspan="1"></td>
-              <td class="no-border" colspan="1"></td>
-              <td class="no-border" colspan="1"></td>
-              <td class="no-border" colspan="2"></td>
-              <td class="no-border" colspan="2">{{ config('company.chucvu.thutruongdonvi') }}</td>
-              <td class="no-border" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">{{ Admin::user()->name }}</td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">{{ config('company.chucvu.thukho') }}</td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">{{ config('company.chucvu.ketoantruong') }}</td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1"></td>
+              <td class="no-border bold" colspan="1">{{ config('company.chucvu.thutruongdonvi') }}</td>
+              <td class="no-border bold" colspan="1"></td>
+              
           </tr>
         </tbody>
         <?php
@@ -235,7 +247,16 @@
             $ttTongXuat = $value->dongianhap * $value->tong_soluongxuat;
             $ttTonCuoiKy = $ttTonDauKy + $ttTongNhap - $ttTongXuat;
             ?>
-            
+            <?php
+                if($key == 0  || ( isset($bag['data']->detail[$key-1]->ma_nguoncungcap) && $bag['data']->detail[$key-1]->ma_nguoncungcap != $bag['data']->detail[$key]->ma_nguoncungcap)  ){
+                    $nguon_new = true;
+              ?>
+                <tr class="page-break-inside-avoid"><td colspan="7" align = "left">- Nguồn vốn:<b> {{$bag['data']->detail[$key]->ma_nguoncungcap}}   </b> 
+                        <!--- T?ng gi� tr? nh?p: <b>{{  number_format(0, 0)}} �</b> </td></tr>-->            
+
+              <?php 
+                }
+              ?>
             
             <tr>
                 <td>{{ $stt }}</td>
@@ -303,6 +324,7 @@
         ?>
     </table> 
     </article>
+    <p style="page-break-before: always">
 </section>
 @endif
 @endsection
